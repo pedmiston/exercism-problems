@@ -1494,6 +1494,7 @@ d,crypto-square,3.0,False,
 d,circular-buffer,4.0,False,
 d,pangram,1.0,False,
 d,react,10.0,False,
+ecmascript,zipper,8.0,False,
 ecmascript,point-mutations,0.0,False,
 ecmascript,forth,8.0,False,matrix
 ecmascript,hello-world,1.0,True,
@@ -1591,6 +1592,7 @@ ecmascript,rotational-cipher,2.0,False,simple-cipher
 ecmascript,nucleotide-count,4.0,False,rna-transcription
 ecmascript,armstrong-numbers,2.0,False,
 ecmascript,rational-numbers,5.0,False,pascals-triangle
+ecmascript,variable-length-quantity,5.0,False,grade-school
 fsharp,hello-world,1.0,True,
 fsharp,leap,1.0,True,
 fsharp,bob,1.0,True,

@@ -1,0 +1,755 @@
+exercise,description
+all-your-base,single bit one to decimal
+all-your-base,binary to single decimal
+all-your-base,single decimal to binary
+all-your-base,binary to multiple decimal
+all-your-base,decimal to binary
+all-your-base,trinary to hexadecimal
+all-your-base,hexadecimal to trinary
+all-your-base,15-bit integer
+all-your-base,empty list
+all-your-base,single zero
+all-your-base,multiple zeros
+all-your-base,leading zeros
+all-your-base,input base is one
+all-your-base,input base is zero
+all-your-base,input base is negative
+all-your-base,negative digit
+all-your-base,invalid positive digit
+all-your-base,output base is one
+all-your-base,output base is zero
+all-your-base,output base is negative
+all-your-base,both bases are negative
+anagram,no matches
+anagram,detects two anagrams
+anagram,does not detect anagram subsets
+anagram,detects anagram
+anagram,detects three anagrams
+anagram,does not detect non-anagrams with identical checksum
+anagram,detects anagrams case-insensitively
+anagram,detects anagrams using case-insensitive subject
+anagram,detects anagrams using case-insensitive possible matches
+anagram,does not detect a anagram if the original word is repeated
+anagram,anagrams must use all letters exactly once
+anagram,capital word is not own anagram
+armstrong-numbers,Single digit numbers are Armstrong numbers
+armstrong-numbers,There are no 2 digit Armstrong numbers
+armstrong-numbers,Three digit number that is an Armstrong number
+armstrong-numbers,Three digit number that is not an Armstrong number
+armstrong-numbers,Four digit number that is an Armstrong number
+armstrong-numbers,Four digit number that is not an Armstrong number
+armstrong-numbers,Seven digit number that is an Armstrong number
+armstrong-numbers,Seven digit number that is not an Armstrong number
+binary-search,finds a value in an array with one element
+binary-search,finds a value in the middle of an array
+binary-search,finds a value at the beginning of an array
+binary-search,finds a value at the end of an array
+binary-search,finds a value in an array of odd length
+binary-search,finds a value in an array of even length
+binary-search,identifies that a value is not included in the array
+binary-search,a value smaller than the array's smallest value is not included
+binary-search,a value larger than the array's largest value is not included
+binary-search,nothing is included in an empty array
+binary,binary 0 is decimal 0
+binary,binary 1 is decimal 1
+binary,binary 10 is decimal 2
+binary,binary 11 is decimal 3
+binary,binary 100 is decimal 4
+binary,binary 1001 is decimal 9
+binary,binary 11010 is decimal 26
+binary,binary 10001101000 is decimal 1128
+binary,binary ignores leading zeros
+binary,2 is not a valid binary digit
+binary,a number containing a non-binary digit is invalid
+binary,a number with trailing non-binary characters is invalid
+binary,a number with leading non-binary characters is invalid
+binary,a number with internal non-binary characters is invalid
+binary,a number and a word whitespace separated is invalid
+bob,stating something
+bob,shouting
+bob,shouting gibberish
+bob,asking a question
+bob,asking a numeric question
+bob,asking gibberish
+bob,talking forcefully
+bob,using acronyms in regular speech
+bob,forceful question
+bob,shouting numbers
+bob,only numbers
+bob,question with only numbers
+bob,shouting with special characters
+bob,shouting with no exclamation mark
+bob,statement containing question mark
+bob,non-letters with question
+bob,prattling on
+bob,silence
+bob,prolonged silence
+bob,alternate silence
+bob,multiple line question
+bob,starting with whitespace
+bob,ending with whitespace
+bob,other whitespace
+bob,non-question ending with whitespace
+bowling,should be able to score a game with all zeros
+bowling,should be able to score a game with no strikes or spares
+bowling,a spare followed by zeros is worth ten points
+bowling,points scored in the roll after a spare are counted twice
+bowling,consecutive spares each get a one roll bonus
+bowling,a spare in the last frame gets a one roll bonus that is counted once
+bowling,a strike earns ten points in a frame with a single roll
+bowling,points scored in the two rolls after a strike are counted twice as a bonus
+bowling,consecutive strikes each get the two roll bonus
+bowling,a strike in the last frame gets a two roll bonus that is counted once
+bowling,rolling a spare with the two roll bonus does not get a bonus roll
+bowling,strikes with the two roll bonus do not get bonus rolls
+bowling,a strike with the one roll bonus after a spare in the last frame does not get a bonus
+bowling,all strikes is a perfect game
+bowling,rolls cannot score negative points
+bowling,a roll cannot score more than 10 points
+bowling,two rolls in a frame cannot score more than 10 points
+bowling,bonus roll after a strike in the last frame cannot score more than 10 points
+bowling,two bonus rolls after a strike in the last frame cannot score more than 10 points
+bowling,two bonus rolls after a strike in the last frame can score more than 10 points if one is a strike
+bowling,the second bonus rolls after a strike in the last frame cannot be a strike if the first one is not a strike
+bowling,second bonus roll after a strike in the last frame cannot score more than 10 points
+bowling,an unstarted game cannot be scored
+bowling,an incomplete game cannot be scored
+bowling,cannot roll if game already has ten frames
+bowling,bonus rolls for a strike in the last frame must be rolled before score can be calculated
+bowling,both bonus rolls for a strike in the last frame must be rolled before score can be calculated
+bowling,bonus roll for a spare in the last frame must be rolled before score can be calculated
+bowling,cannot roll after bonus roll for spare
+bowling,cannot roll after bonus rolls for strike
+bracket-push,paired square brackets
+bracket-push,empty string
+bracket-push,unpaired brackets
+bracket-push,wrong ordered brackets
+bracket-push,wrong closing bracket
+bracket-push,paired with whitespace
+bracket-push,partially paired brackets
+bracket-push,simple nested brackets
+bracket-push,several paired brackets
+bracket-push,paired and nested brackets
+bracket-push,unopened closing brackets
+bracket-push,unpaired and nested brackets
+bracket-push,paired and wrong nested brackets
+bracket-push,math expression
+bracket-push,complex latex expression
+change,single coin change
+change,multiple coin change
+change,change with Lilliputian Coins
+change,change with Lower Elbonia Coins
+change,large target values
+change,possible change without unit coins available
+change,another possible change without unit coins available
+change,no coins make 0 change
+change,error testing for change smaller than the smallest of coins
+change,error if no combination can add up to target
+change,cannot find negative change values
+circular-buffer,reading empty buffer should fail
+circular-buffer,can read an item just written
+circular-buffer,each item may only be read once
+circular-buffer,items are read in the order they are written
+circular-buffer,full buffer can't be written to
+circular-buffer,a read frees up capacity for another write
+circular-buffer,read position is maintained even across multiple writes
+circular-buffer,items cleared out of buffer can't be read
+circular-buffer,clear frees up capacity for another write
+circular-buffer,clear does nothing on empty buffer
+circular-buffer,overwrite acts like write on non-full buffer
+circular-buffer,overwrite replaces the oldest item on full buffer
+circular-buffer,overwrite replaces the oldest item remaining in buffer following a read
+collatz-conjecture,zero steps for one
+collatz-conjecture,divide if even
+collatz-conjecture,even and odd steps
+collatz-conjecture,Large number of even and odd steps
+collatz-conjecture,zero is an error
+collatz-conjecture,negative value is an error
+connect,an empty board has no winner
+connect,X can win on a 1x1 board
+connect,O can win on a 1x1 board
+connect,only edges does not make a winner
+connect,illegal diagonal does not make a winner
+connect,nobody wins crossing adjacent angles
+connect,X wins crossing from left to right
+connect,O wins crossing from top to bottom
+connect,X wins using a convoluted path
+connect,X wins using a spiral path
+crypto-square,empty plaintext results in an empty ciphertext
+crypto-square,Lowercase
+crypto-square,Remove spaces
+crypto-square,Remove punctuation
+crypto-square,9 character plaintext results in 3 chunks of 3 characters
+crypto-square,"8 character plaintext results in 3 chunks, the last one with a trailing space"
+crypto-square,"54 character plaintext results in 7 chunks, the last two with trailing spaces"
+diamond,Degenerate case with a single 'A' row
+diamond,Degenerate case with no row containing 3 distinct groups of spaces
+diamond,Smallest non-degenerate case with odd diamond side length
+diamond,Smallest non-degenerate case with even diamond side length
+diamond,Largest possible diamond
+diffie-hellman,private key is in range 1 .. p
+diffie-hellman,private key is random
+diffie-hellman,can calculate public key using private key
+diffie-hellman,can calculate secret using other party's public key
+diffie-hellman,key exchange
+dominoes,empty input = empty output
+dominoes,singleton input = singleton output
+dominoes,singleton that can't be chained
+dominoes,three elements
+dominoes,can reverse dominoes
+dominoes,can't be chained
+dominoes,disconnected - simple
+dominoes,disconnected - double loop
+dominoes,disconnected - single isolated
+dominoes,need backtrack
+dominoes,separate loops
+dominoes,nine elements
+flatten-array,no nesting
+flatten-array,flattens array with just integers present
+flatten-array,5 level nesting
+flatten-array,6 level nesting
+flatten-array,6 level nest list with null values
+flatten-array,all values in nested list are null
+go-counting,Black corner territory on 5x5 board
+go-counting,White center territory on 5x5 board
+go-counting,Open corner territory on 5x5 board
+go-counting,A stone and not a territory on 5x5 board
+go-counting,Invalid because X is too low for 5x5 board
+go-counting,Invalid because X is too high for 5x5 board
+go-counting,Invalid because Y is too low for 5x5 board
+go-counting,Invalid because Y is too high for 5x5 board
+go-counting,One territory is the whole board
+go-counting,Two territory rectangular board
+go-counting,Two region rectangular board
+grade-school,Adding a student adds them to the sorted roster
+grade-school,Adding more student adds them to the sorted roster
+grade-school,Adding students to different grades adds them to the same sorted roster
+grade-school,Roster returns an empty list if there are no students enrolled
+grade-school,Student names with grades are displayed in the same sorted roster
+grade-school,Grade returns the students in that grade in alphabetical order
+grade-school,Grade returns an empty list if there are no students in that grade
+hamming,empty strands
+hamming,identical strands
+hamming,long identical strands
+hamming,complete distance in single nucleotide strands
+hamming,complete distance in small strands
+hamming,small distance in small strands
+hamming,small distance
+hamming,small distance in long strands
+hamming,non-unique character in first strand
+hamming,non-unique character in second strand
+hamming,same nucleotides in different positions
+hamming,large distance
+hamming,large distance in off-by-one strand
+hamming,disallow first strand longer
+hamming,disallow second strand longer
+hello-world,Say Hi!
+isbn-verifier,valid isbn number
+isbn-verifier,invalid isbn check digit
+isbn-verifier,valid isbn number with a check digit of 10
+isbn-verifier,check digit is a character other than X
+isbn-verifier,invalid character in isbn
+isbn-verifier,X is only valid as a check digit
+isbn-verifier,valid isbn without separating dashes
+isbn-verifier,isbn without separating dashes and X as check digit
+isbn-verifier,isbn without check digit and dashes
+isbn-verifier,too long isbn and no dashes
+isbn-verifier,too short isbn
+isbn-verifier,isbn without check digit
+isbn-verifier,check digit of X should not be used for 0
+isbn-verifier,empty isbn
+isbn-verifier,input is 9 characters
+isbn-verifier,invalid characters are not ignored
+isbn-verifier,input is too long but contains a valid isbn
+largest-series-product,finds the largest product if span equals length
+largest-series-product,can find the largest product of 2 with numbers in order
+largest-series-product,can find the largest product of 2
+largest-series-product,can find the largest product of 3 with numbers in order
+largest-series-product,can find the largest product of 3
+largest-series-product,can find the largest product of 5 with numbers in order
+largest-series-product,can get the largest product of a big number
+largest-series-product,reports zero if the only digits are zero
+largest-series-product,reports zero if all spans include zero
+largest-series-product,rejects span longer than string length
+largest-series-product,reports 1 for empty string and empty product (0 span)
+largest-series-product,reports 1 for nonempty string and empty product (0 span)
+largest-series-product,rejects empty string and nonzero span
+largest-series-product,rejects invalid character in digits
+largest-series-product,rejects negative span
+leap,year not divisible by 4: common year
+leap,"year divisible by 4, not divisible by 100: leap year"
+leap,"year divisible by 100, not divisible by 400: common year"
+leap,year divisible by 400: leap year
+luhn,single digit strings can not be valid
+luhn,a single zero is invalid
+luhn,a simple valid SIN that remains valid if reversed
+luhn,a simple valid SIN that becomes invalid if reversed
+luhn,a valid Canadian SIN
+luhn,invalid Canadian SIN
+luhn,invalid credit card
+luhn,valid strings with a non-digit included become invalid
+luhn,valid strings with punctuation included become invalid
+luhn,valid strings with symbols included become invalid
+luhn,single zero with space is invalid
+luhn,more than a single zero is valid
+luhn,input digit 9 is correctly converted to output digit 9
+luhn,strings with non-digits is invalid
+markdown,parses normal text as a paragraph
+markdown,parsing italics
+markdown,parsing bold text
+markdown,"mixed normal, italics and bold text"
+markdown,with h1 header level
+markdown,with h2 header level
+markdown,with h6 header level
+markdown,unordered lists
+markdown,With a little bit of everything
+matrix,extract row from one number matrix
+matrix,can extract row
+matrix,extract row where numbers have different widths
+matrix,can extract row from non-square matrix
+matrix,extract column from one number matrix
+matrix,can extract column
+matrix,can extract column from non-square matrix
+matrix,extract column where numbers have different widths
+meetup,monteenth of May 2013
+meetup,monteenth of August 2013
+meetup,monteenth of September 2013
+meetup,tuesteenth of March 2013
+meetup,tuesteenth of April 2013
+meetup,tuesteenth of August 2013
+meetup,wednesteenth of January 2013
+meetup,wednesteenth of February 2013
+meetup,wednesteenth of June 2013
+meetup,thursteenth of May 2013
+meetup,thursteenth of June 2013
+meetup,thursteenth of September 2013
+meetup,friteenth of April 2013
+meetup,friteenth of August 2013
+meetup,friteenth of September 2013
+meetup,saturteenth of February 2013
+meetup,saturteenth of April 2013
+meetup,saturteenth of October 2013
+meetup,sunteenth of May 2013
+meetup,sunteenth of June 2013
+meetup,sunteenth of October 2013
+meetup,first Monday of March 2013
+meetup,first Monday of April 2013
+meetup,first Tuesday of May 2013
+meetup,first Tuesday of June 2013
+meetup,first Wednesday of July 2013
+meetup,first Wednesday of August 2013
+meetup,first Thursday of September 2013
+meetup,first Thursday of October 2013
+meetup,first Friday of November 2013
+meetup,first Friday of December 2013
+meetup,first Saturday of January 2013
+meetup,first Saturday of February 2013
+meetup,first Sunday of March 2013
+meetup,first Sunday of April 2013
+meetup,second Monday of March 2013
+meetup,second Monday of April 2013
+meetup,second Tuesday of May 2013
+meetup,second Tuesday of June 2013
+meetup,second Wednesday of July 2013
+meetup,second Wednesday of August 2013
+meetup,second Thursday of September 2013
+meetup,second Thursday of October 2013
+meetup,second Friday of November 2013
+meetup,second Friday of December 2013
+meetup,second Saturday of January 2013
+meetup,second Saturday of February 2013
+meetup,second Sunday of March 2013
+meetup,second Sunday of April 2013
+meetup,third Monday of March 2013
+meetup,third Monday of April 2013
+meetup,third Tuesday of May 2013
+meetup,third Tuesday of June 2013
+meetup,third Wednesday of July 2013
+meetup,third Wednesday of August 2013
+meetup,third Thursday of September 2013
+meetup,third Thursday of October 2013
+meetup,third Friday of November 2013
+meetup,third Friday of December 2013
+meetup,third Saturday of January 2013
+meetup,third Saturday of February 2013
+meetup,third Sunday of March 2013
+meetup,third Sunday of April 2013
+meetup,fourth Monday of March 2013
+meetup,fourth Monday of April 2013
+meetup,fourth Tuesday of May 2013
+meetup,fourth Tuesday of June 2013
+meetup,fourth Wednesday of July 2013
+meetup,fourth Wednesday of August 2013
+meetup,fourth Thursday of September 2013
+meetup,fourth Thursday of October 2013
+meetup,fourth Friday of November 2013
+meetup,fourth Friday of December 2013
+meetup,fourth Saturday of January 2013
+meetup,fourth Saturday of February 2013
+meetup,fourth Sunday of March 2013
+meetup,fourth Sunday of April 2013
+meetup,last Monday of March 2013
+meetup,last Monday of April 2013
+meetup,last Tuesday of May 2013
+meetup,last Tuesday of June 2013
+meetup,last Wednesday of July 2013
+meetup,last Wednesday of August 2013
+meetup,last Thursday of September 2013
+meetup,last Thursday of October 2013
+meetup,last Friday of November 2013
+meetup,last Friday of December 2013
+meetup,last Saturday of January 2013
+meetup,last Saturday of February 2013
+meetup,last Sunday of March 2013
+meetup,last Sunday of April 2013
+meetup,last Wednesday of February 2012
+meetup,last Wednesday of December 2014
+meetup,last Sunday of February 2015
+meetup,first Friday of December 2012
+minesweeper,no rows
+minesweeper,no columns
+minesweeper,no mines
+minesweeper,minefield with only mines
+minesweeper,mine surrounded by spaces
+minesweeper,space surrounded by mines
+minesweeper,horizontal line
+minesweeper,"horizontal line, mines at edges"
+minesweeper,vertical line
+minesweeper,"vertical line, mines at edges"
+minesweeper,cross
+minesweeper,large minefield
+nth-prime,first prime
+nth-prime,second prime
+nth-prime,sixth prime
+nth-prime,big prime
+nth-prime,there is no zeroth prime
+palindrome-products,finds the smallest palindrome from single digit factors
+palindrome-products,finds the largest palindrome from single digit factors
+palindrome-products,find the smallest palindrome from double digit factors
+palindrome-products,find the largest palindrome from double digit factors
+palindrome-products,find smallest palindrome from triple digit factors
+palindrome-products,find the largest palindrome from triple digit factors
+palindrome-products,find smallest palindrome from four digit factors
+palindrome-products,find the largest palindrome from four digit factors
+palindrome-products,empty result for smallest if no palindrome in the range
+palindrome-products,empty result for largest if no palindrome in the range
+palindrome-products,error result for smallest if min is more than max
+palindrome-products,error result for largest if min is more than max
+poker,single hand always wins
+poker,highest card out of all hands wins
+poker,a tie has multiple winners
+poker,"multiple hands with the same high cards, tie compares next highest ranked, down to last card"
+poker,one pair beats high card
+poker,highest pair wins
+poker,two pairs beats one pair
+poker,"both hands have two pairs, highest ranked pair wins"
+poker,"both hands have two pairs, with the same highest ranked pair, tie goes to low pair"
+poker,"both hands have two identically ranked pairs, tie goes to remaining card (kicker)"
+poker,three of a kind beats two pair
+poker,"both hands have three of a kind, tie goes to highest ranked triplet"
+poker,"with multiple decks, two players can have same three of a kind, ties go to highest remaining cards"
+poker,a straight beats three of a kind
+poker,aces can end a straight (10 J Q K A)
+poker,aces can start a straight (A 2 3 4 5)
+poker,"both hands with a straight, tie goes to highest ranked card"
+poker,"even though an ace is usually high, a 5-high straight is the lowest-scoring straight"
+poker,flush beats a straight
+poker,"both hands have a flush, tie goes to high card, down to the last one if necessary"
+poker,full house beats a flush
+poker,"both hands have a full house, tie goes to highest-ranked triplet"
+poker,"with multiple decks, both hands have a full house with the same triplet, tie goes to the pair"
+poker,four of a kind beats a full house
+poker,"both hands have four of a kind, tie goes to high quad"
+poker,"with multiple decks, both hands with identical four of a kind, tie determined by kicker"
+poker,straight flush beats four of a kind
+poker,"both hands have straight flush, tie goes to highest-ranked card"
+proverb,zero pieces
+proverb,one piece
+proverb,two pieces
+proverb,three pieces
+proverb,full proverb
+proverb,four pieces modernized
+raindrops,the sound for 1 is 1
+raindrops,the sound for 3 is Pling
+raindrops,the sound for 5 is Plang
+raindrops,the sound for 7 is Plong
+raindrops,the sound for 6 is Pling as it has a factor 3
+raindrops,2 to the power 3 does not make a raindrop sound as 3 is the exponent not the base
+raindrops,the sound for 9 is Pling as it has a factor 3
+raindrops,the sound for 10 is Plang as it has a factor 5
+raindrops,the sound for 14 is Plong as it has a factor of 7
+raindrops,the sound for 15 is PlingPlang as it has factors 3 and 5
+raindrops,the sound for 21 is PlingPlong as it has factors 3 and 7
+raindrops,the sound for 25 is Plang as it has a factor 5
+raindrops,the sound for 27 is Pling as it has a factor 3
+raindrops,the sound for 35 is PlangPlong as it has factors 5 and 7
+raindrops,the sound for 49 is Plong as it has a factor 7
+raindrops,the sound for 52 is 52
+raindrops,"the sound for 105 is PlingPlangPlong as it has factors 3, 5 and 7"
+raindrops,the sound for 3125 is Plang as it has a factor 5
+react,input cells have a value
+react,an input cell's value can be set
+react,compute cells calculate initial value
+react,compute cells take inputs in the right order
+react,compute cells update value when dependencies are changed
+react,compute cells can depend on other compute cells
+react,compute cells fire callbacks
+react,callback cells only fire on change
+react,callbacks do not report already reported values
+react,callbacks can fire from multiple cells
+react,callbacks can be added and removed
+react,removing a callback multiple times doesn't interfere with other callbacks
+react,callbacks should only be called once even if multiple dependencies change
+react,callbacks should not be called if dependencies change but output value doesn't change
+rectangles,no rows
+rectangles,no columns
+rectangles,no rectangles
+rectangles,one rectangle
+rectangles,two rectangles without shared parts
+rectangles,five rectangles with shared parts
+rectangles,rectangle of height 1 is counted
+rectangles,rectangle of width 1 is counted
+rectangles,1x1 square is counted
+rectangles,only complete rectangles are counted
+rectangles,rectangles can be of different sizes
+rectangles,corner is required for a rectangle to be complete
+rectangles,large input with many rectangles
+reverse-string,an empty string
+reverse-string,a word
+reverse-string,a capitalized word
+reverse-string,a sentence with punctuation
+reverse-string,a palindrome
+rna-transcription,RNA complement of cytosine is guanine
+rna-transcription,RNA complement of guanine is cytosine
+rna-transcription,RNA complement of thymine is adenine
+rna-transcription,RNA complement of adenine is uracil
+rna-transcription,RNA complement
+roman-numerals,1 is a single I
+roman-numerals,2 is two I's
+roman-numerals,3 is three I's
+roman-numerals,"4, being 5 - 1, is IV"
+roman-numerals,5 is a single V
+roman-numerals,"6, being 5 + 1, is VI"
+roman-numerals,"9, being 10 - 1, is IX"
+roman-numerals,20 is two X's
+roman-numerals,48 is not 50 - 2 but rather 40 + 8
+roman-numerals,49 is not 40 + 5 + 4 but rather 50 - 10 + 10 - 1
+roman-numerals,50 is a single L
+roman-numerals,"90, being 100 - 10, is XC"
+roman-numerals,100 is a single C
+roman-numerals,"60, being 50 + 10, is LX"
+roman-numerals,"400, being 500 - 100, is CD"
+roman-numerals,500 is a single D
+roman-numerals,"900, being 1000 - 100, is CM"
+roman-numerals,1000 is a single M
+roman-numerals,3000 is three M's
+saddle-points,Can identify single saddle point
+saddle-points,Can identify that empty matrix has no saddle points
+saddle-points,Can identify lack of saddle points when there are none
+saddle-points,Can identify multiple saddle points
+saddle-points,Can identify saddle point in bottom right corner
+say,zero
+say,one
+say,fourteen
+say,twenty
+say,twenty-two
+say,one hundred
+say,one hundred twenty-three
+say,one thousand
+say,one thousand two hundred thirty-four
+say,one million
+say,one million two thousand three hundred forty-five
+say,one billion
+say,a big number
+say,numbers below zero are out of range
+say,"numbers above 999,999,999,999 are out of range"
+scrabble-score,lowercase letter
+scrabble-score,uppercase letter
+scrabble-score,valuable letter
+scrabble-score,short word
+scrabble-score,"short, valuable word"
+scrabble-score,medium word
+scrabble-score,"medium, valuable word"
+scrabble-score,"long, mixed-case word"
+scrabble-score,english-like word
+scrabble-score,empty input
+scrabble-score,entire alphabet available
+series,slices of one from one
+series,slices of one from two
+series,slices of two
+series,slices of two overlap
+series,slices can include duplicates
+series,slices of a long series
+series,slice length is too large
+series,slice length cannot be zero
+series,slice length cannot be negative
+series,empty series is invalid
+sieve,no primes under two
+sieve,find first prime
+sieve,find primes up to 10
+sieve,limit is prime
+sieve,find primes up to 1000
+space-age,age on Earth
+space-age,age on Mercury
+space-age,age on Venus
+space-age,age on Mars
+space-age,age on Jupiter
+space-age,age on Saturn
+space-age,age on Uranus
+space-age,age on Neptune
+spiral-matrix,empty spiral
+spiral-matrix,trivial spiral
+spiral-matrix,spiral of size 2
+spiral-matrix,spiral of size 3
+spiral-matrix,spiral of size 4
+spiral-matrix,spiral of size 5
+sublist,empty lists
+sublist,empty list within non empty list
+sublist,non empty list contains empty list
+sublist,list equals itself
+sublist,different lists
+sublist,false start
+sublist,consecutive
+sublist,sublist at start
+sublist,sublist in middle
+sublist,sublist at end
+sublist,at start of superlist
+sublist,in middle of superlist
+sublist,at end of superlist
+sublist,first list missing element from second list
+sublist,second list missing element from first list
+sublist,order matters to a list
+sublist,same digits but different numbers
+sum-of-multiples,multiples of 3 or 5 up to 1
+sum-of-multiples,multiples of 3 or 5 up to 4
+sum-of-multiples,multiples of 3 up to 7
+sum-of-multiples,multiples of 3 or 5 up to 10
+sum-of-multiples,multiples of 3 or 5 up to 100
+sum-of-multiples,multiples of 3 or 5 up to 1000
+sum-of-multiples,"multiples of 7, 13 or 17 up to 20"
+sum-of-multiples,multiples of 4 or 6 up to 15
+sum-of-multiples,"multiples of 5, 6 or 8 up to 150"
+sum-of-multiples,multiples of 5 or 25 up to 51
+sum-of-multiples,multiples of 43 or 47 up to 10000
+sum-of-multiples,multiples of 1 up to 100
+sum-of-multiples,multiples of an empty list up to 10000
+tournament,just the header if no input
+tournament,"a win is three points, a loss is zero points"
+tournament,a win can also be expressed as a loss
+tournament,a different team can win
+tournament,a draw is one point each
+tournament,There can be more than one match
+tournament,There can be more than one winner
+tournament,There can be more than two teams
+tournament,typical input
+tournament,incomplete competition (not all pairs have played)
+tournament,ties broken alphabetically
+transpose,empty string
+transpose,two characters in a row
+transpose,two characters in a column
+transpose,simple
+transpose,single line
+transpose,first line longer than second line
+transpose,second line longer than first line
+transpose,mixed line length
+transpose,square
+transpose,rectangle
+transpose,triangle
+two-bucket,Measure using bucket one of size 3 and bucket two of size 5 - start with bucket one
+two-bucket,Measure using bucket one of size 3 and bucket two of size 5 - start with bucket two
+two-bucket,Measure using bucket one of size 7 and bucket two of size 11 - start with bucket one
+two-bucket,Measure using bucket one of size 7 and bucket two of size 11 - start with bucket two
+two-bucket,Measure one step using bucket one of size 1 and bucket two of size 3 - start with bucket two
+two-bucket,Measure using bucket one of size 2 and bucket two of size 3 - start with bucket one and end with bucket two
+two-fer,no name given
+two-fer,a name given
+two-fer,another name given
+word-count,count one word
+word-count,count one of each word
+word-count,multiple occurrences of a word
+word-count,handles cramped lists
+word-count,handles expanded lists
+word-count,ignore punctuation
+word-count,include numbers
+word-count,normalize case
+word-count,with apostrophes
+word-count,with quotations
+word-count,multiple spaces not detected as a word
+word-search,Should accept an initial game grid and a target search word
+word-search,Should locate one word written left to right
+word-search,Should locate the same word written left to right in a different position
+word-search,Should locate a different left to right word
+word-search,Should locate that different left to right word in a different position
+word-search,Should locate a left to right word in two line grid
+word-search,Should locate a left to right word in three line grid
+word-search,Should locate a left to right word in ten line grid
+word-search,Should locate that left to right word in a different position in a ten line grid
+word-search,Should locate a different left to right word in a ten line grid
+word-search,Should locate multiple words
+word-search,Should locate a single word written right to left
+word-search,Should locate multiple words written in different horizontal directions
+word-search,Should locate words written top to bottom
+word-search,Should locate words written bottom to top
+word-search,Should locate words written top left to bottom right
+word-search,Should locate words written bottom right to top left
+word-search,Should locate words written bottom left to top right
+word-search,Should locate words written top right to bottom left
+word-search,Should fail to locate a word that is not in the puzzle
+wordy,addition
+wordy,more addition
+wordy,addition with negative numbers
+wordy,large addition
+wordy,subtraction
+wordy,multiplication
+wordy,division
+wordy,multiple additions
+wordy,addition and subtraction
+wordy,multiple subtraction
+wordy,subtraction then addition
+wordy,multiple multiplication
+wordy,addition and multiplication
+wordy,multiple division
+wordy,unknown operation
+wordy,Non math question
+yacht,Yacht
+yacht,Not Yacht
+yacht,Ones
+yacht,"Ones, out of order"
+yacht,No ones
+yacht,Twos
+yacht,Fours
+yacht,Yacht counted as threes
+yacht,Yacht of 3s counted as fives
+yacht,Sixes
+yacht,"Full house two small, three big"
+yacht,"Full house three small, two big"
+yacht,Two pair is not a full house
+yacht,Four of a kind is not a full house
+yacht,Yacht is not a full house
+yacht,Four of a Kind
+yacht,Yacht can be scored as Four of a Kind
+yacht,Full house is not Four of a Kind
+yacht,Little Straight
+yacht,Little Straight as Big Straight
+yacht,Four in order but not a little straight
+yacht,No pairs but not a little straight
+yacht,"Minimum is 1, maximum is 5, but not a little straight"
+yacht,Big Straight
+yacht,Big Straight as little straight
+yacht,Choice
+yacht,Yacht as choice
+zebra-puzzle,resident who drinks water
+zebra-puzzle,resident who owns zebra
+zipper,data is retained
+zipper,"left, right and value"
+zipper,dead end
+zipper,tree from deep focus
+zipper,traversing up from top
+zipper,"left, right, and up"
+zipper,set_value
+zipper,set_value after traversing up
+zipper,set_left with leaf
+zipper,set_right with null
+zipper,set_right with subtree
+zipper,set_value on deep focus
+zipper,different paths to same zipper

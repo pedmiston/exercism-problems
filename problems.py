@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os
+import sys
 import json
+from pathlib import Path
 import github3
 import pandas
 
@@ -8,11 +10,8 @@ import pandas
 github = github3.login(os.environ["GITHUB_USERNAME"], os.environ["GITHUB_PASSWORD"])
 
 
-def download_problem_specifications():
-    """Download information about problems from exercism/problem-specifications.
-
-    Writes to problem-specifications.csv and test-cases.csv.
-    """
+def get_problem_specifications():
+    """Summarize information about problems from exercism/problem-specifications."""
     repo = github.repository("exercism", "problem-specifications")
     problems = pandas.DataFrame(
         {"exercise": [filename for filename, _ in repo.directory_contents("exercises")]}
@@ -44,34 +43,36 @@ def download_problem_specifications():
 
     test_cases = pandas.concat(
         [melt_test_cases(x) for x in problems.itertuples()], ignore_index=True
-    )
-    test_cases[["exercise", "description"]].to_csv("test-cases.csv", index=False)
-
+    )[["exercise", "description"]]
     del problems["canonical_data"]
-    problems.to_csv("problem-specifications.csv", index=False)
+
+    return dict(problems=problems, test_cases=test_cases)
 
 
-def download_language_track(language):
-    repo = github.repository("exercism", language)
-    try:
-        contents = repo.file_contents("config.json")
-    except github3.exceptions.NotFoundError:
-        print(f"exercism/{language}/config.json does not exist")
-        data = pandas.DataFrame()
-    else:
-        data = json.loads(contents.decoded.decode("utf-8"))
-        data = pandas.DataFrame(data["exercises"]).rename(
-                columns={"slug": "exercise"})
-        data["language"] = language
-    return data
+def get_exercises():
+    languages = list_languages()
 
-def download_all_language_tracks():
+    def _get_exercises(language):
+        repo = github.repository("exercism", language)
+        try:
+            contents = repo.file_contents("config.json")
+        except github3.exceptions.NotFoundError:
+            print(f"exercism/{language}/config.json does not exist")
+            data = pandas.DataFrame()
+        else:
+            data = json.loads(contents.decoded.decode("utf-8"))
+            data = pandas.DataFrame(data["exercises"]).rename(
+                columns={"slug": "exercise"}
+            )
+            data["language"] = language
+        return data
+
     data = pandas.concat(
-        [download_language_track(language) for language in list_languages()],
+        [_get_exercises(language) for language in languages],
         ignore_index=True,
+        sort=False,
     )
-    data = data[["language", "exercise", "difficulty", "core", "unlocked_by"]]
-    data.to_csv("tracks.csv", index=False)
+    return data[["language", "exercise", "difficulty", "core", "unlocked_by"]]
 
 
 def list_languages():
@@ -104,14 +105,24 @@ if __name__ == "__main__":
     parser.add_argument(
         "-l", "--list-languages", action="store_true", help="list language tracks"
     )
-    parser.add_argument("-e", "--exercises", action="store_true", help="summarize exercise data")
+    parser.add_argument(
+        "-e", "--exercises", action="store_true", help="summarize exercise data"
+    )
 
     args = parser.parse_args()
-    if args.specifications:
-        download_problem_specifications()
-
     if args.list_languages:
         print("\n".join(list_languages()))
+        sys.exit()
+
+    data_dir = Path("data-raw")
+    if not data_dir.is_dir():
+        data_dir.mkdir()
+
+    if args.specifications:
+        data = get_problem_specifications()
+        data["problems"].to_csv(data_dir / "problem-specifications.csv", index=False)
+        data["test_cases"].to_csv(data_dir / "test-cases.csv", index=False)
 
     if args.exercises:
-        download_all_language_tracks()
+        exercises = get_exercises()
+        exercises.to_csv(data_dir / "exercises.csv", index=False)
