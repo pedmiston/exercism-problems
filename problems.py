@@ -9,6 +9,10 @@ github = github3.login(os.environ["GITHUB_USERNAME"], os.environ["GITHUB_PASSWOR
 
 
 def download_problem_specifications():
+    """Download information about problems from exercism/problem-specifications.
+
+    Writes to problem-specifications.csv and test-cases.csv.
+    """
     repo = github.repository("exercism", "problem-specifications")
     problems = pandas.DataFrame(
         {"exercise": [filename for filename, _ in repo.directory_contents("exercises")]}
@@ -47,6 +51,46 @@ def download_problem_specifications():
     problems.to_csv("problem-specifications.csv", index=False)
 
 
+def download_language_track(language):
+    repo = github.repository("exercism", language)
+    try:
+        contents = repo.file_contents("config.json")
+    except github3.exceptions.NotFoundError:
+        print(f"exercism/{language}/config.json does not exist")
+        data = pandas.DataFrame()
+    else:
+        data = json.loads(contents.decoded.decode("utf-8"))
+        data = pandas.DataFrame(data["exercises"]).rename(
+                columns={"slug": "exercise"})
+        data["language"] = language
+    return data
+
+def download_all_language_tracks():
+    data = pandas.concat(
+        [download_language_track(language) for language in list_languages()],
+        ignore_index=True,
+    )
+    data = data[["language", "exercise", "difficulty", "core", "unlocked_by"]]
+    data.to_csv("tracks.csv", index=False)
+
+
+def list_languages():
+    exercism = github.organization("exercism")
+    languages = []
+    for repo in exercism.repositories():
+        if repo.name == "problem-specifications":
+            continue
+        try:
+            n_exercises = len(repo.directory_contents("exercises"))
+        except github3.exceptions.NotFoundError:
+            continue
+        else:
+            if n_exercises > 0:
+                languages.append(repo.name)
+
+    return languages
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -57,6 +101,17 @@ if __name__ == "__main__":
         action="store_true",
         help="download problem specifications",
     )
+    parser.add_argument(
+        "-l", "--list-languages", action="store_true", help="list language tracks"
+    )
+    parser.add_argument("-e", "--exercises", action="store_true", help="summarize exercise data")
+
     args = parser.parse_args()
     if args.specifications:
         download_problem_specifications()
+
+    if args.list_languages:
+        print("\n".join(list_languages()))
+
+    if args.exercises:
+        download_all_language_tracks()
