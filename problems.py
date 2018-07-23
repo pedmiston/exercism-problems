@@ -92,6 +92,30 @@ def list_languages():
     return languages
 
 
+def list_problems():
+    repo = github.repository("exercism", "problem-specifications")
+    problems = [filename for filename, _ in repo.directory_contents("exercises")]
+    return problems
+
+
+def print_problem_descriptions():
+    repo = github.repository("exercism", "problem-specifications")
+    problems = [problem.strip() for problem in open('target-problems.txt')]
+
+    descriptions_dir = Path("problem-descriptions")
+    if not descriptions_dir.is_dir():
+        descriptions_dir.mkdir()
+
+    for problem in problems:
+        try:
+            contents = repo.file_contents(f"exercises/{problem}/description.md")
+        except github3.exceptions.NotFoundError:
+            print(f"description.md not found for exercise '{problem}'")
+        else:
+            with open(descriptions_dir / f"{problem}.md", "w") as dest:
+                dest.write(f"# {problem}\n\n{contents.decoded.decode('utf-8')}")
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -107,6 +131,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-e", "--exercises", action="store_true", help="summarize exercise data"
+    )
+    parser.add_argument(
+        "-d", "--descriptions", action="store_true", help="list problem descriptions"
     )
 
     args = parser.parse_args()
@@ -126,3 +153,6 @@ if __name__ == "__main__":
     if args.exercises:
         exercises = get_exercises()
         exercises.to_csv(data_dir / "exercises.csv", index=False)
+
+    if args.descriptions:
+        print_problem_descriptions()

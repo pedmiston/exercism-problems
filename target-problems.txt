@@ -1,0 +1,4 @@
+bowling
+crypto-square
+dominoes
+minesweeper
