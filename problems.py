@@ -116,6 +116,17 @@ def print_problem_descriptions():
                 dest.write(f"# {problem}\n\n{contents.decoded.decode('utf-8')}")
 
 
+def download_problem_specifications():
+    data = get_problem_specifications()
+    data["problems"].to_csv(data_dir / "problem-specifications.csv", index=False)
+    data["test_cases"].to_csv(data_dir / "test-cases.csv", index=False)
+
+
+def download_exercises():
+    exercises = get_exercises()
+    exercises.to_csv(data_dir / "exercises.csv", index=False)
+
+
 if __name__ == "__main__":
     import argparse
 
@@ -135,6 +146,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "-d", "--descriptions", action="store_true", help="list problem descriptions"
     )
+    parser.add_argument(
+        "-a", "--all", action="store_true", help="run all download commands"
+    )
 
     args = parser.parse_args()
     if args.list_languages:
@@ -146,9 +160,7 @@ if __name__ == "__main__":
         data_dir.mkdir()
 
     if args.specifications:
-        data = get_problem_specifications()
-        data["problems"].to_csv(data_dir / "problem-specifications.csv", index=False)
-        data["test_cases"].to_csv(data_dir / "test-cases.csv", index=False)
+        download_problem_specifications()
 
     if args.exercises:
         exercises = get_exercises()
@@ -156,3 +168,8 @@ if __name__ == "__main__":
 
     if args.descriptions:
         print_problem_descriptions()
+
+    if args.all:
+      download_problem_specifications()
+      download_exercises()
+
