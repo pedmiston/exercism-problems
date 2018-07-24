@@ -17,6 +17,8 @@ data("problem_specifications")
 data("exercises")
 ```
 
+# Number of test cases
+
 ```{r n-test-cases, fig.height=14}
 ggplot(problem_specifications) +
   aes(fct_reorder(exercise, n_test_cases), n_test_cases) +
@@ -26,6 +28,8 @@ ggplot(problem_specifications) +
   labs(x = "", y = "number of test cases") +
   theme(plot.margin = unit(c(0, 1, 2, 0), units = "lines"))
 ```
+
+# Difficulty of the same problems in different languages
 
 ```{r difficulty, fig.height=14}
 set.seed(254)
@@ -40,4 +44,21 @@ ggplot(exercises) +
   scale_y_continuous(breaks = 1:10, position = "right") +
   labs(x = "") +
   theme(legend.position = "none")
+```
+
+# Average difficulty across languages
+
+```{r ranking, echo=1, fig.height=8}
+lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
+                                  data = exercises)
+
+lang_difficulty_preds <- broom::tidy(lang_difficulty_mod, effects = "fixed") %>%
+  rename(language = term) %>%
+  mutate(language = str_replace(language, "^language", ""))
+
+ggplot(lang_difficulty_preds) +
+  aes(fct_reorder(language, estimate, .desc = TRUE), estimate) +
+  geom_linerange(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
+  coord_flip(ylim = c(0, 5.9), expand = FALSE, clip = "off") +
+  labs(x = "", y = "average difficulty")
 ```
