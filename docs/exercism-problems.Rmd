@@ -15,40 +15,71 @@ theme_set(theme_minimal())
 library(exercism)
 data("problem_specifications")
 data("exercises")
+
+exercises <- filter(exercises, difficulty != 0)
 ```
 
 # Number of test cases
 
-```{r n-test-cases, fig.height=14}
+```{r n-test-cases-dotplot, fig.height=2}
 ggplot(problem_specifications) +
-  aes(fct_reorder(exercise, n_test_cases), n_test_cases) +
-  geom_point() +
-  coord_flip(ylim = c(0, 100), expand = FALSE, clip = "off") +
-  scale_y_continuous(breaks = seq(0, 100, by = 10), position = "right") +
-  labs(x = "", y = "number of test cases") +
-  theme(plot.margin = unit(c(0, 1, 2, 0), units = "lines"))
+  aes(n_test_cases) +
+  geom_dotplot(binwidth = 1, stackdir = "center", fill = "gray") +
+  scale_x_continuous(breaks = seq(0, 100, by = 10)) +
+  scale_y_continuous(NULL, breaks = NULL) +
+  labs(x = "number of test cases", caption = "Distribution of problems sorted by number of test cases.")
+```
+
+```{r n-test-cases-dotplot-labeled, fig.height=20, fig.width=40}
+problem_specifications_dotplot <- problem_specifications %>%
+  group_by(n_test_cases) %>%
+  mutate(height = 1:n(),
+         height_c = height - mean(height)) %>%
+  ungroup()
+
+ggplot(problem_specifications_dotplot) +
+  aes(factor(n_test_cases), height_c) +
+  geom_text(aes(label = exercise), angle = 45, hjust = 0.5, check_overlap = TRUE, size = 10) +
+  coord_cartesian(xlim = c(-0.1, 28), ylim = c(-11, 11), expand = FALSE) +
+  labs(x = "number of test cases", caption = "Distribution of labeled problems for reference. Note the ordinal x-axis.") +
+  scale_y_continuous(NULL, breaks = NULL) +
+  theme(text = element_text(size = 50))
 ```
 
 # Difficulty of the same problems in different languages
 
+Most Exercism.io problems have been assigned a difficulty score ranging from
+1-10. For example, [python's "hello-world" problem is assigned a difficulty of
+1](https://github.com/exercism/python/blob/master/config.json#L15). I don't know
+how these difficulty scores are assigned. It's likely they are self-assigned by
+the developers working on Exercism.io, and used in the ordering of problems for
+particular learning tracks. What's interesting about these scores is that the
+same problems are assigned different difficulty scores in different languages.
+Note the variability within each problem in the plot below.
+
 ```{r difficulty, fig.height=14}
 set.seed(254)
 ggplot(exercises) +
-  aes(fct_reorder(exercise, difficulty), difficulty) +
+  aes(fct_reorder(exercise, difficulty, .fun = mean), difficulty) +
   stat_summary(fun.y = mean,
                fun.ymin = function(x) mean(x) - sd(x), 
                fun.ymax = function(x) mean(x) + sd(x), 
                geom = "linerange") +
-  geom_point(aes(color = language), position = position_jitter(width=0, height=0.2), shape = 1) +
+  geom_point(aes(color = language), position = position_jitter(width=0, height=0.2), shape = 1, alpha = 0.6) +
   coord_flip() +
   scale_y_continuous(breaks = 1:10, position = "right") +
-  labs(x = "") +
+  labs(x = "", caption = "Problems sorted by average difficulty across languages. Lineranges show mean difficulties ±1 standard deviation.") +
   theme(legend.position = "none")
 ```
 
 # Average difficulty across languages
 
-```{r ranking, echo=1, fig.height=8}
+Are all Exercism.io problems easier in some languages than others? To test this,
+we can estimate the average difficulty across all problems for each language while
+controlling for problem using a hierarchical linear model.
+
+```{r ranking, echo=1:2, fig.height=8}
+# Fit lmer mod with one param per language
 lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
                                   data = exercises)
 

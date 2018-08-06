@@ -4,6 +4,11 @@ This repo contains code for scraping metadata about programming problems from Ex
 The data is available in an R package, which can be installed with `remotes::install_github("pedmiston/exercism-problems")`.
 The code for assembling the data is in the python script "problems.py".
 
+Our results are presented in the following dynamic documents:
+
+[Exercism.io Problems](docs/exercism-problems.md)
+:   Analyses of the problems available on [exercism.io](https://exercism.io) including number of test cases and self-assigned difficulty. Source document: [docs/exercism-problems.Rmd](docs/exercism-problems.Rmd)
+
 ## Assembling the data
 
 To assemble the data, you need a python environment. Here's how I set up to work on this project.
@@ -74,10 +79,3 @@ brew install exercism
 exercism configure --token=your-exercism-account-token-here
 exercism download --exercise=hello-world --track=python
 ```
-
-## Candidate problems
-
-- [bowling](https://github.com/exercism/python/tree/master/exercises/bowling)
-- [crypto-square](https://github.com/exercism/python/tree/master/exercises/crypto-square)
-- [dominoes](https://github.com/exercism/python/tree/master/exercises/dominoes)
-- [minesweeper](https://github.com/exercism/python/tree/master/exercises/minesweeper)
