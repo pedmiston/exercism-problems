@@ -36,3 +36,59 @@ lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
 ```
 
 ![](exercism-problems_files/figure-gfm/ranking-1.png)<!-- -->
+
+## Looking only at the core exercises implemented in the most popular languages
+
+``` r
+# Select problems with implementations in all languages
+n_languages <- length(unique(exercises$language))
+problems_in_all_languages <- count(exercises, exercise) %>%
+  filter(n == n_languages)
+# No problems in all languages!
+
+# Select problems with implementations in the 10 most popular languages according to StackOverflow
+exercism_languages <- unique(exercises$language)
+data("stack_overflow_ranks", package = "programmingquestionnaire")
+top_10_languages <- stack_overflow_ranks %>%
+  filter(language_name %in% exercism_languages) %>%
+  top_n(10) %>%
+  .$language_name
+exercises_in_all_top_10_languages <- exercises %>%
+  group_by(exercise) %>%
+  summarize(core = all(top_10_languages %in% language)) %>%
+  filter(core) %>%
+  .$exercise
+core_exercises <- filter(exercises, language %in% top_10_languages, exercise %in% exercises_in_all_top_10_languages)
+
+core_lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
+                                       data = core_exercises)
+
+core_lang_difficulty_preds <- broom::tidy(core_lang_difficulty_mod, effects = "fixed") %>%
+  rename(language = term) %>%
+  mutate(language = str_replace(language, "^language", ""))
+
+ggplot(core_lang_difficulty_preds) +
+  aes(fct_reorder(language, estimate, .desc = TRUE), estimate) +
+  geom_linerange(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
+  coord_flip(ylim = c(0, 5.9), expand = FALSE, clip = "off") +
+  labs(x = "", y = "average difficulty")
+```
+
+![](exercism-problems_files/figure-gfm/ranking-core-1.png)<!-- -->
+
+``` r
+mod_comparison <- left_join(core_lang_difficulty_preds[,c("language", "estimate")],
+          lang_difficulty_preds[,c("language", "estimate")],
+          by = "language", suffix = c("_core", "_overall"))
+ggplot(mod_comparison) +
+  aes(estimate_core, estimate_overall, label = language) +
+  geom_text(check_overlap = TRUE) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
+  labs(x = "estimated difficulty across core problems",
+       y = "estimated difficulty across all problems") +
+  coord_equal(xlim = c(1, 6), ylim = c(1, 6)) +
+  scale_x_continuous(breaks = 1:6) +
+  scale_y_continuous(breaks = 1:6)
+```
+
+![](exercism-problems_files/figure-gfm/ranking-core-2.png)<!-- -->
