@@ -7,7 +7,7 @@ The code for assembling the data is in the python script "problems.py".
 Our results are presented in the following dynamic documents:
 
 [Exercism.io Problems](docs/exercism-problems.md)
-:   Analyses of the problems available on [exercism.io](https://exercism.io) including number of test cases and self-assigned difficulty. Source document: [docs/exercism-problems.Rmd](docs/exercism-problems.Rmd)
+:   Analyses of the problems available on Exercism.io including number of test cases and self-assigned difficulty. Source document: [docs/exercism-problems.Rmd](docs/exercism-problems.Rmd)
 
 ## Assembling the data
 
