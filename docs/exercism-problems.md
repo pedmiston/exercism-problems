@@ -3,6 +3,21 @@ Analysis of Exercism.io problems
 
 # Number of test cases
 
+The problems or “exercises” on Exercism.io are scored via automated
+tests. These tests often involve providing the solution program with
+input and comparing the output to what was expected. These **test
+cases** can be scored in all languages. Each problem has a different
+number of test cases, and the distribution of problem sizes is shown
+below. The existence of problems with zero test cases could mean that
+the problem is still being developed. But most problems have more tests
+than test cases, because many problems specify certain behavioral
+requirements (e.g., returning an object of a particular type) that must
+be manually translated into tests in each language.
+
+**Core exercises** are implemented in all 10 most popular languages
+according to
+StackOverflow.
+
 ![](exercism-problems_files/figure-gfm/n-test-cases-dotplot-1.png)<!-- -->
 
 ![](exercism-problems_files/figure-gfm/n-test-cases-dotplot-labeled-1.png)<!-- -->
@@ -37,58 +52,19 @@ lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
 
 ![](exercism-problems_files/figure-gfm/ranking-1.png)<!-- -->
 
-## Looking only at the core exercises implemented in the most popular languages
+## Core exercises
 
-``` r
-# Select problems with implementations in all languages
-n_languages <- length(unique(exercises$language))
-problems_in_all_languages <- count(exercises, exercise) %>%
-  filter(n == n_languages)
-# No problems in all languages!
-
-# Select problems with implementations in the 10 most popular languages according to StackOverflow
-exercism_languages <- unique(exercises$language)
-data("stack_overflow_ranks", package = "programmingquestionnaire")
-top_10_languages <- stack_overflow_ranks %>%
-  filter(language_name %in% exercism_languages) %>%
-  top_n(10) %>%
-  .$language_name
-exercises_in_all_top_10_languages <- exercises %>%
-  group_by(exercise) %>%
-  summarize(core = all(top_10_languages %in% language)) %>%
-  filter(core) %>%
-  .$exercise
-core_exercises <- filter(exercises, language %in% top_10_languages, exercise %in% exercises_in_all_top_10_languages)
-
-core_lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
-                                       data = core_exercises)
-
-core_lang_difficulty_preds <- broom::tidy(core_lang_difficulty_mod, effects = "fixed") %>%
-  rename(language = term) %>%
-  mutate(language = str_replace(language, "^language", ""))
-
-ggplot(core_lang_difficulty_preds) +
-  aes(fct_reorder(language, estimate, .desc = TRUE), estimate) +
-  geom_linerange(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
-  coord_flip(ylim = c(0, 5.9), expand = FALSE, clip = "off") +
-  labs(x = "", y = "average difficulty")
-```
+How do the top 10 most popular languages compare in self-assigned
+difficulty on the core exercises?
 
 ![](exercism-problems_files/figure-gfm/ranking-core-1.png)<!-- -->
 
-``` r
-mod_comparison <- left_join(core_lang_difficulty_preds[,c("language", "estimate")],
-          lang_difficulty_preds[,c("language", "estimate")],
-          by = "language", suffix = c("_core", "_overall"))
-ggplot(mod_comparison) +
-  aes(estimate_core, estimate_overall, label = language) +
-  geom_text(check_overlap = TRUE) +
-  geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-  labs(x = "estimated difficulty across core problems",
-       y = "estimated difficulty across all problems") +
-  coord_equal(xlim = c(1, 6), ylim = c(1, 6)) +
-  scale_x_continuous(breaks = 1:6) +
-  scale_y_continuous(breaks = 1:6)
-```
+Are the core exercises really so easy in ruby and python compared to
+java and typescript? One potential confound is that the core exercises
+might simply be easier overall, in which case we might conclude that
+ruby and python are good for easy problems. One way to show how
+difficulty on the core problems correlates with overall difficulty is to
+compare the model estimates from the full model to the core-only
+model.
 
-![](exercism-problems_files/figure-gfm/ranking-core-2.png)<!-- -->
+![](exercism-problems_files/figure-gfm/mod-estimate-correlations-1.png)<!-- -->
