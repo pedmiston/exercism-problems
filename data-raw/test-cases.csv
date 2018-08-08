@@ -75,8 +75,8 @@ bob,talking forcefully
 bob,using acronyms in regular speech
 bob,forceful question
 bob,shouting numbers
-bob,only numbers
-bob,question with only numbers
+bob,no letters
+bob,question with no letters
 bob,shouting with special characters
 bob,shouting with no exclamation mark
 bob,statement containing question mark
@@ -519,6 +519,7 @@ reverse-string,a word
 reverse-string,a capitalized word
 reverse-string,a sentence with punctuation
 reverse-string,a palindrome
+rna-transcription,Empty RNA sequence
 rna-transcription,RNA complement of cytosine is guanine
 rna-transcription,RNA complement of guanine is cytosine
 rna-transcription,RNA complement of thymine is adenine
@@ -546,8 +547,12 @@ roman-numerals,3000 is three M's
 saddle-points,Can identify single saddle point
 saddle-points,Can identify that empty matrix has no saddle points
 saddle-points,Can identify lack of saddle points when there are none
-saddle-points,Can identify multiple saddle points
+saddle-points,Can identify multiple saddle points in a column
+saddle-points,Can identify multiple saddle points in a row
 saddle-points,Can identify saddle point in bottom right corner
+saddle-points,Can identify saddle points in a non square matrix
+saddle-points,Can identify that saddle points in a single column matrix are those with the minimum value
+saddle-points,Can identify that saddle points in a single row matrix are those with the maximum value
 say,zero
 say,one
 say,fourteen
@@ -584,6 +589,18 @@ series,slice length is too large
 series,slice length cannot be zero
 series,slice length cannot be negative
 series,empty series is invalid
+sgf-parsing,empty input
+sgf-parsing,tree with no nodes
+sgf-parsing,node without tree
+sgf-parsing,node without properties
+sgf-parsing,single node tree
+sgf-parsing,properties without delimiter
+sgf-parsing,all lowercase property
+sgf-parsing,upper and lowercase property
+sgf-parsing,two nodes
+sgf-parsing,two child trees
+sgf-parsing,multiple property values
+sgf-parsing,escaped property
 sieve,no primes under two
 sieve,find first prime
 sieve,find primes up to 10

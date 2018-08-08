@@ -1,5 +1,5 @@
 ---
-title: "Analysis of Exercism.io problems"
+title: "Solving the same problems in different programming languages"
 output:
   html_document:
     theme: flatly
@@ -33,61 +33,64 @@ core_exercises <- exercises %>%
   .$exercise
 
 problem_specifications <- mutate(problem_specifications, is_core = exercise %in% core_exercises)
+
+make_recoder <- function(key) {
+  recoder <- function(frame) {
+    if(missing(frame)) return(key)
+    left_join(frame, key)
+  }
+  recoder
+}
+
+one_v_two_key <- data_frame(
+  n_test_cases = c(1, 2),
+  one_v_two = c(-0.5, 0.5)
+)
+recode_one_v_two <- make_recoder(one_v_two_key)
+recode_three_plus <- make_recoder(data_frame(
+  n_test_cases = 3:30,
+  three_plus = TRUE,
+  n_test_cases_1 = n_test_cases - min(n_test_cases) + 1,
+  n_test_cases_log = log10(n_test_cases_1)))
+
+problem_difficulty <- left_join(problem_specifications, exercises) %>%
+  group_by(exercise, n_test_cases) %>%
+  summarize(difficulty = mean(difficulty)) %>%
+  ungroup() %>%
+  mutate(has_test_cases = (n_test_cases > 0)) %>%
+  recode_one_v_two() %>%
+  recode_three_plus()
+
 ```
 
-# Number of test cases
+Are the same problems easier to solve in some programming languages than others?
+To answer this question, we analyzed the difficulty of the same programming problems
+solved in different languages available via Exercism.io.
 
-The problems or "exercises" on Exercism.io are scored via automated tests. These
-tests often involve providing the solution program with input and
-comparing the output to what was expected. These **test cases** can
-be scored in all languages. Each problem has a different number of test cases,
-and the distribution of problem sizes is shown below. The existence of problems
-with zero test cases could mean that the problem is still being developed. But
-most problems have more tests than test cases, because many problems specify
-certain behavioral requirements (e.g., returning an object of a particular type)
-that must be manually translated into tests in each language.
+## What is Exercism.io?
 
-**Core exercises** are implemented in all 10 most popular languages according to StackOverflow.
+[Exercism.io](https://exercism.io) is a website for users to learn new
+programming languages and improve their programming ability by completing
+practice problems referred to as "exercises". To complete each exercise, users
+have to write a program that meets certain requirements as described in the
+problem specification and evaluated by automated tests. On Exercism.io, the same
+problems can be solved in different languages, making data about solutions to
+Exercism.io problems valuable for understanding the differences between
+languages.
 
-```{r n-test-cases-dotplot, fig.height=3}
-scale_color_is_core <- scale_color_brewer("", labels = c("other", "core"), palette = "Set2")
-scale_fill_is_core <- scale_fill_brewer("", labels = c("other", "core"), palette = "Set2")
-ggplot(problem_specifications) +
-  aes(n_test_cases, fill = is_core) +
-  geom_dotplot(binwidth = 1, stackdir = "center") +
-  scale_x_continuous(breaks = seq(0, 100, by = 10)) +
-  scale_y_continuous(NULL, breaks = NULL) +
-  scale_fill_is_core +
-  labs(x = "number of test cases", caption = "Distribution of problems sorted by number of test cases.\nSource: github.com/exercism/problem-specifications")
-```
-
-```{r n-test-cases-dotplot-labeled, fig.height=20, fig.width=40}
-problem_specifications_dotplot <- problem_specifications %>%
-  group_by(n_test_cases) %>%
-  mutate(height = 1:n(),
-         height_c = height - mean(height)) %>%
-  ungroup()
-
-ggplot(problem_specifications_dotplot) +
-  aes(factor(n_test_cases), height_c) +
-  geom_text(aes(label = exercise, color = is_core), angle = 45, hjust = 0.5, check_overlap = TRUE, size = 10) +
-  coord_cartesian(xlim = c(-0.1, 28), ylim = c(-11, 11), expand = FALSE) +
-  labs(x = "number of test cases", caption = "Distribution of labeled problems for reference. Note the ordinal x-axis.\nSource: github.com/exercism/problem-specifications") +
-  scale_y_continuous(NULL, breaks = NULL) +
-  scale_color_is_core +
-  theme(text = element_text(size = 50))
-```
-
-# Difficulty of the same problems in different languages
+## Self-assigned problem difficulty
 
 Most Exercism.io problems have been assigned a difficulty score ranging from
-1-10. For example, [python's "hello-world" problem is assigned a difficulty of
-1](https://github.com/exercism/python/blob/master/config.json#L15). I don't know
-how these difficulty scores are assigned. It's likely they are self-assigned by
-the developers working on Exercism.io, and used in the ordering of problems for
-particular learning tracks. What's interesting about these scores is that the
-same problems are assigned different difficulty scores in different languages.
-Note the variability within each problem in the plot below.
+1-10. For example, [python's "hello-world"
+problem](https://github.com/exercism/python/blob/master/config.json#L15) is
+assigned a difficulty of 1. _I don't know how these difficulty scores are
+assigned._ I will assume they are self-assigned by the developers working on
+Exercism.io, used in the ordering of problems for particular learning tracks,
+and are at least somewhat correlated with behavioral measures of difficulty.
+
+What's interesting about these difficulty scores is that the same problems are
+assigned different difficulty scores in different languages. Note the
+variability within each problem (row) in the plot below.
 
 ```{r difficulty, fig.height=14}
 set.seed(254)
@@ -96,19 +99,19 @@ ggplot(exercises) +
   stat_summary(fun.y = mean,
                fun.ymin = function(x) mean(x) - sd(x), 
                fun.ymax = function(x) mean(x) + sd(x), 
-               geom = "linerange") +
+               geom = "linerange", alpha = 0.8) +
   geom_point(aes(color = language), position = position_jitter(width=0, height=0.2), shape = 1, alpha = 0.6) +
   coord_flip() +
-  scale_y_continuous(breaks = 1:10, position = "right") +
+  scale_y_continuous("self-assigned difficulty", breaks = 1:10, position = "right") +
   labs(x = "", caption = "Problems sorted by average difficulty across languages. Lineranges show mean difficulties ±1 standard deviation.") +
   theme(legend.position = "none")
 ```
 
-# Average difficulty across languages
+## Difficulty per language
 
-Are all Exercism.io problems easier in some languages than others? To test this,
-we can estimate the average difficulty across all problems for each language while
-controlling for problem using a hierarchical linear model.
+**Are problems easier in some languages than others?** We can estimate the
+average difficulty for each language while controlling for overall problem
+difficulty using a hierarchical linear model.
 
 ```{r ranking, echo=1:2, fig.height=8}
 # Fit lmer mod with one param per language
@@ -131,10 +134,10 @@ lang_difficulty_plot <- ggplot(lang_difficulty_preds) +
 lang_difficulty_plot
 ```
 
-## Core exercises
-
-How do the top 10 most popular languages compare in self-assigned difficulty on the core
-exercises?
+Not every exercise is implemented in every language. **Core exercises** are
+implemented in all 10 most popular languages according to StackOverflow. How do
+these top languages compare in self-assigned difficulty on the
+core exercises?
 
 ```{r ranking-core}
 core_lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
@@ -143,24 +146,70 @@ core_lang_difficulty_preds <- get_lang_difficulty_preds(core_lang_difficulty_mod
 lang_difficulty_plot %+% core_lang_difficulty_preds
 ```
 
-Are the core exercises really so easy in ruby and python compared to java and typescript? One
-potential confound is that the core exercises might simply be easier overall, in which case
-we might conclude that ruby and python are good for easy problems. One way to show how
-difficulty on the core problems correlates with overall difficulty is to
-compare the model estimates from the full model to the core-only model.
+## Number of test cases and self-assigned difficulty
 
-```{r mod-estimate-correlations}
-mod_comparison <- left_join(core_lang_difficulty_preds[,c("language", "estimate")],
-          lang_difficulty_preds[,c("language", "estimate")],
-          by = "language", suffix = c("_core", "_overall"))
-ggplot(mod_comparison) +
-  aes(estimate_overall, estimate_core, label = language) +
-  geom_text(check_overlap = TRUE) +
-  geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-  labs(x = "estimated difficulty across all exercises",
-       y = "estimated difficulty across core exercises",
-       caption = "Correlation between the model estimates from the full model and the core-only model.\nCore exercises are easier in all languages.") +
-  coord_equal(xlim = c(1, 6), ylim = c(1, 6)) +
-  scale_x_continuous(breaks = 1:6) +
-  scale_y_continuous(breaks = 1:6)
+Another factor to incorporate into our model is the number of **test cases**.
+Test cases involve providing the solution program with input and comparing the
+output to what was expected. The same test cases can be evaluated in all
+languages. Each problem has a different number of test cases, and the
+distribution of problem sizes is shown below.
+
+Problems with zero test cases likely means the problem is still being developed.
+
+In addition, most problems have more tests than test cases, because many
+problems specify certain behavioral requirements (e.g., returning an object of a
+particular type) that must be manually translated into tests in each language,
+and do not correspond to input and output pairs.
+
+```{r n-test-cases-dotplot, fig.height=3}
+scale_color_is_core <- scale_color_brewer("", labels = c("other", "core"), palette = "Set2")
+scale_fill_is_core <- scale_fill_brewer("", labels = c("other", "core"), palette = "Set2")
+ggplot(problem_specifications) +
+  aes(n_test_cases, fill = is_core) +
+  geom_dotplot(binwidth = 1, stackdir = "center") +
+  scale_x_continuous(breaks = seq(0, 100, by = 10)) +
+  scale_y_continuous(NULL, breaks = NULL) +
+  scale_fill_is_core +
+  labs(x = "number of test cases", caption = "Distribution of problems sorted by number of test cases.\nSource: github.com/exercism/problem-specifications")
+```
+
+```{r n-test-cases-dotplot-labeled, fig.height=20, fig.width=40, eval=FALSE}
+problem_specifications_dotplot <- problem_specifications %>%
+  group_by(n_test_cases) %>%
+  mutate(height = 1:n(),
+         height_c = height - mean(height)) %>%
+  ungroup()
+
+ggplot(problem_specifications_dotplot) +
+  aes(factor(n_test_cases), height_c) +
+  geom_text(aes(label = exercise, color = is_core), angle = 45, hjust = 0.5, check_overlap = TRUE, size = 10) +
+  coord_cartesian(xlim = c(-0.1, 28), ylim = c(-11, 11), expand = FALSE) +
+  labs(x = "number of test cases", caption = "Distribution of labeled problems for reference. Note the ordinal x-axis.\nSource: github.com/exercism/problem-specifications") +
+  scale_y_continuous(NULL, breaks = NULL) +
+  scale_color_is_core +
+  theme(text = element_text(size = 50))
+```
+
+```{r problem-difficulty-by-num-tests}
+one_v_two_mod <- lm(difficulty ~ one_v_two, data = problem_difficulty)
+one_v_two_preds <- recode_one_v_two() %>%
+  cbind(., predict(one_v_two_mod, newdata = ., se = TRUE)) %>%
+  rename(difficulty = fit, se = se.fit)
+
+three_plus_mod <- lm(difficulty ~ n_test_cases_log, data = filter(problem_difficulty, three_plus))
+three_plus_preds <- recode_three_plus() %>%
+  cbind(., predict(three_plus_mod, newdata = ., se = TRUE)) %>%
+  rename(difficulty = fit, se = se.fit)
+
+ggplot(problem_difficulty) +
+  aes(n_test_cases, difficulty) +
+  geom_errorbar(aes(ymin = difficulty - se, ymax = difficulty + se), data = one_v_two_preds,
+                width = 0.1) +
+  geom_smooth(aes(ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = three_plus_preds, color = NA) +
+  geom_point(aes(shape = has_test_cases), show.legend = FALSE) +
+  theme() +
+  scale_x_log10("Number of test cases (log scale)", breaks = c(1, 4, 12, 24, 48, 100)) +
+  scale_y_continuous("Difficulty", breaks = 1:10) +
+  scale_shape_manual(values = c(4, 19)) +
+  coord_cartesian(clip = "off")
 ```

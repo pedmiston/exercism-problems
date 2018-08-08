@@ -42,7 +42,7 @@ def get_problem_specifications():
         return cases
 
     test_cases = pandas.concat(
-        [melt_test_cases(x) for x in problems.itertuples()], ignore_index=True
+        [melt_test_cases(x) for x in problems.itertuples()], ignore_index=True, sort=True
     )[["exercise", "description"]]
     del problems["canonical_data"]
 
@@ -62,8 +62,9 @@ def get_exercises():
         else:
             data = json.loads(contents.decoded.decode("utf-8"))
             data = pandas.DataFrame(data["exercises"]).rename(
-                columns={"slug": "exercise"}
+                columns={"slug": "exercise", "core": "is_core"}
             )
+            data["is_core"] = data.is_core.astype(int)
             data["language"] = language
         return data
 
@@ -72,7 +73,7 @@ def get_exercises():
         ignore_index=True,
         sort=False,
     )
-    return data[["language", "exercise", "difficulty", "core", "unlocked_by"]]
+    return data[["language", "exercise", "difficulty", "is_core", "unlocked_by"]]
 
 
 def list_languages():

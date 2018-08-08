@@ -1,48 +1,45 @@
-Analysis of Exercism.io problems
+Solving the same problems in different programming languages
 ================
 
-# Number of test cases
+Are the same problems easier to solve in some programming languages than
+others? To answer this question, we analyzed the difficulty of the same
+programming problems solved in different languages available via
+Exercism.io.
 
-The problems or “exercises” on Exercism.io are scored via automated
-tests. These tests often involve providing the solution program with
-input and comparing the output to what was expected. These **test
-cases** can be scored in all languages. Each problem has a different
-number of test cases, and the distribution of problem sizes is shown
-below. The existence of problems with zero test cases could mean that
-the problem is still being developed. But most problems have more tests
-than test cases, because many problems specify certain behavioral
-requirements (e.g., returning an object of a particular type) that must
-be manually translated into tests in each language.
+## What is Exercism.io?
 
-**Core exercises** are implemented in all 10 most popular languages
-according to
-StackOverflow.
+[Exercism.io](https://exercism.io) is a website for users to learn new
+programming languages and improve their programming ability by
+completing practice problems referred to as “exercises”. To complete
+each exercise, users have to write a program that meets certain
+requirements as described in the problem specification and evaluated by
+automated tests. On Exercism.io, the same problems can be solved in
+different languages, making data about solutions to Exercism.io problems
+valuable for understanding the differences between languages.
 
-![](exercism-problems_files/figure-gfm/n-test-cases-dotplot-1.png)<!-- -->
-
-![](exercism-problems_files/figure-gfm/n-test-cases-dotplot-labeled-1.png)<!-- -->
-
-# Difficulty of the same problems in different languages
+## Self-assigned problem difficulty
 
 Most Exercism.io problems have been assigned a difficulty score ranging
-from 1-10. For example, [python’s “hello-world” problem is assigned a
-difficulty of
-1](https://github.com/exercism/python/blob/master/config.json#L15). I
-don’t know how these difficulty scores are assigned. It’s likely they
-are self-assigned by the developers working on Exercism.io, and used in
-the ordering of problems for particular learning tracks. What’s
-interesting about these scores is that the same problems are assigned
-different difficulty scores in different languages. Note the variability
-within each problem in the plot below.
+from 1-10. For example, [python’s “hello-world”
+problem](https://github.com/exercism/python/blob/master/config.json#L15)
+is assigned a difficulty of 1. *I don’t know how these difficulty scores
+are assigned.* I will assume they are self-assigned by the developers
+working on Exercism.io, used in the ordering of problems for particular
+learning tracks, and are at least somewhat correlated with behavioral
+measures of difficulty.
+
+What’s interesting about these difficulty scores is that the same
+problems are assigned different difficulty scores in different
+languages. Note the variability within each problem (row) in the plot
+below.
 
 ![](exercism-problems_files/figure-gfm/difficulty-1.png)<!-- -->
 
-# Average difficulty across languages
+## Difficulty per language
 
-Are all Exercism.io problems easier in some languages than others? To
-test this, we can estimate the average difficulty across all problems
-for each language while controlling for problem using a hierarchical
-linear model.
+**Are problems easier in some languages than others?** We can estimate
+the average difficulty for each language while controlling for overall
+problem difficulty using a hierarchical linear model.
 
 ``` r
 # Fit lmer mod with one param per language
@@ -52,19 +49,30 @@ lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
 
 ![](exercism-problems_files/figure-gfm/ranking-1.png)<!-- -->
 
-## Core exercises
-
-How do the top 10 most popular languages compare in self-assigned
+Not every exercise is implemented in every language. **Core exercises**
+are implemented in all 10 most popular languages according to
+StackOverflow. How do these top languages compare in self-assigned
 difficulty on the core exercises?
 
 ![](exercism-problems_files/figure-gfm/ranking-core-1.png)<!-- -->
 
-Are the core exercises really so easy in ruby and python compared to
-java and typescript? One potential confound is that the core exercises
-might simply be easier overall, in which case we might conclude that
-ruby and python are good for easy problems. One way to show how
-difficulty on the core problems correlates with overall difficulty is to
-compare the model estimates from the full model to the core-only
-model.
+## Number of test cases and self-assigned difficulty
 
-![](exercism-problems_files/figure-gfm/mod-estimate-correlations-1.png)<!-- -->
+Another factor to incorporate into our model is the number of **test
+cases**. Test cases involve providing the solution program with input
+and comparing the output to what was expected. The same test cases can
+be evaluated in all languages. Each problem has a different number of
+test cases, and the distribution of problem sizes is shown below.
+
+Problems with zero test cases likely means the problem is still being
+developed.
+
+In addition, most problems have more tests than test cases, because many
+problems specify certain behavioral requirements (e.g., returning an
+object of a particular type) that must be manually translated into tests
+in each language, and do not correspond to input and output
+pairs.
+
+![](exercism-problems_files/figure-gfm/n-test-cases-dotplot-1.png)<!-- -->
+
+![](exercism-problems_files/figure-gfm/problem-difficulty-by-num-tests-1.png)<!-- -->
