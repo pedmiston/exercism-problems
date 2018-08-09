@@ -3,30 +3,31 @@ Solving the same problems in different programming languages
 
 Are the same problems easier to solve in some programming languages than
 others? To answer this question, we analyzed the difficulty of the same
-programming problems solved in different languages available via
-Exercism.io.
+programming problems solved in different languages available on the
+website Exercism.io.
 
 ## What is Exercism.io?
 
-[Exercism.io](https://exercism.io) is a website for users to learn new
-programming languages and improve their programming ability by
-completing practice problems referred to as “exercises”. To complete
-each exercise, users have to write a program that meets certain
-requirements as described in the problem specification and evaluated by
-automated tests. On Exercism.io, the same problems can be solved in
-different languages, making data about solutions to Exercism.io problems
-valuable for understanding the differences between languages.
+[Exercism.io](https://exercism.io) is for users to learn new programming
+languages and improve their programming ability by completing practice
+problems referred to as “exercises”. To complete each exercise, users
+have to write a program that meets certain requirements as described in
+the problem specification and evaluated by automated tests. On
+Exercism.io, the same problems can be solved in different languages,
+making data about solutions to Exercism.io problems valuable for
+understanding the potential differences between languages.
 
 ## Self-assigned problem difficulty
 
 Most Exercism.io problems have been assigned a difficulty score ranging
 from 1-10. For example, [python’s “hello-world”
 problem](https://github.com/exercism/python/blob/master/config.json#L15)
-is assigned a difficulty of 1. *I don’t know how these difficulty scores
-are assigned.* I will assume they are self-assigned by the developers
-working on Exercism.io, used in the ordering of problems for particular
-learning tracks, and are at least somewhat correlated with behavioral
-measures of difficulty.
+is assigned a difficulty of 1.
+
+> I don’t know how these difficulty scores are assigned. I will assume
+> they are self-assigned by the developers working on Exercism.io, used
+> in the ordering of problems for particular learning tracks, and are at
+> least somewhat correlated with behavioral measures of difficulty.
 
 What’s interesting about these difficulty scores is that the same
 problems are assigned different difficulty scores in different

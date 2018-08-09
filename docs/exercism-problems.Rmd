@@ -1,8 +1,8 @@
 ---
 title: "Solving the same problems in different programming languages"
 output:
-  html_document:
-    theme: flatly
+  github_document:
+    toc: true
 ---
 ```{r config, include=FALSE}
 library(knitr)
@@ -53,7 +53,9 @@ recode_three_plus <- make_recoder(data_frame(
   n_test_cases_1 = n_test_cases - min(n_test_cases) + 1,
   n_test_cases_log = log10(n_test_cases_1)))
 
-problem_difficulty <- left_join(problem_specifications, exercises) %>%
+problems_by_language <- left_join(exercises, problem_specifications)
+
+problem_difficulty <- problems_by_language %>%
   group_by(exercise, n_test_cases) %>%
   summarize(difficulty = mean(difficulty)) %>%
   ungroup() %>%
@@ -65,17 +67,17 @@ problem_difficulty <- left_join(problem_specifications, exercises) %>%
 
 Are the same problems easier to solve in some programming languages than others?
 To answer this question, we analyzed the difficulty of the same programming problems
-solved in different languages available via Exercism.io.
+solved in different languages available on the website Exercism.io.
 
 ## What is Exercism.io?
 
-[Exercism.io](https://exercism.io) is a website for users to learn new
+[Exercism.io](https://exercism.io) is for users to learn new
 programming languages and improve their programming ability by completing
 practice problems referred to as "exercises". To complete each exercise, users
 have to write a program that meets certain requirements as described in the
 problem specification and evaluated by automated tests. On Exercism.io, the same
 problems can be solved in different languages, making data about solutions to
-Exercism.io problems valuable for understanding the differences between
+Exercism.io problems valuable for understanding the potential differences between
 languages.
 
 ## Self-assigned problem difficulty
@@ -83,10 +85,12 @@ languages.
 Most Exercism.io problems have been assigned a difficulty score ranging from
 1-10. For example, [python's "hello-world"
 problem](https://github.com/exercism/python/blob/master/config.json#L15) is
-assigned a difficulty of 1. _I don't know how these difficulty scores are
-assigned._ I will assume they are self-assigned by the developers working on
-Exercism.io, used in the ordering of problems for particular learning tracks,
-and are at least somewhat correlated with behavioral measures of difficulty.
+assigned a difficulty of 1.
+
+> I don't know how these difficulty scores are assigned. I will assume they are
+  self-assigned by the developers working on Exercism.io, used in the ordering of
+  problems for particular learning tracks, and are at least somewhat correlated
+  with behavioral measures of difficulty.
 
 What's interesting about these difficulty scores is that the same problems are
 assigned different difficulty scores in different languages. Note the
@@ -191,23 +195,64 @@ ggplot(problem_specifications_dotplot) +
 ```
 
 ```{r problem-difficulty-by-num-tests}
+language_per_n_test_case <- problems_by_language %>%
+  group_by(language, n_test_cases) %>%
+  summarize(difficulty = mean(difficulty)) %>%
+  ungroup() %>%
+  mutate(has_test_cases = (n_test_cases > 0)) %>%
+  recode_one_v_two() %>%
+  recode_three_plus()
+
 one_v_two_mod <- lm(difficulty ~ one_v_two, data = problem_difficulty)
 one_v_two_preds <- recode_one_v_two() %>%
   cbind(., predict(one_v_two_mod, newdata = ., se = TRUE)) %>%
   rename(difficulty = fit, se = se.fit)
+
+one_v_two_lang <- filter(language_per_n_test_case, !is.na(one_v_two)) %>%
+  mutate(n_test_cases_adj = ifelse(n_test_cases == 1, 1.1, 1.75))
+
+library(lme4)
+one_v_two_lang_mod <- lmer(difficulty ~ one_v_two + (1|language), data = one_v_two_lang)
+one_v_two_lang_preds <- recode_one_v_two() %>%
+  cbind(., AICcmodavg::predictSE(one_v_two_lang_mod, newdata = ., se = TRUE)) %>%
+  rename(difficulty = fit, se = se.fit) %>%
+  mutate(n_test_cases_adj = ifelse(n_test_cases == 1, 1.1, 1.75))
 
 three_plus_mod <- lm(difficulty ~ n_test_cases_log, data = filter(problem_difficulty, three_plus))
 three_plus_preds <- recode_three_plus() %>%
   cbind(., predict(three_plus_mod, newdata = ., se = TRUE)) %>%
   rename(difficulty = fit, se = se.fit)
 
+three_plus_lang_mod <- lmer(difficulty ~ n_test_cases_log + (n_test_cases_log|language), data = filter(language_per_n_test_case, three_plus))
+three_plus_lang_preds <- recode_three_plus() %>%
+  cbind(., AICcmodavg::predictSE(three_plus_lang_mod, newdata = ., se = TRUE)) %>%
+  rename(difficulty = fit, se = se.fit)
+
+make_color_palette <- function(hex_colors, names) {
+  names(hex_colors) <- names
+  get_colors <- function(...) {
+    hex_colors[...] %>%
+      unname()
+  }
+  get_colors
+}
+
+set2_palette <- make_color_palette(RColorBrewer::brewer.pal(3, "Set2"), c("green", "orange", "blue"))
+
 ggplot(problem_difficulty) +
   aes(n_test_cases, difficulty) +
   geom_errorbar(aes(ymin = difficulty - se, ymax = difficulty + se), data = one_v_two_preds,
                 width = 0.1) +
   geom_smooth(aes(ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = three_plus_preds, color = NA) +
-  geom_point(aes(shape = has_test_cases), show.legend = FALSE) +
-  theme() +
+  geom_smooth(aes(group = language), data = filter(language_per_n_test_case, !is.na(three_plus)), show.legend = FALSE, method = "lm", size = 0.5, se = FALSE,
+              color = set2_palette("blue")) +
+  geom_errorbar(aes(x = n_test_cases_adj, ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = one_v_two_lang_preds,
+                color = set2_palette("blue"), size = 1.5, width = 0.1) +
+  geom_point(aes(x = n_test_cases, shape = has_test_cases), show.legend = FALSE) +
+  geom_line(aes(x = n_test_cases_adj, group = language), stat = "summary", fun.y = mean, data = one_v_two_lang, show.legend = FALSE,
+            color = set2_palette("blue")) +
+  geom_smooth(aes(ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = three_plus_lang_preds, size = 1.5, color = NA,
+              fill = set2_palette("blue")) +
   scale_x_log10("Number of test cases (log scale)", breaks = c(1, 4, 12, 24, 48, 100)) +
   scale_y_continuous("Difficulty", breaks = 1:10) +
   scale_shape_manual(values = c(4, 19)) +
