@@ -10,7 +10,7 @@ import pandas
 github = github3.login(os.environ["GITHUB_USERNAME"], os.environ["GITHUB_PASSWORD"])
 
 
-def get_problem_specifications():
+def get_problem_specification_data():
     """Summarize information about problems from exercism/problem-specifications."""
     repo = github.repository("exercism", "problem-specifications")
     problems = pandas.DataFrame(
@@ -49,7 +49,7 @@ def get_problem_specifications():
     return dict(problems=problems, test_cases=test_cases)
 
 
-def get_exercises():
+def get_exercise_data():
     languages = list_languages()
 
     def _get_exercises(language):
@@ -73,7 +73,16 @@ def get_exercises():
         ignore_index=True,
         sort=False,
     )
-    return data[["language", "exercise", "difficulty", "is_core", "unlocked_by"]]
+
+    exercises = data[["language", "exercise", "difficulty", "is_core", "unlocked_by"]]
+
+    def melt_topics(row):
+        if not row.topics:
+            return pandas.DataFrame()
+        return pandas.DataFrame({"exercise": row.exercise, "topic": row.topics})
+    topics = pandas.concat([melt_topics(r) for r in data.itertuples()], ignore_index=True, sort=True)
+
+    return dict(exercises=exercises, topics=topics)
 
 
 def list_languages():
@@ -118,14 +127,15 @@ def print_problem_descriptions():
 
 
 def download_problem_specifications():
-    data = get_problem_specifications()
+    data = get_problem_specification_data()
     data["problems"].to_csv(data_dir / "problem-specifications.csv", index=False)
     data["test_cases"].to_csv(data_dir / "test-cases.csv", index=False)
 
 
 def download_exercises():
-    exercises = get_exercises()
-    exercises.to_csv(data_dir / "exercises.csv", index=False)
+    data = get_exercise_data()
+    data["exercises"].to_csv(data_dir / "exercises.csv", index=False)
+    data["topics"].to_csv(data_dir / "exercise-topics.csv", index=False)
 
 
 if __name__ == "__main__":
@@ -151,6 +161,10 @@ if __name__ == "__main__":
         "-a", "--all", action="store_true", help="run all download commands"
     )
 
+    if not len(sys.argv) > 1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
     args = parser.parse_args()
     if args.list_languages:
         print("\n".join(list_languages()))
@@ -164,8 +178,7 @@ if __name__ == "__main__":
         download_problem_specifications()
 
     if args.exercises:
-        exercises = get_exercises()
-        exercises.to_csv(data_dir / "exercises.csv", index=False)
+        download_exercises()
 
     if args.descriptions:
         print_problem_descriptions()
@@ -173,4 +186,3 @@ if __name__ == "__main__":
     if args.all:
       download_problem_specifications()
       download_exercises()
-

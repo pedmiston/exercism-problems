@@ -65,8 +65,8 @@ and comparing the output to what was expected. The same test cases can
 be evaluated in all languages. Each problem has a different number of
 test cases, and the distribution of problem sizes is shown below.
 
-Problems with zero test cases likely means the problem is still being
-developed.
+> Problems with zero test cases likely means the problem is still being
+> developed.
 
 In addition, most problems have more tests than test cases, because many
 problems specify certain behavioral requirements (e.g., returning an
@@ -76,4 +76,18 @@ pairs.
 
 ![](exercism-problems_files/figure-gfm/n-test-cases-dotplot-1.png)<!-- -->
 
+**What’s the relationship between number of test cases and difficulty?**
+Presumably problems with more test cases would be harder, and yet not
+every test is the same level of
+difficulty.
+
 ![](exercism-problems_files/figure-gfm/problem-difficulty-by-num-tests-1.png)<!-- -->
+
+Looking at the plot above, there seems to be a difference in difficulty
+between problems with 1 and 2 tests, with some form of linear
+relationship beginning with 3 tests and continuing through arounmd 30
+tests. We can investigate these relationships with post-hoc tests, as
+visible in the plot
+below.
+
+![](exercism-problems_files/figure-gfm/problem-difficulty-by-num-tests-post-hoc-1.png)<!-- -->

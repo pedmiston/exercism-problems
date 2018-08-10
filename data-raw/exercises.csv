@@ -1236,6 +1236,7 @@ rust,run-length-encoding,4,0,saddle-points
 rust,isbn-verifier,4,0,saddle-points
 rust,perfect-numbers,4,0,saddle-points
 rust,clock,4,1,
+rust,dot-dsl,4,0,clock
 rust,hamming,4,0,saddle-points
 rust,simple-linked-list,4,0,clock
 rust,pascals-triangle,4,0,clock

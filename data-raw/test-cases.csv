@@ -162,7 +162,7 @@ circular-buffer,overwrite replaces the oldest item remaining in buffer following
 collatz-conjecture,zero steps for one
 collatz-conjecture,divide if even
 collatz-conjecture,even and odd steps
-collatz-conjecture,Large number of even and odd steps
+collatz-conjecture,large number of even and odd steps
 collatz-conjecture,zero is an error
 collatz-conjecture,negative value is an error
 connect,an empty board has no winner
@@ -303,6 +303,9 @@ markdown,with h2 header level
 markdown,with h6 header level
 markdown,unordered lists
 markdown,With a little bit of everything
+markdown,with markdown symbols in the header text that should not be interpreted
+markdown,with markdown symbols in the list item text that should not be interpreted
+markdown,with markdown symbols in the paragraph text that should not be interpreted
 matrix,extract row from one number matrix
 matrix,can extract row
 matrix,extract row where numbers have different widths

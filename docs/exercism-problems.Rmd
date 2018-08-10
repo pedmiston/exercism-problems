@@ -28,11 +28,15 @@ top_10_languages <- stack_overflow_ranks %>%
 core_exercises <- exercises %>%
   filter(difficulty > 0) %>%
   group_by(exercise) %>%
-  summarize(is_core = all(top_10_languages %in% language)) %>%
-  filter(is_core) %>%
+  summarize(in_core_languages = all(top_10_languages %in% language)) %>%
+  filter(in_core_languages) %>%
   .$exercise
 
-problem_specifications <- mutate(problem_specifications, is_core = exercise %in% core_exercises)
+problem_specifications <- problem_specifications %>%
+  mutate(
+    in_core_languages = exercise %in% core_exercises,
+    has_test_cases = n_test_cases > 0
+  )
 
 make_recoder <- function(key) {
   recoder <- function(frame) {
@@ -56,13 +60,23 @@ recode_three_plus <- make_recoder(data_frame(
 problems_by_language <- left_join(exercises, problem_specifications)
 
 problem_difficulty <- problems_by_language %>%
-  group_by(exercise, n_test_cases) %>%
+  group_by(exercise, n_test_cases, has_test_cases) %>%
   summarize(difficulty = mean(difficulty)) %>%
   ungroup() %>%
-  mutate(has_test_cases = (n_test_cases > 0)) %>%
   recode_one_v_two() %>%
   recode_three_plus()
 
+
+make_color_palette <- function(hex_colors, names) {
+  names(hex_colors) <- names
+  get_colors <- function(...) {
+    hex_colors[...] %>%
+      unname()
+  }
+  get_colors
+}
+
+set2_palette <- make_color_palette(RColorBrewer::brewer.pal(3, "Set2"), c("green", "orange", "blue"))
 ```
 
 Are the same problems easier to solve in some programming languages than others?
@@ -158,7 +172,7 @@ output to what was expected. The same test cases can be evaluated in all
 languages. Each problem has a different number of test cases, and the
 distribution of problem sizes is shown below.
 
-Problems with zero test cases likely means the problem is still being developed.
+> Problems with zero test cases likely means the problem is still being developed.
 
 In addition, most problems have more tests than test cases, because many
 problems specify certain behavioral requirements (e.g., returning an object of a
@@ -169,7 +183,7 @@ and do not correspond to input and output pairs.
 scale_color_is_core <- scale_color_brewer("", labels = c("other", "core"), palette = "Set2")
 scale_fill_is_core <- scale_fill_brewer("", labels = c("other", "core"), palette = "Set2")
 ggplot(problem_specifications) +
-  aes(n_test_cases, fill = is_core) +
+  aes(n_test_cases, fill = in_core_languages) +
   geom_dotplot(binwidth = 1, stackdir = "center") +
   scale_x_continuous(breaks = seq(0, 100, by = 10)) +
   scale_y_continuous(NULL, breaks = NULL) +
@@ -186,7 +200,7 @@ problem_specifications_dotplot <- problem_specifications %>%
 
 ggplot(problem_specifications_dotplot) +
   aes(factor(n_test_cases), height_c) +
-  geom_text(aes(label = exercise, color = is_core), angle = 45, hjust = 0.5, check_overlap = TRUE, size = 10) +
+  geom_text(aes(label = exercise, color = in_core_languages), angle = 45, hjust = 0.5, check_overlap = TRUE, size = 10) +
   coord_cartesian(xlim = c(-0.1, 28), ylim = c(-11, 11), expand = FALSE) +
   labs(x = "number of test cases", caption = "Distribution of labeled problems for reference. Note the ordinal x-axis.\nSource: github.com/exercism/problem-specifications") +
   scale_y_continuous(NULL, breaks = NULL) +
@@ -194,12 +208,48 @@ ggplot(problem_specifications_dotplot) +
   theme(text = element_text(size = 50))
 ```
 
+**What's the relationship between number of test cases and difficulty?**
+Presumably problems with more test cases would be harder, and yet not every test
+is the same level of difficulty.
+
 ```{r problem-difficulty-by-num-tests}
+exercise_means <- problems_by_language %>%
+  group_by(exercise, n_test_cases, has_test_cases) %>%
+  summarize(
+    difficulty = mean(difficulty),
+    n_languages = length(unique(language))
+  )
+
+n_test_case_means <- problems_by_language %>%
+  group_by(n_test_cases) %>%
+  summarize(
+    difficulty = mean(difficulty),
+    n_exercises = length(unique(exercise))
+  )
+
+ggplot(problems_by_language) +
+  aes(n_test_cases, difficulty) +
+  geom_point(aes(shape = has_test_cases), data = exercise_means, show.legend = FALSE) +
+  geom_point(aes(size = n_exercises), data = n_test_case_means, stat = "summary", fun.y = mean, color = "black") +
+  geom_smooth(aes(group = language), data = filter(problems_by_language, n_test_cases != 0, n_test_cases < 30),
+              method = "lm", se = FALSE, size = 0.2, alpha = 0.2, color = set2_palette("blue")) +
+  geom_smooth(data = filter(problems_by_language, n_test_cases != 0, n_test_cases < 30), method = "lm", se = FALSE, size = 1.5, color = "black") +
+  scale_x_log10("Number of test cases (log scale)", breaks = c(1, 4, 12, 24, 48, 100)) +
+  scale_y_continuous("Difficulty", breaks = 1:10) +
+  scale_size_continuous("Number of exercises") +
+  scale_shape_manual(values = c(4, 1)) +
+  coord_cartesian(clip = "off") +
+  theme(legend.position = "bottom") +
+  labs(caption = "Black circles show mean difficulty of all exercises with the same number of test cases.\nWhite circles show mean difficulty for each exercise averaged across all languages.\nThin blue lines show linear regressions fit for each language.")
+```
+
+Looking at the plot above, there seems to be a difference in difficulty between problems with 1 and 2 tests, with some form of linear relationship beginning with 3 tests and continuing through arounmd 30 tests. We can investigate these relationships with post-hoc tests, as visible in the plot below.
+
+```{r problem-difficulty-by-num-tests-post-hoc}
 language_per_n_test_case <- problems_by_language %>%
-  group_by(language, n_test_cases) %>%
+  group_by(language, n_test_cases, has_test_cases) %>%
   summarize(difficulty = mean(difficulty)) %>%
   ungroup() %>%
-  mutate(has_test_cases = (n_test_cases > 0)) %>%
   recode_one_v_two() %>%
   recode_three_plus()
 
@@ -227,17 +277,6 @@ three_plus_lang_mod <- lmer(difficulty ~ n_test_cases_log + (n_test_cases_log|la
 three_plus_lang_preds <- recode_three_plus() %>%
   cbind(., AICcmodavg::predictSE(three_plus_lang_mod, newdata = ., se = TRUE)) %>%
   rename(difficulty = fit, se = se.fit)
-
-make_color_palette <- function(hex_colors, names) {
-  names(hex_colors) <- names
-  get_colors <- function(...) {
-    hex_colors[...] %>%
-      unname()
-  }
-  get_colors
-}
-
-set2_palette <- make_color_palette(RColorBrewer::brewer.pal(3, "Set2"), c("green", "orange", "blue"))
 
 ggplot(problem_difficulty) +
   aes(n_test_cases, difficulty) +
