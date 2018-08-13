@@ -91,3 +91,8 @@ visible in the plot
 below.
 
 ![](exercism-problems_files/figure-gfm/problem-difficulty-by-num-tests-post-hoc-1.png)<!-- -->
+
+**Which languages are easiest regardless of the number of
+tests?**
+
+![](exercism-problems_files/figure-gfm/per-lang-mods-1.png)<!-- -->![](exercism-problems_files/figure-gfm/per-lang-mods-2.png)<!-- -->
