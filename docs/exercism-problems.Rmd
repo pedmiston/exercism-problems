@@ -226,14 +226,25 @@ exercise_means <- problems_by_language %>%
   summarize(
     difficulty = mean(difficulty),
     n_languages = length(unique(language))
-  )
+  ) %>%
+  ungroup()
 
 n_test_case_means <- problems_by_language %>%
   group_by(n_test_cases) %>%
   summarize(
     difficulty = mean(difficulty),
     n_exercises = length(unique(exercise))
-  )
+  ) %>%
+  ungroup()
+
+language_means <- problems_by_language %>%
+  filter(n_test_cases > 0) %>%
+  group_by(language, n_test_cases) %>%
+  summarize(
+    difficulty = mean(difficulty),
+    n_exerises = length(unique(exercise))
+  ) %>%
+  ungroup()
 
 ggplot(problems_by_language) +
   aes(n_test_cases, difficulty) +
@@ -316,9 +327,10 @@ lang_pred_lines$labeled <- lang_pred_lines$language %in% labeled
 
 ggplot(lang_pred_lines) +
   aes(n_test_cases, difficulty) +
-  geom_point(aes(shape = has_test_cases), data = exercise_means, show.legend = FALSE) +
+  geom_point(data = language_means, show.legend = FALSE, position = position_jitter(width = 0.1, height = 0.05)) +
   geom_abline(aes(slope = slope, intercept = intercept, color = labeled)) +
   coord_cartesian(xlim = c(1, 30), ylim = c(0, 10)) +
+  scale_y_continuous(breaks = 1:10) +
   scale_shape_manual(values = c(4, 19)) +
   scale_color_manual(values = c("gray", set2_palette("blue"))) +
   theme(legend.position = "none")
