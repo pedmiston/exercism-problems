@@ -36,7 +36,22 @@ below.
 
 ![](exercism-problems_files/figure-gfm/difficulty-1.png)<!-- -->
 
-## Difficulty per language
+## Exploratory analyses
+
+Why are some problems more difficult in some languages than in others?
+The self-assigned difficulty scores shown above are likely correlated
+with objective measures of difficulty, but there are many other factors
+that may influence the rated values. For example, novices and experts
+may rate the difficulty of the same problem differently, in which case
+the differences between languages could simply mean differences between
+raters. Without knowing more about how these difficulty scores are
+assigned, it is impossible to draw strong conclusions from these data.
+Nonetheless, we can explore the data **as if** self-assigned difficulty
+is representative of objective difficulty, and use the insights to
+articulate a pre-registered analysis plan for analyzing objective
+difficulty scores when they have been obtained.
+
+### Difficulty per language
 
 **Are problems easier in some languages than others?** We can estimate
 the average difficulty for each language while controlling for overall
@@ -57,7 +72,7 @@ difficulty on the core exercises?
 
 ![](exercism-problems_files/figure-gfm/ranking-core-1.png)<!-- -->
 
-## Number of test cases and self-assigned difficulty
+### Number of test cases and self-assigned difficulty
 
 Another factor to incorporate into our model is the number of **test
 cases**. Test cases involve providing the solution program with input
