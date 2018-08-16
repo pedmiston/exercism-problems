@@ -366,3 +366,41 @@ ggplot(lang_pred_lines_ranks) +
   theme(legend.position = "none") +
   labs(caption = "Rank correlation plot showing relationship between intercepts and slopes.\nHighlighted languages have a small intercept and small slope.")
 ```
+
+### Topics
+
+Each problem touches on one or more topic.
+
+```{r top20-topics}
+data("exercise_topics")
+
+top20_topics <- exercise_topics %>%
+  distinct(exercise, topic) %>%
+  count(topic) %>%
+  top_n(20, wt = n)
+
+top20_topic_names <- top20_topics$topic
+
+ggplot(top20_topics) +
+  aes(fct_reorder(topic, n), n) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(x = "", y = "number of exercises", caption = "Top 20 topics")
+```
+
+Some topics are more difficult than others.
+
+```{r topic-difficulty}
+topic_difficulty <- left_join(exercise_topics, exercises) %>%
+  filter(topic %in% top20_topic_names) %>%
+  group_by(topic) %>%
+  summarize(
+    difficulty = mean(difficulty)
+  )
+
+ggplot(topic_difficulty) +
+  aes(fct_reorder(topic, difficulty), difficulty) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(x = "", y = "average difficulty", caption = "Average difficulty of top 20 topics")
+```

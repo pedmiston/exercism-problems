@@ -111,3 +111,13 @@ below.
 tests?**
 
 ![](exercism-problems_files/figure-gfm/per-lang-mods-1.png)<!-- -->![](exercism-problems_files/figure-gfm/per-lang-mods-2.png)<!-- -->
+
+### Topics
+
+Each problem touches on one or more topic.
+
+![](exercism-problems_files/figure-gfm/top20-topics-1.png)<!-- -->
+
+Some topics are more difficult than others.
+
+![](exercism-problems_files/figure-gfm/topic-difficulty-1.png)<!-- -->
