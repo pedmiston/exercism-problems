@@ -8,7 +8,7 @@ website Exercism.io.
 
 ## What is Exercism.io?
 
-[Exercism.io](https://exercism.io) is for users to learn new programming
+[Exercism.io](https://exercism.io) is a website for users to learn new programming
 languages and improve their programming ability by completing practice
 problems referred to as “exercises”. To complete each exercise, users
 have to write a program that meets certain requirements as described in
