@@ -79,7 +79,7 @@ def get_exercise_data():
     def melt_topics(row):
         if not row.topics:
             return pandas.DataFrame()
-        return pandas.DataFrame({"exercise": row.exercise, "topic": row.topics})
+        return pandas.DataFrame({"exercise": row.exercise, "language": row.language, "topic": row.topics})
     topics = pandas.concat([melt_topics(r) for r in data.itertuples()], ignore_index=True, sort=True)
 
     return dict(exercises=exercises, topics=topics)
