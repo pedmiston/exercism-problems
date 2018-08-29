@@ -29,6 +29,17 @@ def get_problem_specification_data():
     problems["canonical_data"] = problems.exercise.apply(load_canonical_data)
     problems["n_test_cases"] = problems.canonical_data.apply(lambda x: len(x["cases"]))
 
+    def get_problem_description(problem):
+        try:
+            contents = repo.file_contents(f"exercises/{problem}/description.md")
+        except github3.exceptions.NotFoundError:
+            description = ""
+        else:
+            description = contents.decoded.decode('utf-8')
+        return description
+
+    problems["description"] = problems.exercise.apply(get_problem_description)
+
     def melt_test_cases(problem_spec):
         try:
             cases = pandas.DataFrame(problem_spec.canonical_data["cases"])
