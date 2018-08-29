@@ -1,126 +1,3573 @@
-exercise,n_test_cases
-accumulate,0
-acronym,1
-affine-cipher,2
-all-your-base,21
-allergies,2
-alphametics,1
-anagram,12
-armstrong-numbers,8
-atbash-cipher,2
-bank-account,0
-beer-song,2
-binary-search-tree,4
-binary-search,10
-binary,15
-bob,25
-book-store,1
-bowling,30
-bracket-push,15
-change,11
-circular-buffer,13
-clock,4
-collatz-conjecture,6
-complex-numbers,7
-connect,10
-counter,0
-crypto-square,7
-custom-set,9
-diamond,5
-difference-of-squares,3
-diffie-hellman,5
-dominoes,12
-dot-dsl,0
-error-handling,0
-etl,1
-flatten-array,6
-food-chain,1
-forth,12
-gigasecond,1
-go-counting,11
-grade-school,7
-grains,2
-grep,2
-hamming,15
-hangman,0
-hello-world,1
-hexadecimal,0
-house,1
-isbn-verifier,17
-isogram,1
-kindergarten-garden,2
-largest-series-product,15
-leap,4
-ledger,0
-lens-person,0
-linked-list,0
-list-ops,8
-luhn,14
-markdown,12
-matrix,8
-meetup,95
-minesweeper,12
-nth-prime,5
-nucleotide-codons,0
-nucleotide-count,1
-ocr-numbers,1
-octal,0
-paasio,0
-palindrome-products,12
-pangram,1
-parallel-letter-frequency,0
-pascals-triangle,1
-perfect-numbers,4
-phone-number,1
-pig-latin,6
-point-mutations,0
-poker,28
-pov,2
-prime-factors,1
-protein-translation,1
-proverb,6
-pythagorean-triplet,0
-queen-attack,2
-rail-fence-cipher,2
-raindrops,18
-rational-numbers,5
-react,14
-rectangles,13
-rest-api,2
-reverse-string,5
-rna-transcription,6
-robot-name,0
-robot-simulator,5
-roman-numerals,19
-rotational-cipher,1
-run-length-encoding,3
-saddle-points,9
-say,15
-scale-generator,2
-scrabble-score,11
-secret-handshake,1
-series,10
-sgf-parsing,12
-sieve,5
-simple-cipher,3
-simple-linked-list,0
-space-age,8
-spiral-matrix,6
-strain,0
-sublist,17
-sum-of-multiples,13
-tournament,11
-transpose,11
-tree-building,0
-triangle,3
-trinary,1
-twelve-days,2
-two-bucket,6
-two-fer,3
-variable-length-quantity,2
-word-count,11
-word-search,20
-wordy,16
-yacht,27
-zebra-puzzle,2
-zipper,13
+exercise,description,n_test_cases
+acronym,"Convert a phrase to its acronym.
+
+Techies love their TLA (Three Letter Acronyms)!
+
+Help generate some jargon by writing a program that converts a long name
+like Portable Network Graphics to its acronym (PNG).
+",6
+affine-cipher,"Create an implementation of the affine cipher,
+an ancient encryption system created in the Middle East.
+ 
+The affine cipher is a type of monoalphabetic substitution cipher.
+Each character is mapped to its numeric equivalent, encrypted with
+a mathematical function and then converted to the letter relating to
+its new numeric value. Although all monoalphabetic ciphers are weak,
+the affine cypher is much stronger than the atbash cipher,
+because it has many more keys.
+ 
+the encryption function is:
+ 
+  `E(x) = (ax + b) mod m`
+  -  where `x` is the letter's index from 0 - length of alphabet - 1
+  -  `m` is the length of the alphabet. For the roman alphabet `m == 26`.
+  -  and `a` and `b` make the key
+ 
+the decryption function is:
+ 
+  `D(y) = a^-1(y - b) mod m`
+  -  where `y` is the numeric value of an encrypted letter, ie. `y = E(x)`
+  -  it is important to note that `a^-1` is the modular multiplicative inverse
+     of `a mod m`
+  -  the modular multiplicative inverse of `a` only exists if `a` and `m` are
+     coprime.
+ 
+To find the MMI of `a`:
+
+  `an mod m = 1`
+  -  where `n` is the modular multiplicative inverse of `a mod m`
+
+More information regarding how to find a Modular Multiplicative Inverse
+and what it means can be found [here.](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse) 
+
+Because automatic decryption fails if `a` is not coprime to `m` your
+program should return status 1 and `""Error: a and m must be coprime.""`
+if they are not.  Otherwise it should encode or decode with the
+provided key.
+ 
+The Caesar (shift) cipher is a simple affine cipher where `a` is 1 and
+`b` as the magnitude results in a static displacement of the letters.
+This is much less secure than a full implementation of the affine cipher.
+
+Ciphertext is written out in groups of fixed length, the traditional group
+size being 5 letters, and punctuation is excluded. This is to make it
+harder to guess things based on word boundaries.
+
+## Examples
+ 
+ - Encoding `test` gives `ybty` with the key a=5 b=7
+ - Decoding `ybty` gives `test` with the key a=5 b=7
+ - Decoding `ybty` gives `lqul` with the wrong key a=11 b=7
+ - Decoding `kqlfd jzvgy tpaet icdhm rtwly kqlon ubstx`
+   - gives `thequickbrownfoxjumpsoverthelazydog` with the key a=19 b=13
+ - Encoding `test` with the key a=18 b=13
+   - gives `Error: a and m must be coprime.`
+   - because a and m are not relatively prime
+
+### Examples of finding a Modular Multiplicative Inverse (MMI)
+
+  - simple example:
+    - `9 mod 26 = 9`
+    - `9 * 3 mod 26 = 27 mod 26 = 1`
+    - `3` is the MMI of `9 mod 26`
+  - a more complicated example:
+    - `15 mod 26 = 15`
+    - `15 * 7 mod 26 = 105 mod 26 = 1`
+    - `7` is the MMI of `15 mod 26`
+",16
+all-your-base,"Convert a number, represented as a sequence of digits in one base, to any other base.
+
+Implement general base conversion. Given a number in base **a**,
+represented as a sequence of digits, convert it to base **b**.
+
+## Note
+
+- Try to implement the conversion yourself.
+  Do not use something else to perform the conversion for you.
+
+## About [Positional Notation](https://en.wikipedia.org/wiki/Positional_notation)
+
+In positional notation, a number in base **b** can be understood as a linear
+combination of powers of **b**.
+
+The number 42, *in base 10*, means:
+
+(4 * 10^1) + (2 * 10^0)
+
+The number 101010, *in base 2*, means:
+
+(1 * 2^5) + (0 * 2^4) + (1 * 2^3) + (0 * 2^2) + (1 * 2^1) + (0 * 2^0)
+
+The number 1120, *in base 3*, means:
+
+(1 * 3^3) + (1 * 3^2) + (2 * 3^1) + (0 * 3^0)
+
+I think you got the idea!
+
+*Yes. Those three numbers above are exactly the same. Congratulations!*
+",21
+allergies,"Given a person's allergy score, determine whether or not they're allergic to a given item, and their full list of allergies.
+
+An allergy test produces a single numeric score which contains the
+information about all the allergies the person has (that they were
+tested for).
+
+The list of items (and their value) that were tested are:
+
+* eggs (1)
+* peanuts (2)
+* shellfish (4)
+* strawberries (8)
+* tomatoes (16)
+* chocolate (32)
+* pollen (64)
+* cats (128)
+
+So if Tom is allergic to peanuts and chocolate, he gets a score of 34.
+
+Now, given just that score of 34, your program should be able to say:
+
+- Whether Tom is allergic to any one of those allergens listed above.
+- All the allergens Tom is allergic to.
+
+Note: a given score may include allergens **not** listed above (i.e.
+allergens that score 256, 512, 1024, etc.).  Your program should
+ignore those components of the score.  For example, if the allergy
+score is 257, your program should only report the eggs (1) allergy.
+",13
+alphametics,"Write a function to solve alphametics puzzles.
+
+[Alphametics](https://en.wikipedia.org/wiki/Alphametics) is a puzzle where
+letters in words are replaced with numbers.
+
+For example `SEND + MORE = MONEY`:
+
+```text
+  S E N D
+  M O R E +
+-----------
+M O N E Y
+```
+
+Replacing these with valid numbers gives:
+
+```text
+  9 5 6 7
+  1 0 8 5 +
+-----------
+1 0 6 5 2
+```
+
+This is correct because every letter is replaced by a different number and the
+words, translated into numbers, then make a valid sum.
+
+Each letter must represent a different digit, and the leading digit of
+a multi-digit number must not be zero.
+
+Write a function to solve alphametics puzzles.
+",9
+anagram,"Given a word and a list of possible anagrams, select the correct sublist.
+
+Given `""listen""` and a list of candidates like `""enlists"" ""google""
+""inlets"" ""banana""` the program should return a list containing
+`""inlets""`.
+",12
+armstrong-numbers,"An [Armstrong number](https://en.wikipedia.org/wiki/Narcissistic_number) is a number that is the sum of its own digits each raised to the power of the number of digits.
+
+For example:
+
+- 9 is an Armstrong number, because `9 = 9^1 = 9`
+- 10 is *not* an Armstrong number, because `10 != 1^2 + 0^2 = 1`
+- 153 is an Armstrong number, because: `153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153`
+- 154 is *not* an Armstrong number, because: `154 != 1^3 + 5^3 + 4^3 = 1 + 125 + 64 = 190`
+
+Write some code to determine whether a number is an Armstrong number.
+",8
+atbash-cipher,"Create an implementation of the atbash cipher, an ancient encryption system created in the Middle East.
+
+The Atbash cipher is a simple substitution cipher that relies on
+transposing all the letters in the alphabet such that the resulting
+alphabet is backwards. The first letter is replaced with the last
+letter, the second with the second-last, and so on.
+
+An Atbash cipher for the Latin alphabet would be as follows:
+
+```text
+Plain:  abcdefghijklmnopqrstuvwxyz
+Cipher: zyxwvutsrqponmlkjihgfedcba
+```
+
+It is a very weak cipher because it only has one possible key, and it is
+a simple monoalphabetic substitution cipher. However, this may not have
+been an issue in the cipher's time.
+
+Ciphertext is written out in groups of fixed length, the traditional group size
+being 5 letters, and punctuation is excluded. This is to make it harder to guess
+things based on word boundaries.
+
+## Examples
+
+- Encoding `test` gives `gvhg`
+- Decoding `gvhg` gives `test`
+- Decoding `gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt` gives `thequickbrownfoxjumpsoverthelazydog`
+",14
+beer-song,"Recite the lyrics to that beloved classic, that field-trip favorite: 99 Bottles of Beer on the Wall.
+
+Note that not all verses are identical.
+
+```text
+99 bottles of beer on the wall, 99 bottles of beer.
+Take one down and pass it around, 98 bottles of beer on the wall.
+
+98 bottles of beer on the wall, 98 bottles of beer.
+Take one down and pass it around, 97 bottles of beer on the wall.
+
+97 bottles of beer on the wall, 97 bottles of beer.
+Take one down and pass it around, 96 bottles of beer on the wall.
+
+96 bottles of beer on the wall, 96 bottles of beer.
+Take one down and pass it around, 95 bottles of beer on the wall.
+
+95 bottles of beer on the wall, 95 bottles of beer.
+Take one down and pass it around, 94 bottles of beer on the wall.
+
+94 bottles of beer on the wall, 94 bottles of beer.
+Take one down and pass it around, 93 bottles of beer on the wall.
+
+93 bottles of beer on the wall, 93 bottles of beer.
+Take one down and pass it around, 92 bottles of beer on the wall.
+
+92 bottles of beer on the wall, 92 bottles of beer.
+Take one down and pass it around, 91 bottles of beer on the wall.
+
+91 bottles of beer on the wall, 91 bottles of beer.
+Take one down and pass it around, 90 bottles of beer on the wall.
+
+90 bottles of beer on the wall, 90 bottles of beer.
+Take one down and pass it around, 89 bottles of beer on the wall.
+
+89 bottles of beer on the wall, 89 bottles of beer.
+Take one down and pass it around, 88 bottles of beer on the wall.
+
+88 bottles of beer on the wall, 88 bottles of beer.
+Take one down and pass it around, 87 bottles of beer on the wall.
+
+87 bottles of beer on the wall, 87 bottles of beer.
+Take one down and pass it around, 86 bottles of beer on the wall.
+
+86 bottles of beer on the wall, 86 bottles of beer.
+Take one down and pass it around, 85 bottles of beer on the wall.
+
+85 bottles of beer on the wall, 85 bottles of beer.
+Take one down and pass it around, 84 bottles of beer on the wall.
+
+84 bottles of beer on the wall, 84 bottles of beer.
+Take one down and pass it around, 83 bottles of beer on the wall.
+
+83 bottles of beer on the wall, 83 bottles of beer.
+Take one down and pass it around, 82 bottles of beer on the wall.
+
+82 bottles of beer on the wall, 82 bottles of beer.
+Take one down and pass it around, 81 bottles of beer on the wall.
+
+81 bottles of beer on the wall, 81 bottles of beer.
+Take one down and pass it around, 80 bottles of beer on the wall.
+
+80 bottles of beer on the wall, 80 bottles of beer.
+Take one down and pass it around, 79 bottles of beer on the wall.
+
+79 bottles of beer on the wall, 79 bottles of beer.
+Take one down and pass it around, 78 bottles of beer on the wall.
+
+78 bottles of beer on the wall, 78 bottles of beer.
+Take one down and pass it around, 77 bottles of beer on the wall.
+
+77 bottles of beer on the wall, 77 bottles of beer.
+Take one down and pass it around, 76 bottles of beer on the wall.
+
+76 bottles of beer on the wall, 76 bottles of beer.
+Take one down and pass it around, 75 bottles of beer on the wall.
+
+75 bottles of beer on the wall, 75 bottles of beer.
+Take one down and pass it around, 74 bottles of beer on the wall.
+
+74 bottles of beer on the wall, 74 bottles of beer.
+Take one down and pass it around, 73 bottles of beer on the wall.
+
+73 bottles of beer on the wall, 73 bottles of beer.
+Take one down and pass it around, 72 bottles of beer on the wall.
+
+72 bottles of beer on the wall, 72 bottles of beer.
+Take one down and pass it around, 71 bottles of beer on the wall.
+
+71 bottles of beer on the wall, 71 bottles of beer.
+Take one down and pass it around, 70 bottles of beer on the wall.
+
+70 bottles of beer on the wall, 70 bottles of beer.
+Take one down and pass it around, 69 bottles of beer on the wall.
+
+69 bottles of beer on the wall, 69 bottles of beer.
+Take one down and pass it around, 68 bottles of beer on the wall.
+
+68 bottles of beer on the wall, 68 bottles of beer.
+Take one down and pass it around, 67 bottles of beer on the wall.
+
+67 bottles of beer on the wall, 67 bottles of beer.
+Take one down and pass it around, 66 bottles of beer on the wall.
+
+66 bottles of beer on the wall, 66 bottles of beer.
+Take one down and pass it around, 65 bottles of beer on the wall.
+
+65 bottles of beer on the wall, 65 bottles of beer.
+Take one down and pass it around, 64 bottles of beer on the wall.
+
+64 bottles of beer on the wall, 64 bottles of beer.
+Take one down and pass it around, 63 bottles of beer on the wall.
+
+63 bottles of beer on the wall, 63 bottles of beer.
+Take one down and pass it around, 62 bottles of beer on the wall.
+
+62 bottles of beer on the wall, 62 bottles of beer.
+Take one down and pass it around, 61 bottles of beer on the wall.
+
+61 bottles of beer on the wall, 61 bottles of beer.
+Take one down and pass it around, 60 bottles of beer on the wall.
+
+60 bottles of beer on the wall, 60 bottles of beer.
+Take one down and pass it around, 59 bottles of beer on the wall.
+
+59 bottles of beer on the wall, 59 bottles of beer.
+Take one down and pass it around, 58 bottles of beer on the wall.
+
+58 bottles of beer on the wall, 58 bottles of beer.
+Take one down and pass it around, 57 bottles of beer on the wall.
+
+57 bottles of beer on the wall, 57 bottles of beer.
+Take one down and pass it around, 56 bottles of beer on the wall.
+
+56 bottles of beer on the wall, 56 bottles of beer.
+Take one down and pass it around, 55 bottles of beer on the wall.
+
+55 bottles of beer on the wall, 55 bottles of beer.
+Take one down and pass it around, 54 bottles of beer on the wall.
+
+54 bottles of beer on the wall, 54 bottles of beer.
+Take one down and pass it around, 53 bottles of beer on the wall.
+
+53 bottles of beer on the wall, 53 bottles of beer.
+Take one down and pass it around, 52 bottles of beer on the wall.
+
+52 bottles of beer on the wall, 52 bottles of beer.
+Take one down and pass it around, 51 bottles of beer on the wall.
+
+51 bottles of beer on the wall, 51 bottles of beer.
+Take one down and pass it around, 50 bottles of beer on the wall.
+
+50 bottles of beer on the wall, 50 bottles of beer.
+Take one down and pass it around, 49 bottles of beer on the wall.
+
+49 bottles of beer on the wall, 49 bottles of beer.
+Take one down and pass it around, 48 bottles of beer on the wall.
+
+48 bottles of beer on the wall, 48 bottles of beer.
+Take one down and pass it around, 47 bottles of beer on the wall.
+
+47 bottles of beer on the wall, 47 bottles of beer.
+Take one down and pass it around, 46 bottles of beer on the wall.
+
+46 bottles of beer on the wall, 46 bottles of beer.
+Take one down and pass it around, 45 bottles of beer on the wall.
+
+45 bottles of beer on the wall, 45 bottles of beer.
+Take one down and pass it around, 44 bottles of beer on the wall.
+
+44 bottles of beer on the wall, 44 bottles of beer.
+Take one down and pass it around, 43 bottles of beer on the wall.
+
+43 bottles of beer on the wall, 43 bottles of beer.
+Take one down and pass it around, 42 bottles of beer on the wall.
+
+42 bottles of beer on the wall, 42 bottles of beer.
+Take one down and pass it around, 41 bottles of beer on the wall.
+
+41 bottles of beer on the wall, 41 bottles of beer.
+Take one down and pass it around, 40 bottles of beer on the wall.
+
+40 bottles of beer on the wall, 40 bottles of beer.
+Take one down and pass it around, 39 bottles of beer on the wall.
+
+39 bottles of beer on the wall, 39 bottles of beer.
+Take one down and pass it around, 38 bottles of beer on the wall.
+
+38 bottles of beer on the wall, 38 bottles of beer.
+Take one down and pass it around, 37 bottles of beer on the wall.
+
+37 bottles of beer on the wall, 37 bottles of beer.
+Take one down and pass it around, 36 bottles of beer on the wall.
+
+36 bottles of beer on the wall, 36 bottles of beer.
+Take one down and pass it around, 35 bottles of beer on the wall.
+
+35 bottles of beer on the wall, 35 bottles of beer.
+Take one down and pass it around, 34 bottles of beer on the wall.
+
+34 bottles of beer on the wall, 34 bottles of beer.
+Take one down and pass it around, 33 bottles of beer on the wall.
+
+33 bottles of beer on the wall, 33 bottles of beer.
+Take one down and pass it around, 32 bottles of beer on the wall.
+
+32 bottles of beer on the wall, 32 bottles of beer.
+Take one down and pass it around, 31 bottles of beer on the wall.
+
+31 bottles of beer on the wall, 31 bottles of beer.
+Take one down and pass it around, 30 bottles of beer on the wall.
+
+30 bottles of beer on the wall, 30 bottles of beer.
+Take one down and pass it around, 29 bottles of beer on the wall.
+
+29 bottles of beer on the wall, 29 bottles of beer.
+Take one down and pass it around, 28 bottles of beer on the wall.
+
+28 bottles of beer on the wall, 28 bottles of beer.
+Take one down and pass it around, 27 bottles of beer on the wall.
+
+27 bottles of beer on the wall, 27 bottles of beer.
+Take one down and pass it around, 26 bottles of beer on the wall.
+
+26 bottles of beer on the wall, 26 bottles of beer.
+Take one down and pass it around, 25 bottles of beer on the wall.
+
+25 bottles of beer on the wall, 25 bottles of beer.
+Take one down and pass it around, 24 bottles of beer on the wall.
+
+24 bottles of beer on the wall, 24 bottles of beer.
+Take one down and pass it around, 23 bottles of beer on the wall.
+
+23 bottles of beer on the wall, 23 bottles of beer.
+Take one down and pass it around, 22 bottles of beer on the wall.
+
+22 bottles of beer on the wall, 22 bottles of beer.
+Take one down and pass it around, 21 bottles of beer on the wall.
+
+21 bottles of beer on the wall, 21 bottles of beer.
+Take one down and pass it around, 20 bottles of beer on the wall.
+
+20 bottles of beer on the wall, 20 bottles of beer.
+Take one down and pass it around, 19 bottles of beer on the wall.
+
+19 bottles of beer on the wall, 19 bottles of beer.
+Take one down and pass it around, 18 bottles of beer on the wall.
+
+18 bottles of beer on the wall, 18 bottles of beer.
+Take one down and pass it around, 17 bottles of beer on the wall.
+
+17 bottles of beer on the wall, 17 bottles of beer.
+Take one down and pass it around, 16 bottles of beer on the wall.
+
+16 bottles of beer on the wall, 16 bottles of beer.
+Take one down and pass it around, 15 bottles of beer on the wall.
+
+15 bottles of beer on the wall, 15 bottles of beer.
+Take one down and pass it around, 14 bottles of beer on the wall.
+
+14 bottles of beer on the wall, 14 bottles of beer.
+Take one down and pass it around, 13 bottles of beer on the wall.
+
+13 bottles of beer on the wall, 13 bottles of beer.
+Take one down and pass it around, 12 bottles of beer on the wall.
+
+12 bottles of beer on the wall, 12 bottles of beer.
+Take one down and pass it around, 11 bottles of beer on the wall.
+
+11 bottles of beer on the wall, 11 bottles of beer.
+Take one down and pass it around, 10 bottles of beer on the wall.
+
+10 bottles of beer on the wall, 10 bottles of beer.
+Take one down and pass it around, 9 bottles of beer on the wall.
+
+9 bottles of beer on the wall, 9 bottles of beer.
+Take one down and pass it around, 8 bottles of beer on the wall.
+
+8 bottles of beer on the wall, 8 bottles of beer.
+Take one down and pass it around, 7 bottles of beer on the wall.
+
+7 bottles of beer on the wall, 7 bottles of beer.
+Take one down and pass it around, 6 bottles of beer on the wall.
+
+6 bottles of beer on the wall, 6 bottles of beer.
+Take one down and pass it around, 5 bottles of beer on the wall.
+
+5 bottles of beer on the wall, 5 bottles of beer.
+Take one down and pass it around, 4 bottles of beer on the wall.
+
+4 bottles of beer on the wall, 4 bottles of beer.
+Take one down and pass it around, 3 bottles of beer on the wall.
+
+3 bottles of beer on the wall, 3 bottles of beer.
+Take one down and pass it around, 2 bottles of beer on the wall.
+
+2 bottles of beer on the wall, 2 bottles of beer.
+Take one down and pass it around, 1 bottle of beer on the wall.
+
+1 bottle of beer on the wall, 1 bottle of beer.
+Take it down and pass it around, no more bottles of beer on the wall.
+
+No more bottles of beer on the wall, no more bottles of beer.
+Go to the store and buy some more, 99 bottles of beer on the wall.
+```
+
+## For bonus points
+
+Did you get the tests passing and the code clean? If you want to, these
+are some additional things you could try:
+
+* Remove as much duplication as you possibly can.
+* Optimize for readability, even if it means introducing duplication.
+* If you've removed all the duplication, do you have a lot of
+  conditionals? Try replacing the conditionals with polymorphism, if it
+  applies in this language. How readable is it?
+
+Then please share your thoughts in a comment on the submission. Did this
+experiment make the code better? Worse? Did you learn anything from it?
+",2
+binary-search-tree,"Insert and search for numbers in a binary tree.
+
+When we need to represent sorted data, an array does not make a good
+data structure.
+
+Say we have the array `[1, 3, 4, 5]`, and we add 2 to it so it becomes
+`[1, 3, 4, 5, 2]` now we must sort the entire array again! We can
+improve on this by realizing that we only need to make space for the new
+item `[1, nil, 3, 4, 5]`, and then adding the item in the space we
+added. But this still requires us to shift many elements down by one.
+
+Binary Search Trees, however, can operate on sorted data much more
+efficiently.
+
+A binary search tree consists of a series of connected nodes. Each node
+contains a piece of data (e.g. the number 3), a variable named `left`,
+and a variable named `right`. The `left` and `right` variables point at
+`nil`, or other nodes. Since these other nodes in turn have other nodes
+beneath them, we say that the left and right variables are pointing at
+subtrees. All data in the left subtree is less than or equal to the
+current node's data, and all data in the right subtree is greater than
+the current node's data.
+
+For example, if we had a node containing the data 4, and we added the
+data 2, our tree would look like this:
+
+      4
+     /
+    2
+
+If we then added 6, it would look like this:
+
+      4
+     / \
+    2   6
+
+If we then added 3, it would look like this
+
+       4
+     /   \
+    2     6
+     \
+      3
+
+And if we then added 1, 5, and 7, it would look like this
+
+          4
+        /   \
+       /     \
+      2       6
+     / \     / \
+    1   3   5   7
+",8
+binary-search,"Implement a binary search algorithm.
+
+Searching a sorted collection is a common task. A dictionary is a sorted
+list of word definitions. Given a word, one can find its definition. A
+telephone book is a sorted list of people's names, addresses, and
+telephone numbers. Knowing someone's name allows one to quickly find
+their telephone number and address.
+
+If the list to be searched contains more than a few items (a dozen, say)
+a binary search will require far fewer comparisons than a linear search,
+but it imposes the requirement that the list be sorted.
+
+In computer science, a binary search or half-interval search algorithm
+finds the position of a specified input value (the search ""key"") within
+an array sorted by key value.
+
+In each step, the algorithm compares the search key value with the key
+value of the middle element of the array.
+
+If the keys match, then a matching element has been found and its index,
+or position, is returned.
+
+Otherwise, if the search key is less than the middle element's key, then
+the algorithm repeats its action on the sub-array to the left of the
+middle element or, if the search key is greater, on the sub-array to the
+right.
+
+If the remaining array to be searched is empty, then the key cannot be
+found in the array and a special ""not found"" indication is returned.
+
+A binary search halves the number of items to check with each iteration,
+so locating an item (or determining its absence) takes logarithmic time.
+A binary search is a dichotomic divide and conquer search algorithm.
+",10
+binary,"Convert a binary number, represented as a string (e.g. '101010'), to its decimal equivalent using first principles.
+
+Implement binary to decimal conversion. Given a binary input
+string, your program should produce a decimal output. The
+program should handle invalid inputs.
+
+## Note
+
+- Implement the conversion yourself.
+  Do not use something else to perform the conversion for you.
+
+## About Binary (Base-2)
+
+Decimal is a base-10 system.
+
+A number 23 in base 10 notation can be understood
+as a linear combination of powers of 10:
+
+- The rightmost digit gets multiplied by 10^0 = 1
+- The next number gets multiplied by 10^1 = 10
+- ...
+- The *n*th number gets multiplied by 10^*(n-1)*.
+- All these values are summed.
+
+So: `23 => 2*10^1 + 3*10^0 => 2*10 + 3*1 = 23 base 10`
+
+Binary is similar, but uses powers of 2 rather than powers of 10.
+
+So: `101 => 1*2^2 + 0*2^1 + 1*2^0 => 1*4 + 0*2 + 1*1 => 4 + 1 => 5 base 10`.
+",15
+bob,"Bob is a lackadaisical teenager. In conversation, his responses are very limited.
+
+Bob answers 'Sure.' if you ask him a question.
+
+He answers 'Whoa, chill out!' if you yell at him.
+
+He answers 'Calm down, I know what I'm doing!' if you yell a question at him.
+
+He says 'Fine. Be that way!' if you address him without actually saying
+anything.
+
+He answers 'Whatever.' to anything else.
+
+Bob's conversational partner is a purist when it comes to written communication and always follows normal rules regarding sentence punctuation in English.
+",25
+book-store,"To try and encourage more sales of different books from a popular 5 book
+series, a bookshop has decided to offer discounts on multiple book purchases.
+
+One copy of any of the five books costs $8.
+
+If, however, you buy two different books, you get a 5%
+discount on those two books.
+
+If you buy 3 different books, you get a 10% discount.
+
+If you buy 4 different books, you get a 20% discount.
+
+If you buy all 5, you get a 25% discount.
+
+Note: that if you buy four books, of which 3 are
+different titles, you get a 10% discount on the 3 that
+form part of a set, but the fourth book still costs $8.
+
+Your mission is to write a piece of code to calculate the
+price of any conceivable shopping basket (containing only
+books of the same series), giving as big a discount as
+possible.
+
+For example, how much does this basket of books cost?
+
+- 2 copies of the first book
+- 2 copies of the second book
+- 2 copies of the third book
+- 1 copy of the fourth book
+- 1 copy of the fifth book
+
+One way of grouping these 8 books is:
+
+- 1 group of 5 --> 25% discount (1st,2nd,3rd,4th,5th)
+- +1 group of 3 --> 10% discount (1st,2nd,3rd)
+
+This would give a total of:
+
+- 5 books at a 25% discount
+- +3 books at a 10% discount
+
+Resulting in:
+
+- 5 x (8 - 2.00) == 5 x 6.00 == $30.00
+- +3 x (8 - 0.80) == 3 x 7.20 == $21.60
+
+For a total of $51.60
+
+However, a different way to group these 8 books is:
+
+- 1 group of 4 books --> 20% discount  (1st,2nd,3rd,4th)
+- +1 group of 4 books --> 20% discount  (1st,2nd,3rd,5th)
+
+This would give a total of:
+
+- 4 books at a 20% discount
+- +4 books at a 20% discount
+
+Resulting in:
+
+- 4 x (8 - 1.60) == 4 x 6.40 == $25.60
+- +4 x (8 - 1.60) == 4 x 6.40 == $25.60
+
+For a total of $51.20
+
+And $51.20 is the price with the biggest discount.
+",15
+bowling,"Score a bowling game.
+
+Bowling is a game where players roll a heavy ball to knock down pins
+arranged in a triangle. Write code to keep track of the score
+of a game of bowling.
+
+## Scoring Bowling
+
+The game consists of 10 frames. A frame is composed of one or two ball
+throws with 10 pins standing at frame initialization. There are three
+cases for the tabulation of a frame.
+
+* An open frame is where a score of less than 10 is recorded for the
+  frame. In this case the score for the frame is the number of pins
+  knocked down.
+
+* A spare is where all ten pins are knocked down by the second
+  throw. The total value of a spare is 10 plus the number of pins
+  knocked down in their next throw.
+
+* A strike is where all ten pins are knocked down by the first
+  throw. The total value of a strike is 10 plus the number of pins
+  knocked down in the next two throws. If a strike is immediately
+  followed by a second strike, then the value of the first strike
+  cannot be determined until the ball is thrown one more time.
+
+Here is a three frame example:
+
+| Frame 1         | Frame 2       | Frame 3                |
+| :-------------: |:-------------:| :---------------------:|
+| X (strike)      | 5/ (spare)    | 9 0 (open frame)       |
+
+Frame 1 is (10 + 5 + 5) = 20
+
+Frame 2 is (5 + 5 + 9) = 19
+
+Frame 3 is (9 + 0) = 9
+
+This means the current running total is 48.
+
+The tenth frame in the game is a special case. If someone throws a
+strike or a spare then they get a fill ball. Fill balls exist to
+calculate the total of the 10th frame. Scoring a strike or spare on
+the fill ball does not give the player more fill balls. The total
+value of the 10th frame is the total number of pins knocked down.
+
+For a tenth frame of X1/ (strike and a spare), the total value is 20.
+
+For a tenth frame of XXX (three strikes), the total value is 30.
+
+## Requirements
+
+Write code to keep track of the score of a game of bowling. It should
+support two operations:
+
+* `roll(pins : int)` is called each time the player rolls a ball.  The
+  argument is the number of pins knocked down.
+* `score() : int` is called only at the very end of the game.  It
+  returns the total score for that game.
+",30
+bracket-push,"Given a string containing brackets `[]`, braces `{}`, parentheses `()`,
+or any combination thereof, verify that any and all pairs are matched
+and nested correctly.
+",16
+change,"Correctly determine the fewest number of coins to be given to a customer such
+that the sum of the coins' value would equal the correct amount of change.
+
+## For example
+
+- An input of 15 with [1, 5, 10, 25, 100] should return one nickel (5)
+  and one dime (10) or [0, 1, 1, 0, 0]
+- An input of 40 with [1, 5, 10, 25, 100] should return one nickel (5)
+  and one dime (10) and one quarter (25) or [0, 1, 1, 1, 0]
+
+## Edge cases
+
+- Does your algorithm work for any given set of coins?
+- Can you ask for negative change?
+- Can you ask for a change value smaller than the smallest coin value?
+",11
+circular-buffer,"A circular buffer, cyclic buffer or ring buffer is a data structure that
+uses a single, fixed-size buffer as if it were connected end-to-end.
+
+A circular buffer first starts empty and of some predefined length. For
+example, this is a 7-element buffer:
+
+    [ ][ ][ ][ ][ ][ ][ ]
+
+Assume that a 1 is written into the middle of the buffer (exact starting
+location does not matter in a circular buffer):
+
+    [ ][ ][ ][1][ ][ ][ ]
+
+Then assume that two more elements are added — 2 & 3 — which get
+appended after the 1:
+
+    [ ][ ][ ][1][2][3][ ]
+
+If two elements are then removed from the buffer, the oldest values
+inside the buffer are removed. The two elements removed, in this case,
+are 1 & 2, leaving the buffer with just a 3:
+
+    [ ][ ][ ][ ][ ][3][ ]
+
+If the buffer has 7 elements then it is completely full:
+
+    [6][7][8][9][3][4][5]
+
+When the buffer is full an error will be raised, alerting the client
+that further writes are blocked until a slot becomes free.
+
+When the buffer is full, the client can opt to overwrite the oldest
+data with a forced write. In this case, two more elements — A & B —
+are added and they overwrite the 3 & 4:
+
+    [6][7][8][9][A][B][5]
+
+3 & 4 have been replaced by A & B making 5 now the oldest data in the
+buffer. Finally, if two elements are removed then what would be
+returned is 5 & 6 yielding the buffer:
+
+    [ ][7][8][9][A][B][ ]
+
+Because there is space available, if the client again uses overwrite
+to store C & D then the space where 5 & 6 were stored previously will
+be used not the location of 7 & 8. 7 is still the oldest element and
+the buffer is once again full.
+
+    [D][7][8][9][A][B][C]
+",13
+clock,"Implement a clock that handles times without dates.
+
+You should be able to add and subtract minutes to it.
+
+Two clocks that represent the same time should be equal to each other.
+",51
+collatz-conjecture,"The Collatz Conjecture or 3x+1 problem can be summarized as follows:
+
+Take any positive integer n. If n is even, divide n by 2 to get n / 2. If n is
+odd, multiply n by 3 and add 1 to get 3n + 1. Repeat the process indefinitely.
+The conjecture states that no matter which number you start with, you will
+always reach 1 eventually.
+
+Given a number n, return the number of steps required to reach 1.
+
+## Examples
+
+Starting with n = 12, the steps would be as follows:
+
+0. 12
+1. 6
+2. 3
+3. 10
+4. 5
+5. 16
+6. 8
+7. 4
+8. 2
+9. 1
+
+Resulting in 9 steps. So for input n = 12, the return value would be 9.
+",6
+complex-numbers,"A complex number is a number in the form `a + b * i` where `a` and `b` are real and `i` satisfies `i^2 = -1`.
+
+`a` is called the real part and `b` is called the imaginary part of `z`.
+The conjugate of the number `a + b * i` is the number `a - b * i`.
+The absolute value of a complex number `z = a + b * i` is a real number `|z| = sqrt(a^2 + b^2)`. The square of the absolute value `|z|^2` is the result of multiplication of `z` by its complex conjugate.
+
+The sum/difference of two complex numbers involves adding/subtracting their real and imaginary parts separately:
+`(a + i * b) + (c + i * d) = (a + c) + (b + d) * i`,
+`(a + i * b) - (c + i * d) = (a - c) + (b - d) * i`.
+
+Multiplication result is by definition
+`(a + i * b) * (c + i * d) = (a * c - b * d) + (b * c + a * d) * i`.
+
+The reciprocal of a non-zero complex number is
+`1 / (a + i * b) = a/(a^2 + b^2) - b/(a^2 + b^2) * i`.
+
+Dividing a complex number `a + i * b` by another `c + i * d` gives:
+`(a + i * b) / (c + i * d) = (a * c + b * d)/(c^2 + d^2) + (b * c - a * d)/(c^2 + d^2) * i`.
+
+Raising e to a complex exponent can be expressed as `e^(a + i * b) = e^a * e^(i * b)`, the last term of which is given by Euler's formula `e^(i * b) = cos(b) + i * sin(b)`.
+
+Implement the following operations:
+ - addition, subtraction, multiplication and division of two complex numbers,
+ - conjugate, absolute value, exponent of a given complex number.
+
+
+Assume the programming language you are using does not have an implementation of complex numbers.
+",22
+connect,"Compute the result for a game of Hex / Polygon.
+
+The abstract boardgame known as
+[Hex](https://en.wikipedia.org/wiki/Hex_%28board_game%29) / Polygon /
+CON-TAC-TIX is quite simple in rules, though complex in practice. Two players
+place stones on a rhombus with hexagonal fields. The player to connect his/her
+stones to the opposite side first wins. The four sides of the rhombus are
+divided between the two players (i.e. one player gets assigned a side and the
+side directly opposite it and the other player gets assigned the two other
+sides).
+
+Your goal is to build a program that given a simple representation of a board
+computes the winner (or lack thereof). Note that all games need not be ""fair"".
+(For example, players may have mismatched piece counts.)
+
+The boards look like this (with spaces added for readability, which won't be in
+the representation passed to your code):
+
+```text
+. O . X .
+ . X X O .
+  O O O X .
+   . X O X O
+    X O O O X
+```
+
+""Player `O`"" plays from top to bottom, ""Player `X`"" plays from left to right. In
+the above example `O` has made a connection from left to right but nobody has
+won since `O` didn't connect top and bottom.
+",10
+crypto-square,"Implement the classic method for composing secret messages called a square code.
+
+Given an English text, output the encoded version of that text.
+
+First, the input is normalized: the spaces and punctuation are removed
+from the English text and the message is downcased.
+
+Then, the normalized characters are broken into rows.  These rows can be
+regarded as forming a rectangle when printed with intervening newlines.
+
+For example, the sentence
+
+```text
+""If man was meant to stay on the ground, god would have given us roots.""
+```
+
+is normalized to:
+
+```text
+""ifmanwasmeanttostayonthegroundgodwouldhavegivenusroots""
+```
+
+The plaintext should be organized in to a rectangle.  The size of the
+rectangle (`r x c`) should be decided by the length of the message,
+such that `c >= r` and `c - r <= 1`, where `c` is the number of columns
+and `r` is the number of rows.
+
+Our normalized text is 54 characters long, dictating a rectangle with
+`c = 8` and `r = 7`:
+
+```text
+""ifmanwas""
+""meanttos""
+""tayonthe""
+""groundgo""
+""dwouldha""
+""vegivenu""
+""sroots  ""
+```
+
+The coded message is obtained by reading down the columns going left to
+right.
+
+The message above is coded as:
+
+```text
+""imtgdvsfearwermayoogoanouuiontnnlvtwttddesaohghnsseoau""
+```
+
+Output the encoded text in chunks that fill perfect rectangles `(r X c)`,
+with `c` chunks of `r` length, separated by spaces. For phrases that are
+`n` characters short of the perfect rectangle, pad each of the last `n`
+chunks with a single trailing space.
+
+```text
+""imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau ""
+```
+
+Notice that were we to stack these, we could visually decode the
+cyphertext back in to the original message:
+
+```text
+""imtgdvs""
+""fearwer""
+""mayoogo""
+""anouuio""
+""ntnnlvt""
+""wttddes""
+""aohghn ""
+""sseoau ""
+```
+",7
+custom-set,"Create a custom set type.
+
+Sometimes it is necessary to define a custom data structure of some
+type, like a set. In this exercise you will define your own set. How it
+works internally doesn't matter, as long as it behaves like a set of
+unique elements.
+",38
+diamond,"The diamond kata takes as its input a letter, and outputs it in a diamond
+shape. Given a letter, it prints a diamond starting with 'A', with the
+supplied letter at the widest point.
+
+## Requirements
+
+* The first row contains one 'A'.
+* The last row contains one 'A'.
+* All rows, except the first and last, have exactly two identical letters.
+* All rows have as many trailing spaces as leading spaces. (This might be 0).
+* The diamond is horizontally symmetric.
+* The diamond is vertically symmetric.
+* The diamond has a square shape (width equals height).
+* The letters form a diamond shape.
+* The top half has the letters in ascending order.
+* The bottom half has the letters in descending order.
+* The four corners (containing the spaces) are triangles.
+
+## Examples
+
+In the following examples, spaces are indicated by `·` characters.
+
+Diamond for letter 'A':
+
+```text
+A
+```
+
+Diamond for letter 'C':
+
+```text
+··A··
+·B·B·
+C···C
+·B·B·
+··A··
+```
+
+Diamond for letter 'E':
+
+```text
+····A····
+···B·B···
+··C···C··
+·D·····D·
+E·······E
+·D·····D·
+··C···C··
+···B·B···
+····A····
+```
+",5
+difference-of-squares,"Find the difference between the square of the sum and the sum of the squares of the first N natural numbers.
+
+The square of the sum of the first ten natural numbers is
+(1 + 2 + ... + 10)² = 55² = 3025.
+
+The sum of the squares of the first ten natural numbers is
+1² + 2² + ... + 10² = 385.
+
+Hence the difference between the square of the sum of the first
+ten natural numbers and the sum of the squares of the first ten
+natural numbers is 3025 - 385 = 2640.
+",9
+diffie-hellman,"Diffie-Hellman key exchange.
+
+Alice and Bob use Diffie-Hellman key exchange to share secrets.  They
+start with prime numbers, pick private keys, generate and share public
+keys, and then generate a shared secret key.
+
+## Step 0
+
+The test program supplies prime numbers p and g.
+
+## Step 1
+
+Alice picks a private key, a, greater than 1 and less than p.  Bob does
+the same to pick a private key b.
+
+## Step 2
+
+Alice calculates a public key A.
+
+    A = g**a mod p
+
+Using the same p and g, Bob similarly calculates a public key B from his
+private key b.
+
+## Step 3
+
+Alice and Bob exchange public keys.  Alice calculates secret key s.
+
+    s = B**a mod p
+
+Bob calculates
+
+    s = A**b mod p
+
+The calculations produce the same result!  Alice and Bob now share
+secret s.
+",5
+dominoes,"Make a chain of dominoes.
+
+Compute a way to order a given set of dominoes in such a way that they form a
+correct domino chain (the dots on one half of a stone match the dots on the
+neighbouring half of an adjacent stone) and that dots on the halfs of the stones
+which don't have a neighbour (the first and last stone) match each other.
+
+For example given the stones `[2|1]`, `[2|3]` and `[1|3]` you should compute something
+like `[1|2] [2|3] [3|1]` or `[3|2] [2|1] [1|3]` or `[1|3] [3|2] [2|1]` etc, where the first and last numbers are the same.
+
+For stones `[1|2]`, `[4|1]` and `[2|3]` the resulting chain is not valid: `[4|1] [1|2] [2|3]`'s first and last numbers are not the same. 4 != 3
+
+Some test cases may use duplicate stones in a chain solution, assume that multiple Domino sets are being used.
+",12
+etl,"We are going to do the `Transform` step of an Extract-Transform-Load.
+
+### ETL
+
+Extract-Transform-Load (ETL) is a fancy way of saying, ""We have some crufty, legacy data over in this system, and now we need it in this shiny new system over here, so
+we're going to migrate this.""
+
+(Typically, this is followed by, ""We're only going to need to run this
+once."" That's then typically followed by much forehead slapping and
+moaning about how stupid we could possibly be.)
+
+### The goal
+
+We're going to extract some scrabble scores from a legacy system.
+
+The old system stored a list of letters per score:
+
+- 1 point: ""A"", ""E"", ""I"", ""O"", ""U"", ""L"", ""N"", ""R"", ""S"", ""T"",
+- 2 points: ""D"", ""G"",
+- 3 points: ""B"", ""C"", ""M"", ""P"",
+- 4 points: ""F"", ""H"", ""V"", ""W"", ""Y"",
+- 5 points: ""K"",
+- 8 points: ""J"", ""X"",
+- 10 points: ""Q"", ""Z"",
+
+The shiny new scrabble system instead stores the score per letter, which
+makes it much faster and easier to calculate the score for a word. It
+also stores the letters in lower-case regardless of the case of the
+input letters:
+
+- ""a"" is worth 1 point.
+- ""b"" is worth 3 points.
+- ""c"" is worth 3 points.
+- ""d"" is worth 2 points.
+- Etc.
+
+Your mission, should you choose to accept it, is to transform the legacy data
+format to the shiny new format.
+
+### Notes
+
+A final note about scoring, Scrabble is played around the world in a
+variety of languages, each with its own unique scoring table. For
+example, an ""E"" is scored at 2 in the Māori-language version of the
+game while being scored at 4 in the Hawaiian-language version.
+",4
+flatten-array,"Take a nested list and return a single flattened list with all values except nil/null.
+
+The challenge is to write a function that accepts an arbitrarily-deep nested list-like structure and returns a flattened structure without any nil/null values.
+
+For Example
+
+input: [1,[2,3,null,4],[null],5]
+
+output: [1,2,3,4,5]
+",6
+food-chain,"Generate the lyrics of the song 'I Know an Old Lady Who Swallowed a Fly'.
+
+While you could copy/paste the lyrics,
+or read them from a file, this problem is much more
+interesting if you approach it algorithmically.
+
+This is a [cumulative song](http://en.wikipedia.org/wiki/Cumulative_song) of unknown origin.
+
+This is one of many common variants.
+
+```text
+I know an old lady who swallowed a fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a spider.
+It wriggled and jiggled and tickled inside her.
+She swallowed the spider to catch the fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a bird.
+How absurd to swallow a bird!
+She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.
+She swallowed the spider to catch the fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a cat.
+Imagine that, to swallow a cat!
+She swallowed the cat to catch the bird.
+She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.
+She swallowed the spider to catch the fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a dog.
+What a hog, to swallow a dog!
+She swallowed the dog to catch the cat.
+She swallowed the cat to catch the bird.
+She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.
+She swallowed the spider to catch the fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a goat.
+Just opened her throat and swallowed a goat!
+She swallowed the goat to catch the dog.
+She swallowed the dog to catch the cat.
+She swallowed the cat to catch the bird.
+She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.
+She swallowed the spider to catch the fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a cow.
+I don't know how she swallowed a cow!
+She swallowed the cow to catch the goat.
+She swallowed the goat to catch the dog.
+She swallowed the dog to catch the cat.
+She swallowed the cat to catch the bird.
+She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.
+She swallowed the spider to catch the fly.
+I don't know why she swallowed the fly. Perhaps she'll die.
+
+I know an old lady who swallowed a horse.
+She's dead, of course!
+```
+",10
+forth,"Implement an evaluator for a very simple subset of Forth.
+
+[Forth](https://en.wikipedia.org/wiki/Forth_%28programming_language%29)
+is a stack-based programming language. Implement a very basic evaluator
+for a small subset of Forth.
+
+Your evaluator has to support the following words:
+
+- `+`, `-`, `*`, `/` (integer arithmetic)
+- `DUP`, `DROP`, `SWAP`, `OVER` (stack manipulation)
+
+Your evaluator also has to support defining new words using the
+customary syntax: `: word-name definition ;`.
+
+To keep things simple the only data type you need to support is signed
+integers of at least 16 bits size.
+
+You should use the following rules for the syntax: a number is a
+sequence of one or more (ASCII) digits, a word is a sequence of one or
+more letters, digits, symbols or punctuation that is not a number.
+(Forth probably uses slightly different rules, but this is close
+enough.)
+
+Words are case-insensitive.
+",46
+gigasecond,"Calculate the moment when someone has lived for 10^9 seconds.
+
+A gigasecond is 10^9 (1,000,000,000) seconds.
+",5
+go-counting,"Count the scored points on a Go board.
+
+In the game of go (also known as baduk, igo, cờ vây and wéiqí) points
+are gained by completely encircling empty intersections with your
+stones. The encircled intersections of a player are known as its
+territory.
+
+Write a function that determines the territory of each player. You may
+assume that any stones that have been stranded in enemy territory have
+already been taken off the board.
+
+Write a function that determines the territory which includes a specified coordinate.
+
+Multiple empty intersections may be encircled at once and for encircling
+only horizontal and vertical neighbours count. In the following diagram
+the stones which matter are marked ""O"" and the stones that don't are
+marked ""I"" (ignored).  Empty spaces represent empty intersections.
+
+```text
++----+
+|IOOI|
+|O  O|
+|O OI|
+|IOI |
++----+
+```
+
+To be more precise an empty intersection is part of a player's territory
+if all of its neighbours are either stones of that player or empty
+intersections that are part of that player's territory.
+
+For more information see
+[wikipedia](https://en.wikipedia.org/wiki/Go_%28game%29) or [Sensei's
+Library](http://senseis.xmp.net/).
+",11
+grade-school,"Given students' names along with the grade that they are in, create a roster
+for the school.
+
+In the end, you should be able to:
+
+- Add a student's name to the roster for a grade
+  - ""Add Jim to grade 2.""
+  - ""OK.""
+- Get a list of all students enrolled in a grade
+  - ""Which students are in grade 2?""
+  - ""We've only got Jim just now.""
+- Get a sorted list of all students in all grades.  Grades should sort
+  as 1, 2, 3, etc., and students within a grade should be sorted
+  alphabetically by name.
+  - ""Who all is enrolled in school right now?""
+  - ""Grade 1: Anna, Barb, and Charlie. Grade 2: Alex, Peter, and Zoe.
+    Grade 3…""
+
+Note that all our students only have one name.  (It's a small town, what
+do you want?)
+
+## For bonus points
+
+Did you get the tests passing and the code clean? If you want to, these
+are some additional things you could try:
+
+- If you're working in a language with mutable data structures and your
+  implementation allows outside code to mutate the school's internal DB
+  directly, see if you can prevent this. Feel free to introduce additional
+  tests.
+
+Then please share your thoughts in a comment on the submission. Did this
+experiment make the code better? Worse? Did you learn anything from it?
+",7
+grains,"Calculate the number of grains of wheat on a chessboard given that the number
+on each square doubles.
+
+There once was a wise servant who saved the life of a prince. The king
+promised to pay whatever the servant could dream up. Knowing that the
+king loved chess, the servant told the king he would like to have grains
+of wheat. One grain on the first square of a chess board. Two grains on
+the next. Four on the third, and so on.
+
+There are 64 squares on a chessboard.
+
+Write code that shows:
+- how many grains were on each square, and
+- the total number of grains
+
+## For bonus points
+
+Did you get the tests passing and the code clean? If you want to, these
+are some additional things you could try:
+
+- Optimize for speed.
+- Optimize for readability.
+
+Then please share your thoughts in a comment on the submission. Did this
+experiment make the code better? Worse? Did you learn anything from it?
+",10
+grep,"Search a file for lines matching a regular expression pattern. Return the line
+number and contents of each matching line.
+
+The Unix [`grep`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html) command can be used to search for lines in one or more files
+that match a user-provided search query (known as the *pattern*).
+
+The `grep` command takes three arguments:
+
+1. The pattern used to match lines in a file.
+2. Zero or more flags to customize the matching behavior.
+3. One or more files in which to search for matching lines.
+
+Your task is to implement the `grep` function, which should read the contents
+of the specified files, find the lines that match the specified pattern
+and then output those lines as a single string. Note that the lines should
+be output in the order in which they were found, with the first matching line
+in the first file being output first.
+
+As an example, suppose there is a file named ""input.txt"" with the following contents:
+
+```text
+hello
+world
+hello again
+```
+
+If we were to call `grep ""hello"" input.txt`, the returned string should be:
+
+```text
+hello
+hello again
+```
+
+### Flags
+
+As said earlier, the `grep` command should also support the following flags:
+
+- `-n` Print the line numbers of each matching line.
+- `-l` Print only the names of files that contain at least one matching line.
+- `-i` Match line using a case-insensitive comparison.
+- `-v` Invert the program -- collect all lines that fail to match the pattern.
+- `-x` Only match entire lines, instead of lines that contain a match.
+
+If we run `grep -n ""hello"" input.txt`, the `-n` flag will require the matching
+lines to be prefixed with its line number:
+
+```text
+1:hello
+3:hello again
+```
+
+And if we run `grep -i ""HELLO"" input.txt`, we'll do a case-insensitive match,
+and the output will be:
+
+```text
+hello
+hello again
+```
+
+The `grep` command should support multiple flags at once.
+
+For example, running `grep -l -v ""hello"" file1.txt file2.txt` should
+print the names of files that do not contain the string ""hello"".
+",21
+hamming,"Calculate the Hamming difference between two DNA strands.
+
+A mutation is simply a mistake that occurs during the creation or
+copying of a nucleic acid, in particular DNA. Because nucleic acids are
+vital to cellular functions, mutations tend to cause a ripple effect
+throughout the cell. Although mutations are technically mistakes, a very
+rare mutation may equip the cell with a beneficial attribute. In fact,
+the macro effects of evolution are attributable by the accumulated
+result of beneficial microscopic mutations over many generations.
+
+The simplest and most common type of nucleic acid mutation is a point
+mutation, which replaces one base with another at a single nucleotide.
+
+By counting the number of differences between two homologous DNA strands
+taken from different genomes with a common ancestor, we get a measure of
+the minimum number of point mutations that could have occurred on the
+evolutionary path between the two strands.
+
+This is called the 'Hamming distance'.
+
+It is found by comparing two DNA strands and counting how many of the
+nucleotides are different from their equivalent in the other string.
+
+    GAGCCTACTAACGGGAT
+    CATCGTAATGACGGCCT
+    ^ ^ ^  ^ ^    ^^
+
+The Hamming distance between these two DNA strands is 7.
+
+# Implementation notes
+
+The Hamming distance is only defined for sequences of equal length, so
+an attempt to calculate it between sequences of different lengths should
+not work. The general handling of this situation (e.g., raising an
+exception vs returning a special value) may differ between languages.
+",15
+hello-world,"The classical introductory exercise. Just say ""Hello, World!"".
+
+[""Hello, World!""](http://en.wikipedia.org/wiki/%22Hello,_world!%22_program) is
+the traditional first program for beginning programming in a new language
+or environment.
+
+The objectives are simple:
+
+- Write a function that returns the string ""Hello, World!"".
+- Run the test suite and make sure that it succeeds.
+- Submit your solution and check it at the website.
+
+If everything goes well, you will be ready to fetch your first real exercise.
+",1
+house,"Recite the nursery rhyme 'This is the House that Jack Built'.
+
+> [The] process of placing a phrase of clause within another phrase of
+> clause is called embedding. It is through the processes of recursion
+> and embedding that we are able to take a finite number of forms (words
+> and phrases) and construct an infinite number of expressions.
+> Furthermore, embedding also allows us to construct an infinitely long
+> structure, in theory anyway.
+
+- [papyr.com](http://papyr.com/hypertextbooks/grammar/ph_noun.htm)
+
+The nursery rhyme reads as follows:
+
+```text
+This is the house that Jack built.
+
+This is the malt
+that lay in the house that Jack built.
+
+This is the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the maiden all forlorn
+that milked the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the man all tattered and torn
+that kissed the maiden all forlorn
+that milked the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the priest all shaven and shorn
+that married the man all tattered and torn
+that kissed the maiden all forlorn
+that milked the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the rooster that crowed in the morn
+that woke the priest all shaven and shorn
+that married the man all tattered and torn
+that kissed the maiden all forlorn
+that milked the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the farmer sowing his corn
+that kept the rooster that crowed in the morn
+that woke the priest all shaven and shorn
+that married the man all tattered and torn
+that kissed the maiden all forlorn
+that milked the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+
+This is the horse and the hound and the horn
+that belonged to the farmer sowing his corn
+that kept the rooster that crowed in the morn
+that woke the priest all shaven and shorn
+that married the man all tattered and torn
+that kissed the maiden all forlorn
+that milked the cow with the crumpled horn
+that tossed the dog
+that worried the cat
+that killed the rat
+that ate the malt
+that lay in the house that Jack built.
+```
+",14
+isbn-verifier,"The [ISBN-10 verification process](https://en.wikipedia.org/wiki/International_Standard_Book_Number) is used to validate book identification
+numbers. These normally contain dashes and look like: `3-598-21508-8`
+
+## ISBN
+
+The ISBN-10 format is 9 digits (0 to 9) plus one check character (either a digit or an X only). In the case the check character is an X, this represents the value '10'. These may be communicated with or without hyphens, and can be checked for their validity by the following formula:
+
+```
+(x1 * 10 + x2 * 9 + x3 * 8 + x4 * 7 + x5 * 6 + x6 * 5 + x7 * 4 + x8 * 3 + x9 * 2 + x10 * 1) mod 11 == 0
+```
+
+If the result is 0, then it is a valid ISBN-10, otherwise it is invalid.
+
+## Example
+
+Let's take the ISBN-10 `3-598-21508-8`. We plug it in to the formula, and get:
+```
+(3 * 10 + 5 * 9 + 9 * 8 + 8 * 7 + 2 * 6 + 1 * 5 + 5 * 4 + 0 * 3 + 8 * 2 + 8 * 1) mod 11 == 0
+```
+
+Since the result is 0, this proves that our ISBN is valid.
+
+## Task
+
+Given a string the program should check if the provided string is a valid ISBN-10.
+Putting this into place requires some thinking about preprocessing/parsing of the string prior to calculating the check digit for the ISBN.
+
+The program should be able to verify ISBN-10 both with and without separating dashes.
+
+
+## Caveats
+
+Converting from strings to numbers can be tricky in certain languages.
+Now, it's even trickier since the check digit of an ISBN-10 may be 'X' (representing '10'). For instance `3-598-21507-X` is a valid ISBN-10.
+
+## Bonus tasks
+
+* Generate a valid ISBN-13 from the input ISBN-10 (and maybe verify it again with a derived verifier).
+
+* Generate valid ISBN, maybe even from a given starting ISBN.",17
+isogram,"Determine if a word or phrase is an isogram.
+
+An isogram (also known as a ""nonpattern word"") is a word or phrase without a repeating letter, however spaces and hyphens are allowed to appear multiple times.
+
+Examples of isograms:
+
+- lumberjacks
+- background
+- downstream
+- six-year-old
+
+The word *isograms*, however, is not an isogram, because the s repeats.
+",11
+kindergarten-garden,"Given a diagram, determine which plants each child in the kindergarten class is
+responsible for.
+
+The kindergarten class is learning about growing plants. The teacher
+thought it would be a good idea to give them actual seeds, plant them in
+actual dirt, and grow actual plants.
+
+They've chosen to grow grass, clover, radishes, and violets.
+
+To this end, the children have put little cups along the window sills, and
+planted one type of plant in each cup, choosing randomly from the available
+types of seeds.
+
+```text
+[window][window][window]
+........................ # each dot represents a cup
+........................
+```
+
+There are 12 children in the class:
+
+- Alice, Bob, Charlie, David,
+- Eve, Fred, Ginny, Harriet,
+- Ileana, Joseph, Kincaid, and Larry.
+
+Each child gets 4 cups, two on each row. Their teacher assigns cups to
+the children alphabetically by their names.
+
+The following diagram represents Alice's plants:
+
+```text
+[window][window][window]
+VR......................
+RG......................
+```
+
+In the first row, nearest the windows, she has a violet and a radish.  In the
+second row she has a radish and some grass.
+
+Your program will be given the plants from left-to-right starting with
+the row nearest the windows. From this, it should be able to determine
+which plants belong to each student.
+
+For example, if it's told that the garden looks like so:
+
+```text
+[window][window][window]
+VRCGVVRVCGGCCGVRGCVCGCGV
+VRCCCGCRRGVCGCRVVCVGCGCV
+```
+
+Then if asked for Alice's plants, it should provide:
+
+- Violets, radishes, violets, radishes
+
+While asking for Bob's plants would yield:
+
+- Clover, grass, clover, clover
+",8
+largest-series-product,"Given a string of digits, calculate the largest product for a contiguous
+substring of digits of length n.
+
+For example, for the input `'1027839564'`, the largest product for a
+series of 3 digits is 270 (9 * 5 * 6), and the largest product for a
+series of 5 digits is 7560 (7 * 8 * 3 * 9 * 5).
+
+Note that these series are only required to occupy *adjacent positions*
+in the input; the digits need not be *numerically consecutive*.
+
+For the input `'73167176531330624919225119674426574742355349194934'`,
+the largest product for a series of 6 digits is 23520.
+",15
+leap,"Given a year, report if it is a leap year.
+
+The tricky thing here is that a leap year in the Gregorian calendar occurs:
+
+```text
+on every year that is evenly divisible by 4
+  except every year that is evenly divisible by 100
+    unless the year is also evenly divisible by 400
+```
+
+For example, 1997 is not a leap year, but 1996 is.  1900 is not a leap
+year, but 2000 is.
+
+If your language provides a method in the standard library that does
+this look-up, pretend it doesn't exist and implement it yourself.
+
+## Notes
+
+Though our exercise adopts some very simple rules, there is more to
+learn!
+
+For a delightful, four minute explanation of the whole leap year
+phenomenon, go watch [this youtube video][video].
+
+[video]: http://www.youtube.com/watch?v=xX96xng7sAE
+",4
+list-ops,"Implement basic list operations.
+
+In functional languages list operations like `length`, `map`, and
+`reduce` are very common. Implement a series of basic list operations,
+without using existing functions.
+",20
+luhn,"Given a number determine whether or not it is valid per the Luhn formula.
+
+The [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm) is
+a simple checksum formula used to validate a variety of identification
+numbers, such as credit card numbers and Canadian Social Insurance
+Numbers.
+
+The task is to check if a given string is valid.
+
+Validating a Number
+------
+
+Strings of length 1 or less are not valid. Spaces are allowed in the input,
+but they should be stripped before checking. All other non-digit characters
+are disallowed.
+
+## Example 1: valid credit card number
+
+```text
+4539 1488 0343 6467
+```
+
+The first step of the Luhn algorithm is to double every second digit,
+starting from the right. We will be doubling
+
+```text
+4_3_ 1_8_ 0_4_ 6_6_
+```
+
+If doubling the number results in a number greater than 9 then subtract 9
+from the product. The results of our doubling:
+
+```text
+8569 2478 0383 3437
+```
+
+Then sum all of the digits:
+
+```text
+8+5+6+9+2+4+7+8+0+3+8+3+3+4+3+7 = 80
+```
+
+If the sum is evenly divisible by 10, then the number is valid. This number is valid!
+
+## Example 2: invalid credit card number
+
+```text
+8273 1232 7352 0569
+```
+
+Double the second digits, starting from the right
+
+```text
+7253 2262 5312 0539
+```
+
+Sum the digits
+
+```text
+7+2+5+3+2+2+6+2+5+3+1+2+0+5+3+9 = 57
+```
+
+57 is not evenly divisible by 10, so this number is not valid.
+",14
+markdown,"Refactor a Markdown parser.
+
+The markdown exercise is a refactoring exercise. There is code that parses a
+given string with [Markdown
+syntax](https://guides.github.com/features/mastering-markdown/) and returns the
+associated HTML for that string. Even though this code is confusingly written
+and hard to follow, somehow it works and all the tests are passing! Your
+challenge is to re-write this code to make it easier to read and maintain
+while still making sure that all the tests keep passing.
+
+It would be helpful if you made notes of what you did in your refactoring in
+comments so reviewers can see that, but it isn't strictly necessary. The most
+important thing is to make the code better!
+",12
+matrix,"Given a string representing a matrix of numbers, return the rows and columns of
+that matrix.
+
+So given a string with embedded newlines like:
+
+```text
+9 8 7
+5 3 2
+6 6 7
+```
+
+representing this matrix:
+
+```text
+    0  1  2
+  |---------
+0 | 9  8  7
+1 | 5  3  2
+2 | 6  6  7
+```
+
+your code should be able to spit out:
+
+- A list of the rows, reading each row left-to-right while moving
+  top-to-bottom across the rows,
+- A list of the columns, reading each column top-to-bottom while moving
+  from left-to-right.
+
+The rows for our example matrix:
+
+- 9, 8, 7
+- 5, 3, 2
+- 6, 6, 7
+
+And its columns:
+
+- 9, 5, 6
+- 8, 3, 6
+- 7, 2, 7
+",8
+meetup,"Calculate the date of meetups.
+
+Typically meetups happen on the same day of the week.  In this exercise, you
+will take a description of a meetup date, and return the actual meetup date.
+
+Examples of general descriptions are:
+
+- The first Monday of January 2017
+- The third Tuesday of January 2017
+- The wednesteenth of January 2017
+- The last Thursday of January 2017
+
+The descriptors you are expected to parse are:
+first, second, third, fourth, fifth, last, monteenth, tuesteenth, wednesteenth,
+thursteenth, friteenth, saturteenth, sunteenth
+
+Note that ""monteenth"", ""tuesteenth"", etc are all made up words. There was a
+meetup whose members realized that there are exactly 7 numbered days in a month
+that end in '-teenth'. Therefore, one is guaranteed that each day of the week
+(Monday, Tuesday, ...) will have exactly one date that is named with '-teenth'
+in every month.
+
+Given examples of a meetup dates, each containing a month, day, year, and
+descriptor calculate the date of the actual meetup.  For example, if given
+""The first Monday of January 2017"", the correct meetup date is 2017/1/2.
+",95
+minesweeper,"Add the numbers to a minesweeper board.
+
+Minesweeper is a popular game where the user has to find the mines using
+numeric hints that indicate how many mines are directly adjacent
+(horizontally, vertically, diagonally) to a square.
+
+In this exercise you have to create some code that counts the number of
+mines adjacent to a square and transforms boards like this (where `*`
+indicates a mine):
+
+    +-----+
+    | * * |
+    |  *  |
+    |  *  |
+    |     |
+    +-----+
+
+into this:
+
+    +-----+
+    |1*3*1|
+    |13*31|
+    | 2*2 |
+    | 111 |
+    +-----+
+",12
+nth-prime,"Given a number n, determine what the nth prime is.
+
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that
+the 6th prime is 13.
+
+If your language provides methods in the standard library to deal with prime
+numbers, pretend they don't exist and implement them yourself.
+",5
+nucleotide-count,"Given a single stranded DNA string, compute how many times each nucleotide occurs in the string.
+
+The genetic language of every living thing on the planet is DNA.
+DNA is a large molecule that is built from an extremely long sequence of individual elements called nucleotides.
+4 types exist in DNA and these differ only slightly and can be represented as the following symbols: 'A' for adenine, 'C' for cytosine, 'G' for guanine, and 'T' thymine.
+
+Here is an analogy:
+- twigs are to birds nests as
+- nucleotides are to DNA as
+- legos are to lego houses as
+- words are to sentences as...
+",5
+ocr-numbers,"Given a 3 x 4 grid of pipes, underscores, and spaces, determine which number is
+represented, or whether it is garbled.
+
+# Step One
+
+To begin with, convert a simple binary font to a string containing 0 or 1.
+
+The binary font uses pipes and underscores, four rows high and three columns wide.
+
+```text
+     _   #
+    | |  # zero.
+    |_|  #
+         # the fourth row is always blank
+```
+
+Is converted to ""0""
+
+```text
+         #
+      |  # one.
+      |  #
+         # (blank fourth row)
+```
+
+Is converted to ""1""
+
+If the input is the correct size, but not recognizable, your program should return '?'
+
+If the input is the incorrect size, your program should return an error.
+
+# Step Two
+
+Update your program to recognize multi-character binary strings, replacing garbled numbers with ?
+
+# Step Three
+
+Update your program to recognize all numbers 0 through 9, both individually and as part of a larger string.
+
+```text
+ _ 
+ _|
+|_ 
+   
+```
+
+Is converted to ""2""
+
+```text
+      _  _     _  _  _  _  _  _  #
+    | _| _||_||_ |_   ||_||_|| | # decimal numbers.
+    ||_  _|  | _||_|  ||_| _||_| #
+                                 # fourth line is always blank
+```
+
+Is converted to ""1234567890""
+
+# Step Four
+
+Update your program to handle multiple numbers, one per line. When converting several lines, join the lines with commas.
+
+```text
+    _  _ 
+  | _| _|
+  ||_  _|
+         
+    _  _ 
+|_||_ |_ 
+  | _||_|
+         
+ _  _  _ 
+  ||_||_|
+  ||_| _|
+         
+```
+
+Is converted to ""123,456,789""
+",17
+palindrome-products,"Detect palindrome products in a given range.
+
+A palindromic number is a number that remains the same when its digits are
+reversed. For example, `121` is a palindromic number but `112` is not.
+
+Given a range of numbers, find the largest and smallest palindromes which
+are products of numbers within that range.
+
+Your solution should return the largest and smallest palindromes, along with the
+factors of each within the range. If the largest or smallest palindrome has more
+than one pair of factors within the range, then return all the pairs.
+
+## Example 1
+
+Given the range `[1, 9]` (both inclusive)...
+
+And given the list of all possible products within this range:
+`[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 15, 21, 24, 27, 20, 28, 32, 36, 25, 30, 35, 40, 45, 42, 48, 54, 49, 56, 63, 64, 72, 81]`
+
+The palindrome products are all single digit numbers (in this case):
+`[1, 2, 3, 4, 5, 6, 7, 8, 9]`
+
+The smallest palindrome product is `1`. Its factors are `(1, 1)`.
+The largest palindrome product is `9`. Its factors are `(1, 9)` and `(3, 3)`.
+
+## Example 2
+
+Given the range `[10, 99]` (both inclusive)...
+
+The smallest palindrome product is `121`. Its factors are `(11, 11)`.
+The largest palindrome product is `9009`. Its factors are `(91, 99)`.
+",12
+pangram,"Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan gramma,
+""every letter"") is a sentence using every letter of the alphabet at least once.
+The best known English pangram is:
+> The quick brown fox jumps over the lazy dog.
+
+The alphabet used consists of ASCII letters `a` to `z`, inclusive, and is case
+insensitive. Input will not contain non-ASCII symbols.
+",10
+pascals-triangle,"Compute Pascal's triangle up to a given number of rows.
+
+In Pascal's Triangle each number is computed by adding the numbers to
+the right and left of the current position in the previous row.
+
+```text
+    1
+   1 1
+  1 2 1
+ 1 3 3 1
+1 4 6 4 1
+# ... etc
+```
+",9
+perfect-numbers,"Determine if a number is perfect, abundant, or deficient based on
+Nicomachus' (60 - 120 CE) classification scheme for natural numbers.
+
+The Greek mathematician [Nicomachus](https://en.wikipedia.org/wiki/Nicomachus) devised a classification scheme for natural numbers, identifying each as belonging uniquely to the categories of **perfect**, **abundant**, or **deficient** based on their [aliquot sum](https://en.wikipedia.org/wiki/Aliquot_sum). The aliquot sum is defined as the sum of the factors of a number not including the number itself. For example, the aliquot sum of 15 is (1 + 3 + 5) = 9
+
+- **Perfect**: aliquot sum = number
+  - 6 is a perfect number because (1 + 2 + 3) = 6
+  - 28 is a perfect number because (1 + 2 + 4 + 7 + 14) = 28
+- **Abundant**: aliquot sum > number
+  - 12 is an abundant number because (1 + 2 + 3 + 4 + 6) = 16
+  - 24 is an abundant number because (1 + 2 + 3 + 4 + 6 + 8 + 12) = 36
+- **Deficient**: aliquot sum < number
+  - 8 is a deficient number because (1 + 2 + 4) = 7
+  - Prime numbers are deficient
+
+Implement a way to determine whether a given number is **perfect**. Depending on your language track, you may also need to implement a way to determine whether a given number is **abundant** or **deficient**.
+",13
+phone-number,"Clean up user-entered phone numbers so that they can be sent SMS messages.
+
+The **North American Numbering Plan (NANP)** is a telephone numbering system used by many countries in North America like the United States, Canada or Bermuda. All NANP-countries share the same international country code: `1`.
+
+NANP numbers are ten-digit numbers consisting of a three-digit Numbering Plan Area code, commonly known as *area code*, followed by a seven-digit local number. The first three digits of the local number represent the *exchange code*, followed by the unique four-digit number which is the *subscriber number*.
+
+The format is usually represented as
+
+```text
+(NXX)-NXX-XXXX
+```
+
+where `N` is any digit from 2 through 9 and `X` is any digit from 0 through 9.
+
+Your task is to clean up differently formatted telephone numbers by removing punctuation and the country code (1) if present.
+
+For example, the inputs
+- `+1 (613)-995-0253`
+- `613-995-0253`
+- `1 613 995 0253`
+- `613.995.0253`
+
+should all produce the output
+
+`6139950253`
+
+**Note:** As this exercise only deals with telephone numbers used in NANP-countries, only 1 is considered a valid country code.
+",14
+pig-latin,"Implement a program that translates from English to Pig Latin.
+
+Pig Latin is a made-up children's language that's intended to be
+confusing. It obeys a few simple rules (below), but when it's spoken
+quickly it's really difficult for non-children (and non-native speakers)
+to understand.
+
+- **Rule 1**: If a word begins with a vowel sound, add an ""ay"" sound to the end of the word. Please note that ""xr"" and ""yt"" at the beginning of a word make vowel sounds (e.g. ""xray"" -> ""xrayay"", ""yttria"" -> ""yttriaay"").
+- **Rule 2**: If a word begins with a consonant sound, move it to the end of the word and then add an ""ay"" sound to the end of the word. Consonant sounds can be made up of multiple consonants, a.k.a. a consonant cluster (e.g. ""chair"" -> ""airchay"").
+- **Rule 3**: If a word starts with a consonant sound followed by ""qu"", move it to the end of the word, and then add an ""ay"" sound to the end of the word (e.g. ""square"" -> ""aresquay"").
+- **Rule 4**: If a word contains a ""y"" after a consonant cluster or as the second letter in a two letter word it makes a vowel sound (e.g. ""rhythm"" -> ""ythmrhay"", ""my"" -> ""ymay"").
+
+There are a few more rules for edge cases, and there are regional
+variants too.
+
+See <http://en.wikipedia.org/wiki/Pig_latin> for more details.
+",22
+poker,"Pick the best hand(s) from a list of poker hands.
+
+See [wikipedia](https://en.wikipedia.org/wiki/List_of_poker_hands) for an
+overview of poker hands.
+",28
+pov,"Reparent a graph on a selected node.
+
+This exercise is all about re-orientating a graph to see things from a different
+point of view. For example family trees are usually presented from the
+ancestor's perspective:
+
+```text
+    +------0------+
+    |      |      |
+  +-1-+  +-2-+  +-3-+
+  |   |  |   |  |   |
+  4   5  6   7  8   9
+```
+
+But the same information can be presented from the perspective of any other node
+in the graph, by pulling it up to the root and dragging its relationships along
+with it. So the same graph from 6's perspective would look like:
+
+```text
+        6
+        |
+  +-----2-----+
+  |           |
+  7     +-----0-----+
+        |           |
+      +-1-+       +-3-+
+      |   |       |   |
+      4   5       8   9
+```
+
+This lets us more simply describe the paths between two nodes. So for example
+the path from 6-9 (which in the first graph goes up to the root and then down to
+a different leaf node) can be seen to follow the path 6-2-0-3-9
+
+This exercise involves taking an input graph and re-orientating it from the point
+of view of one of the nodes.
+",15
+prime-factors,"Compute the prime factors of a given natural number.
+
+A prime number is only evenly divisible by itself and 1.
+
+Note that 1 is not a prime number.
+
+## Example
+
+What are the prime factors of 60?
+
+- Our first divisor is 2. 2 goes into 60, leaving 30.
+- 2 goes into 30, leaving 15.
+  - 2 doesn't go cleanly into 15. So let's move on to our next divisor, 3.
+- 3 goes cleanly into 15, leaving 5.
+  - 3 does not go cleanly into 5. The next possible factor is 4.
+  - 4 does not go cleanly into 5. The next possible factor is 5.
+- 5 does go cleanly into 5.
+- We're left only with 1, so now, we're done.
+
+Our successful divisors in that computation represent the list of prime
+factors of 60: 2, 2, 3, and 5.
+
+You can check this yourself:
+
+- 2 * 2 * 3 * 5
+- = 4 * 15
+- = 60
+- Success!
+",7
+protein-translation,"Translate RNA sequences into proteins.
+
+RNA can be broken into three nucleotide sequences called codons, and then translated to a polypeptide like so:
+
+RNA: `""AUGUUUUCU""` => translates to
+
+Codons: `""AUG"", ""UUU"", ""UCU""`
+=> which become a polypeptide with the following sequence =>
+
+Protein: `""Methionine"", ""Phenylalanine"", ""Serine""`
+
+There are 64 codons which in turn correspond to 20 amino acids; however, all of the codon sequences and resulting amino acids are not important in this exercise.  If it works for one codon, the program should work for all of them.
+However, feel free to expand the list in the test suite to include them all.
+
+There are also three terminating codons (also known as 'STOP' codons); if any of these codons are encountered (by the ribosome), all translation ends and the protein is terminated.
+
+All subsequent codons after are ignored, like this:
+
+RNA: `""AUGUUUUCUUAAAUG""` =>
+
+Codons: `""AUG"", ""UUU"", ""UCU"", ""UAA"", ""AUG""` =>
+
+Protein: `""Methionine"", ""Phenylalanine"", ""Serine""`
+
+Note the stop codon `""UAA""` terminates the translation and the final methionine is not translated into the protein sequence.
+
+Below are the codons and resulting Amino Acids needed for the exercise.
+
+Codon                 | Protein
+:---                  | :---
+AUG                   | Methionine
+UUU, UUC              | Phenylalanine
+UUA, UUG              | Leucine
+UCU, UCC, UCA, UCG    | Serine
+UAU, UAC              | Tyrosine
+UGU, UGC              | Cysteine
+UGG                   | Tryptophan
+UAA, UAG, UGA         | STOP
+
+Learn more about [protein translation on Wikipedia](http://en.wikipedia.org/wiki/Translation_(biology))
+",23
+proverb,"For want of a horseshoe nail, a kingdom was lost, or so the saying goes.
+
+Given a list of inputs, generate the relevant proverb. For example, given the list `[""nail"", ""shoe"", ""horse"", ""rider"", ""message"", ""battle"", ""kingdom""]`, you will output the full text of this proverbial rhyme:
+
+```text
+For want of a nail the shoe was lost.
+For want of a shoe the horse was lost.
+For want of a horse the rider was lost.
+For want of a rider the message was lost.
+For want of a message the battle was lost.
+For want of a battle the kingdom was lost.
+And all for the want of a nail.
+```
+
+Note that the list of inputs may vary; your solution should be able to handle lists of arbitrary length and content. No line of the output text should be a static, unchanging string; all should vary according to the input given.
+",6
+queen-attack,"Given the position of two queens on a chess board, indicate whether or not they
+are positioned so that they can attack each other.
+
+In the game of chess, a queen can attack pieces which are on the same
+row, column, or diagonal.
+
+A chessboard can be represented by an 8 by 8 array.
+
+So if you're told the white queen is at (2, 3) and the black queen at
+(5, 6), then you'd know you've got a set-up like so:
+
+```text
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ W _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ B _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+```
+
+You'd also be able to answer whether the queens can attack each other.
+In this case, that answer would be yes, they can, because both pieces
+share a diagonal.
+",12
+rail-fence-cipher,"Implement encoding and decoding for the rail fence cipher.
+
+The Rail Fence cipher is a form of transposition cipher that gets its name from
+the way in which it's encoded. It was already used by the ancient Greeks.
+
+In the Rail Fence cipher, the message is written downwards on successive ""rails""
+of an imaginary fence, then moving up when we get to the bottom (like a zig-zag).
+Finally the message is then read off in rows.
+
+For example, using three ""rails"" and the message ""WE ARE DISCOVERED FLEE AT ONCE"",
+the cipherer writes out:
+
+```text
+W . . . E . . . C . . . R . . . L . . . T . . . E
+. E . R . D . S . O . E . E . F . E . A . O . C .
+. . A . . . I . . . V . . . D . . . E . . . N . .
+```
+
+Then reads off:
+
+```text
+WECRLTEERDSOEEFEAOCAIVDEN
+```
+
+To decrypt a message you take the zig-zag shape and fill the ciphertext along the rows.
+
+```text
+? . . . ? . . . ? . . . ? . . . ? . . . ? . . . ?
+. ? . ? . ? . ? . ? . ? . ? . ? . ? . ? . ? . ? .
+. . ? . . . ? . . . ? . . . ? . . . ? . . . ? . .
+```
+
+The first row has seven spots that can be filled with ""WECRLTE"".
+
+```text
+W . . . E . . . C . . . R . . . L . . . T . . . E
+. ? . ? . ? . ? . ? . ? . ? . ? . ? . ? . ? . ? .
+. . ? . . . ? . . . ? . . . ? . . . ? . . . ? . .
+```
+
+Now the 2nd row takes ""ERDSOEEFEAOC"".
+
+```text
+W . . . E . . . C . . . R . . . L . . . T . . . E
+. E . R . D . S . O . E . E . F . E . A . O . C .
+. . ? . . . ? . . . ? . . . ? . . . ? . . . ? . .
+```
+
+Leaving ""AIVDEN"" for the last row.
+
+```text
+W . . . E . . . C . . . R . . . L . . . T . . . E
+. E . R . D . S . O . E . E . F . E . A . O . C .
+. . A . . . I . . . V . . . D . . . E . . . N . .
+```
+
+If you now read along the zig-zag shape you can read the original message.
+",6
+raindrops,"Convert a number to a string, the contents of which depend on the number's factors.
+
+- If the number has 3 as a factor, output 'Pling'.
+- If the number has 5 as a factor, output 'Plang'.
+- If the number has 7 as a factor, output 'Plong'.
+- If the number does not have 3, 5, or 7 as a factor,
+  just pass the number's digits straight through.
+
+## Examples
+
+- 28's factors are 1, 2, 4, **7**, 14, 28.
+  - In raindrop-speak, this would be a simple ""Plong"".
+- 30's factors are 1, 2, **3**, **5**, 6, 10, 15, 30.
+  - In raindrop-speak, this would be a ""PlingPlang"".
+- 34 has four factors: 1, 2, 17, and 34.
+  - In raindrop-speak, this would be ""34"".
+",18
+rational-numbers,"A rational number is defined as the quotient of two integers `a` and `b`, called the numerator and denominator, respectively, where `b != 0`.
+
+The absolute value `|r|` of the rational number `r = a/b` is equal to `|a|/|b|`.
+
+The sum of two rational numbers `r1 = a1/b1` and `r2 = a2/b2` is `r1 + r2 = a1/b1 + a2/b2 = (a1 * b2 + a2 * b1) / (b1 * b2)`.
+
+The difference of two rational numbers `r1 = a1/b1` and `r2 = a2/b2` is `r1 - r2 = a1/b1 - a2/b2 = (a1 * b2 - a2 * b1) / (b1 * b2)`.
+
+The product (multiplication) of two rational numbers `r1 = a1/b1` and `r2 = a2/b2` is `r1 * r2 = (a1 * a2) / (b1 * b2)`.
+
+Dividing a rational number `r1 = a1/b1` by another `r2 = a2/b2` is `r1 / r2 = (a1 * b2) / (a2 * b1)` if `a2 * b1` is not zero.
+
+Exponentiation of a rational number `r = a/b` to a non-negative integer power `n` is `r^n = (a^n)/(b^n)`.
+
+Exponentiation of a rational number `r = a/b` to a negative integer power `n` is `r^n = (b^m)/(a^m)`, where `m = |n|`.
+
+Exponentiation of a rational number `r = a/b` to a real (floating-point) number `x` is the quotient `(a^x)/(b^x)`, which is a real number.
+
+Exponentiation of a real number `x` to a rational number `r = a/b` is `x^(a/b) = root(x^a, b)`, where `root(p, q)` is the `q`th root of `p`.
+
+Implement the following operations:
+ - addition, subtraction, multiplication and division of two rational numbers,
+ - absolute value, exponentiation of a given rational number to an integer power, exponentiation of a given rational number to a real (floating-point) power, exponentiation of a real number to a rational number.
+
+Your implementation of rational numbers should always be reduced to lowest terms. For example, `4/4` should reduce to `1/1`, `30/60` should reduce to `1/2`, `12/8` should reduce to `3/2`, etc. To reduce a rational number `r = a/b`, divide `a` and `b` by the greatest common divisor (gcd) of `a` and `b`. So, for example, `gcd(12, 8) = 4`, so `r = 12/8` can be reduced to `(12/4)/(8/4) = 3/2`.
+
+Assume that the programming language you are using does not have an implementation of rational numbers.
+",22
+react,"Implement a basic reactive system.
+
+Reactive programming is a programming paradigm that focuses on how values
+are computed in terms of each other to allow a change to one value to
+automatically propagate to other values, like in a spreadsheet.
+
+Implement a basic reactive system with cells with settable values (""input""
+cells) and cells with values computed in terms of other cells (""compute""
+cells). Implement updates so that when an input value is changed, values
+propagate to reach a new stable system state.
+
+In addition, compute cells should allow for registering change notification
+callbacks.  Call a cell’s callbacks when the cell’s value in a new stable
+state has changed from the previous stable state.
+",14
+rectangles,"Count the rectangles in an ASCII diagram like the one below.
+
+```text
+   +--+
+  ++  |
++-++--+
+|  |  |
++--+--+
+```
+
+The above diagram contains 6 rectangles:
+
+```text
+
+
++-----+
+|     |
++-----+
+```
+
+```text
+   +--+
+   |  |
+   |  |
+   |  |
+   +--+
+```
+
+```text
+   +--+
+   |  |
+   +--+
+
+
+```
+
+```text
+
+
+   +--+
+   |  |
+   +--+
+```
+
+```text
+
+
++--+
+|  |
++--+
+```
+
+```text
+
+  ++
+  ++
+
+
+```
+
+You may assume that the input is always a proper rectangle (i.e. the length of
+every line equals the length of the first line).
+",13
+rest-api,"Implement a RESTful API for tracking IOUs.
+
+Four roommates have a habit of borrowing money from each other frequently, and have trouble remembering who owes whom, and how much.
+
+Your task is to implement a simple [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer) that receives [IOU](https://en.wikipedia.org/wiki/IOU)s as POST requests, and can deliver specified summary information via GET requests.
+
+### API Specification
+
+#### User object
+```json
+{
+  ""name"": ""Adam"",
+  ""owes"": {
+    ""Bob"": 12.0,
+    ""Chuck"": 4.0,
+    ""Dan"": 9.5
+  },
+  ""owed_by"": {
+    ""Bob"": 6.5,
+    ""Dan"": 2.75,
+  },
+  ""balance"": ""<(total owed by other users) - (total owed to other users)>""
+}
+```
+
+#### Methods
+
+| Description | HTTP Method | URL | Payload Format | Response w/o Payload | Response w/ Payload |
+| --- | --- | --- | --- | --- | --- |
+| List of user information | GET | /users | `{""users"":[""Adam"",""Bob""]}` | `{""users"":<List of all User objects>}` | {""users"":\<List of User objects for \<users\>\>} |
+| Create user | POST | /add | {""user"":\<name of new user (unique)} | N/A | \<User object for new user\> |
+| Create IOU | POST | /iou | {""lender"":\<name of lender\>,""borrower"":\<name of borrower>,""amount"":5.25} | N/A | {""users"":\<updated User objects for \<lender\> and \<borrower\>\>} |
+
+### Other Resources:
+- https://restfulapi.net/
+- Example RESTful APIs
+  - [GitHub](https://developer.github.com/v3/)
+  - [Reddit](https://www.reddit.com/dev/api/)",8
+reverse-string,"Reverse a string
+
+For example:
+input: ""cool""
+output: ""looc""
+",5
+rna-transcription,"Given a DNA strand, return its RNA complement (per RNA transcription).
+
+Both DNA and RNA strands are a sequence of nucleotides.
+
+The four nucleotides found in DNA are adenine (**A**), cytosine (**C**),
+guanine (**G**) and thymine (**T**).
+
+The four nucleotides found in RNA are adenine (**A**), cytosine (**C**),
+guanine (**G**) and uracil (**U**).
+
+Given a DNA strand, its transcribed RNA strand is formed by replacing
+each nucleotide with its complement:
+
+* `G` -> `C`
+* `C` -> `G`
+* `T` -> `A`
+* `A` -> `U`
+",6
+robot-simulator,"Write a robot simulator.
+
+A robot factory's test facility needs a program to verify robot movements.
+
+The robots have three possible movements:
+
+- turn right
+- turn left
+- advance
+
+Robots are placed on a hypothetical infinite grid, facing a particular
+direction (north, east, south, or west) at a set of {x,y} coordinates,
+e.g., {3,8}, with coordinates increasing to the north and east.
+
+The robot then receives a number of instructions, at which point the
+testing facility verifies the robot's new position, and in which
+direction it is pointing.
+
+- The letter-string ""RAALAL"" means:
+  - Turn right
+  - Advance twice
+  - Turn left
+  - Advance once
+  - Turn left yet again
+- Say a robot starts at {7, 3} facing north. Then running this stream
+  of instructions should leave it at {9, 4} facing west.
+",20
+roman-numerals,"Write a function to convert from normal numbers to Roman Numerals.
+
+The Romans were a clever bunch. They conquered most of Europe and ruled
+it for hundreds of years. They invented concrete and straight roads and
+even bikinis. One thing they never discovered though was the number
+zero. This made writing and dating extensive histories of their exploits
+slightly more challenging, but the system of numbers they came up with
+is still in use today. For example the BBC uses Roman numerals to date
+their programmes.
+
+The Romans wrote numbers using letters - I, V, X, L, C, D, M. (notice
+these letters have lots of straight lines and are hence easy to hack
+into stone tablets).
+
+```text
+ 1  => I
+10  => X
+ 7  => VII
+```
+
+There is no need to be able to convert numbers larger than about 3000.
+(The Romans themselves didn't tend to go any higher)
+
+Wikipedia says: Modern Roman numerals ... are written by expressing each
+digit separately starting with the left most digit and skipping any
+digit with a value of zero.
+
+To see this in practice, consider the example of 1990.
+
+In Roman numerals 1990 is MCMXC:
+
+1000=M
+900=CM
+90=XC
+
+2008 is written as MMVIII:
+
+2000=MM
+8=VIII
+
+See also: http://www.novaroma.org/via_romana/numbers.html
+",19
+rotational-cipher,"Create an implementation of the rotational cipher, also sometimes called the Caesar cipher.
+
+The Caesar cipher is a simple shift cipher that relies on
+transposing all the letters in the alphabet using an integer key
+between `0` and `26`. Using a key of `0` or `26` will always yield
+the same output due to modular arithmetic. The letter is shifted
+for as many values as the value of the key.
+
+The general notation for rotational ciphers is `ROT + <key>`.
+The most commonly used rotational cipher is `ROT13`.
+
+A `ROT13` on the Latin alphabet would be as follows:
+
+```text
+Plain:  abcdefghijklmnopqrstuvwxyz
+Cipher: nopqrstuvwxyzabcdefghijklm
+```
+
+It is stronger than the Atbash cipher because it has 27 possible keys, and 25 usable keys.
+
+Ciphertext is written out in the same formatting as the input including spaces and punctuation.
+
+## Examples
+
+- ROT5  `omg` gives `trl`
+- ROT0  `c` gives `c`
+- ROT26 `Cool` gives `Cool`
+- ROT13 `The quick brown fox jumps over the lazy dog.` gives `Gur dhvpx oebja sbk whzcf bire gur ynml qbt.`
+- ROT13 `Gur dhvpx oebja sbk whzcf bire gur ynml qbt.` gives `The quick brown fox jumps over the lazy dog.`
+",10
+run-length-encoding,"Implement run-length encoding and decoding.
+
+Run-length encoding (RLE) is a simple form of data compression, where runs
+(consecutive data elements) are replaced by just one data value and count.
+
+For example we can represent the original 53 characters with only 13.
+
+```text
+""WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB""  ->  ""12WB12W3B24WB""
+```
+
+RLE allows the original data to be perfectly reconstructed from
+the compressed data, which makes it a lossless data compression.
+
+```text
+""AABCCCDEEEE""  ->  ""2AB3CD4E""  ->  ""AABCCCDEEEE""
+```
+
+For simplicity, you can assume that the unencoded string will only contain
+the letters A through Z (either lower or upper case) and whitespace. This way
+data to be encoded will never contain any numbers and numbers inside data to
+be decoded always represent the count for the following character.
+",13
+saddle-points,"Detect saddle points in a matrix.
+
+So say you have a matrix like so:
+
+```text
+    0  1  2
+  |---------
+0 | 9  8  7
+1 | 5  3  2     <--- saddle point at (1,0)
+2 | 6  6  7
+```
+
+It has a saddle point at (1, 0).
+
+It's called a ""saddle point"" because it is greater than or equal to
+every element in its row and less than or equal to every element in
+its column.
+
+A matrix may have zero or more saddle points.
+
+Your code should be able to provide the (possibly empty) list of all the
+saddle points for any given matrix.
+
+The matrix can have a different number of rows and columns (Non square).
+
+Note that you may find other definitions of matrix saddle points online,
+but the tests for this exercise follow the above unambiguous definition.
+",9
+say,"Given a number from 0 to 999,999,999,999, spell out that number in English.
+
+## Step 1
+
+Handle the basic case of 0 through 99.
+
+If the input to the program is `22`, then the output should be
+`'twenty-two'`.
+
+Your program should complain loudly if given a number outside the
+blessed range.
+
+Some good test cases for this program are:
+
+- 0
+- 14
+- 50
+- 98
+- -1
+- 100
+
+### Extension
+
+If you're on a Mac, shell out to Mac OS X's `say` program to talk out
+loud. If you're on Linux or Windows, eSpeakNG may be available with the command `espeak`.
+
+## Step 2
+
+Implement breaking a number up into chunks of thousands.
+
+So `1234567890` should yield a list like 1, 234, 567, and 890, while the
+far simpler `1000` should yield just 1 and 0.
+
+The program must also report any values that are out of range.
+
+## Step 3
+
+Now handle inserting the appropriate scale word between those chunks.
+
+So `1234567890` should yield `'1 billion 234 million 567 thousand 890'`
+
+The program must also report any values that are out of range.  It's
+fine to stop at ""trillion"".
+
+## Step 4
+
+Put it all together to get nothing but plain English.
+
+`12345` should give `twelve thousand three hundred forty-five`.
+
+The program must also report any values that are out of range.
+
+### Extensions
+
+Use _and_ (correctly) when spelling out the number in English:
+
+- 14 becomes ""fourteen"".
+- 100 becomes ""one hundred"".
+- 120 becomes ""one hundred and twenty"".
+- 1002 becomes ""one thousand and two"".
+- 1323 becomes ""one thousand three hundred and twenty-three"".
+",15
+scale-generator,"Given a tonic, or starting note, and a set of intervals, generate
+the musical scale starting with the tonic and following the
+specified interval pattern.
+
+Scales in Western music are based on the chromatic (12-note) scale. This
+scale can be expressed as the following group of pitches:
+
+A, A#, B, C, C#, D, D#, E, F, F#, G, G#
+
+A given sharp note (indicated by a #) can also be expressed as the flat
+of the note above it (indicated by a b) so the chromatic scale can also be
+written like this:
+
+A, Bb, B, C, Db, D, Eb, E, F, Gb, G, Ab
+
+The major and minor scale and modes are subsets of this twelve-pitch
+collection. They have seven pitches, and are called diatonic scales.
+The collection of notes in these scales is written with either sharps or
+flats, depending on the tonic. Here is a list of which are which:
+
+No Sharps or Flats:
+C major
+a minor
+
+Use Sharps:
+G, D, A, E, B, F# major
+e, b, f#, c#, g#, d# minor
+
+Use Flats:
+F, Bb, Eb, Ab, Db, Gb major
+d, g, c, f, bb, eb minor
+
+The diatonic scales, and all other scales that derive from the
+chromatic scale, are built upon intervals. An interval is the space
+between two pitches.
+
+The simplest interval is between two adjacent notes, and is called a
+""half step"", or ""minor second"" (sometimes written as a lower-case ""m"").
+The interval between two notes that have an interceding note is called
+a ""whole step"" or ""major second"" (written as an upper-case ""M""). The
+diatonic scales are built using only these two intervals between
+adjacent notes.
+
+Non-diatonic scales can contain other intervals.  An ""augmented first""
+interval, written ""A"", has two interceding notes (e.g., from A to C or
+Db to E). There are also smaller and larger intervals, but they will not
+figure into this exercise.
+",17
+scrabble-score,"Given a word, compute the scrabble score for that word.
+
+## Letter Values
+
+You'll need these:
+
+```text
+Letter                           Value
+A, E, I, O, U, L, N, R, S, T       1
+D, G                               2
+B, C, M, P                         3
+F, H, V, W, Y                      4
+K                                  5
+J, X                               8
+Q, Z                               10
+```
+
+## Examples
+
+""cabbage"" should be scored as worth 14 points:
+
+- 3 points for C
+- 1 point for A, twice
+- 3 points for B, twice
+- 2 points for G
+- 1 point for E
+
+And to total:
+
+- `3 + 2*1 + 2*3 + 2 + 1`
+- = `3 + 2 + 6 + 3`
+- = `5 + 9`
+- = 14
+
+## Extensions
+
+- You can play a double or a triple letter.
+- You can play a double or a triple word.
+",11
+secret-handshake,"> There are 10 types of people in the world: Those who understand
+> binary, and those who don't.
+
+You and your fellow cohort of those in the ""know"" when it comes to
+binary decide to come up with a secret ""handshake"".
+
+```text
+1 = wink
+10 = double blink
+100 = close your eyes
+1000 = jump
+
+
+10000 = Reverse the order of the operations in the secret handshake.
+```
+
+Given a decimal number, convert it to the appropriate sequence of events for a secret handshake.
+
+Here's a couple of examples:
+
+Given the input 3, the function would return the array
+[""wink"", ""double blink""] because 3 is 11 in binary.
+
+Given the input 19, the function would return the array
+[""double blink"", ""wink""] because 19 is 10011 in binary.
+Notice that the addition of 16 (10000 in binary)
+has caused the array to be reversed.
+",11
+series,"Given a string of digits, output all the contiguous substrings of length `n` in
+that string in the order that they appear.
+
+For example, the string ""49142"" has the following 3-digit series:
+
+- ""491""
+- ""914""
+- ""142""
+
+And the following 4-digit series:
+
+- ""4914""
+- ""9142""
+
+And if you ask for a 6-digit series from a 5-digit string, you deserve
+whatever you get.
+
+Note that these series are only required to occupy *adjacent positions*
+in the input; the digits need not be *numerically consecutive*.
+",10
+sgf-parsing,"Parsing a Smart Game Format string.
+
+[SGF](https://en.wikipedia.org/wiki/Smart_Game_Format) is a standard format for
+storing board game files, in particular go.
+
+SGF is a fairly simple format. An SGF file usually contains a single
+tree of nodes where each node is a property list. The property list
+contains key value pairs, each key can only occur once but may have
+multiple values.
+
+An SGF file may look like this:
+
+```text
+(;FF[4]C[root]SZ[19];B[aa];W[ab])
+```
+
+This is a tree with three nodes:
+
+- The top level node has two properties: FF\[4\] (key = ""FF"", value =
+  ""4"") and C\[root\](key = ""C"", value = ""root""). (FF indicates the
+  version of SGF and C is a comment.)
+  - The top level node has a single child which has a single property:
+    B\[aa\].  (Black plays on the point encoded as ""aa"", which is the
+    1-1 point (which is a stupid place to play)).
+    - The B\[aa\] node has a single child which has a single property:
+      W\[ab\].
+
+As you can imagine an SGF file contains a lot of nodes with a single
+child, which is why there's a shorthand for it.
+
+SGF can encode variations of play. Go players do a lot of backtracking
+in their reviews (let's try this, doesn't work, let's try that) and SGF
+supports variations of play sequences. For example:
+
+```text
+(;FF[4](;B[aa];W[ab])(;B[dd];W[ee]))
+```
+
+Here the root node has two variations. The first (which by convention
+indicates what's actually played) is where black plays on 1-1. Black was
+sent this file by his teacher who pointed out a more sensible play in
+the second child of the root node: `B[dd]` (4-4 point, a very standard
+opening to take the corner).
+
+A key can have multiple values associated with it. For example:
+
+```text
+(;FF[4];AB[aa][ab][ba])
+```
+
+Here `AB` (add black) is used to add three black stones to the board.
+
+There are a few more complexities to SGF (and parsing in general), which
+you can mostly ignore. You should assume that the input is encoded in
+UTF-8, the tests won't contain a charset property, so don't worry about
+that. Furthermore you may assume that all newlines are unix style (`\n`,
+no `\r` or `\r\n` will be in the tests) and that no optional whitespace
+between properties, nodes, etc will be in the tests.
+
+The exercise will have you parse an SGF string and return a tree
+structure of properties. You do not need to encode knowledge about the
+data types of properties, just use the rules for the
+[text](http://www.red-bean.com/sgf/sgf4.html#text) type everywhere.
+",12
+sieve,"Use the Sieve of Eratosthenes to find all the primes from 2 up to a given
+number.
+
+The Sieve of Eratosthenes is a simple, ancient algorithm for finding all
+prime numbers up to any given limit. It does so by iteratively marking as
+composite (i.e. not prime) the multiples of each prime, starting with the
+multiples of 2. It does not use any division or remainder operation.
+
+Create your range, starting at two and continuing up to and including the given limit. (i.e. [2, limit])
+
+The algorithm consists of repeating the following over and over:
+
+- take the next available unmarked number in your list (it is prime)
+- mark all the multiples of that number (they are not prime)
+
+Repeat until you have processed each number in your range.
+
+When the algorithm terminates, all the numbers in the list that have not
+been marked are prime.
+
+The wikipedia article has a useful graphic that explains the algorithm:
+https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+
+Notice that this is a very specific algorithm, and the tests don't check
+that you've implemented the algorithm, only that you've come up with the
+correct list of primes. A good first test is to check that you do not use
+division or remainder operations (div, /, mod or % depending on the
+language).
+",5
+simple-cipher,"Implement a simple shift cipher like Caesar and a more secure substitution cipher.
+
+## Step 1
+
+""If he had anything confidential to say, he wrote it in cipher, that is,
+by so changing the order of the letters of the alphabet, that not a word
+could be made out. If anyone wishes to decipher these, and get at their
+meaning, he must substitute the fourth letter of the alphabet, namely D,
+for A, and so with the others.""
+—Suetonius, Life of Julius Caesar
+
+Ciphers are very straight-forward algorithms that allow us to render
+text less readable while still allowing easy deciphering. They are
+vulnerable to many forms of cryptoanalysis, but we are lucky that
+generally our little sisters are not cryptoanalysts.
+
+The Caesar Cipher was used for some messages from Julius Caesar that
+were sent afield. Now Caesar knew that the cipher wasn't very good, but
+he had one ally in that respect: almost nobody could read well. So even
+being a couple letters off was sufficient so that people couldn't
+recognize the few words that they did know.
+
+Your task is to create a simple shift cipher like the Caesar Cipher.
+This image is a great example of the Caesar Cipher:
+
+![Caesar Cipher][1]
+
+For example:
+
+Giving ""iamapandabear"" as input to the encode function returns the cipher ""ldpdsdqgdehdu"". Obscure enough to keep our message secret in transit.
+
+When ""ldpdsdqgdehdu"" is put into the decode function it would return
+the original ""iamapandabear"" letting your friend read your original
+message.
+
+## Step 2
+
+Shift ciphers are no fun though when your kid sister figures it out. Try
+amending the code to allow us to specify a key and use that for the
+shift distance. This is called a substitution cipher.
+
+Here's an example:
+
+Given the key ""aaaaaaaaaaaaaaaaaa"", encoding the string ""iamapandabear""
+would return the original ""iamapandabear"".
+
+Given the key ""ddddddddddddddddd"", encoding our string ""iamapandabear""
+would return the obscured ""ldpdsdqgdehdu""
+
+In the example above, we've set a = 0 for the key value. So when the
+plaintext is added to the key, we end up with the same message coming
+out. So ""aaaa"" is not an ideal key. But if we set the key to ""dddd"", we
+would get the same thing as the Caesar Cipher.
+
+## Step 3
+
+The weakest link in any cipher is the human being. Let's make your
+substitution cipher a little more fault tolerant by providing a source
+of randomness and ensuring that the key contains only lowercase letters.
+
+If someone doesn't submit a key at all, generate a truly random key of
+at least 100 characters in length.
+
+If the key submitted is not composed only of lowercase letters, your
+solution should handle the error in a language-appropriate way.
+
+## Extensions
+
+Shift ciphers work by making the text slightly odd, but are vulnerable
+to frequency analysis. Substitution ciphers help that, but are still
+very vulnerable when the key is short or if spaces are preserved. Later
+on you'll see one solution to this problem in the exercise
+""crypto-square"".
+
+If you want to go farther in this field, the questions begin to be about
+how we can exchange keys in a secure way. Take a look at [Diffie-Hellman
+on Wikipedia][dh] for one of the first implementations of this scheme.
+
+[1]: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Caesar_cipher_left_shift_of_3.svg/320px-Caesar_cipher_left_shift_of_3.svg.png
+[dh]: http://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange
+",14
+space-age,"Given an age in seconds, calculate how old someone would be on:
+
+   - Earth: orbital period 365.25 Earth days, or 31557600 seconds
+   - Mercury: orbital period 0.2408467 Earth years
+   - Venus: orbital period 0.61519726 Earth years
+   - Mars: orbital period 1.8808158 Earth years
+   - Jupiter: orbital period 11.862615 Earth years
+   - Saturn: orbital period 29.447498 Earth years
+   - Uranus: orbital period 84.016846 Earth years
+   - Neptune: orbital period 164.79132 Earth years
+
+So if you were told someone were 1,000,000,000 seconds old, you should
+be able to say that they're 31.69 Earth-years old.
+
+If you're wondering why Pluto didn't make the cut, go watch [this
+youtube video](http://www.youtube.com/watch?v=Z_2gbGXzFbs).
+",8
+spiral-matrix,"Given the size, return a square matrix of numbers in spiral order.
+
+The matrix should be filled with natural numbers, starting from 1
+in the top-left corner, increasing in an inward, clockwise spiral order,
+like these examples:
+
+###### Spiral matrix of size 3
+
+```text
+1 2 3
+8 9 4
+7 6 5
+```
+
+###### Spiral matrix of size 4
+
+```text
+ 1  2  3 4
+12 13 14 5
+11 16 15 6
+10  9  8 7
+```
+",6
+sublist,"Given two lists determine if the first list is contained within the second
+list, if the second list is contained within the first list, if both lists are
+contained within each other or if none of these are true.
+
+Specifically, a list A is a sublist of list B if by dropping 0 or more elements
+from the front of B and 0 or more elements from the back of B you get a list
+that's completely equal to A.
+
+Examples:
+
+ * A = [1, 2, 3], B = [1, 2, 3, 4, 5], A is a sublist of B
+ * A = [3, 4, 5], B = [1, 2, 3, 4, 5], A is a sublist of B
+ * A = [3, 4], B = [1, 2, 3, 4, 5], A is a sublist of B
+ * A = [1, 2, 3], B = [1, 2, 3], A is equal to B
+ * A = [1, 2, 3, 4, 5], B = [2, 3, 4], A is a superlist of B
+ * A = [1, 2, 4], B = [1, 2, 3, 4, 5], A is not a superlist of, sublist of or equal to B
+",17
+sum-of-multiples,"Given a number, find the sum of all the unique multiples of particular numbers up to
+but not including that number.
+
+If we list all the natural numbers below 20 that are multiples of 3 or 5,
+we get 3, 5, 6, 9, 10, 12, 15, and 18.
+
+The sum of these multiples is 78.
+",13
+tournament,"Tally the results of a small football competition.
+
+Based on an input file containing which team played against which and what the
+outcome was, create a file with a table like this:
+
+```text
+Team                           | MP |  W |  D |  L |  P
+Devastating Donkeys            |  3 |  2 |  1 |  0 |  7
+Allegoric Alaskans             |  3 |  2 |  0 |  1 |  6
+Blithering Badgers             |  3 |  1 |  0 |  2 |  3
+Courageous Californians        |  3 |  0 |  1 |  2 |  1
+```
+
+What do those abbreviations mean?
+
+- MP: Matches Played
+- W: Matches Won
+- D: Matches Drawn (Tied)
+- L: Matches Lost
+- P: Points
+
+A win earns a team 3 points. A draw earns 1. A loss earns 0.
+
+The outcome should be ordered by points, descending. In case of a tie, teams are ordered alphabetically.
+
+###
+
+Input
+
+Your tallying program will receive input that looks like:
+
+```text
+Allegoric Alaskans;Blithering Badgers;win
+Devastating Donkeys;Courageous Californians;draw
+Devastating Donkeys;Allegoric Alaskans;win
+Courageous Californians;Blithering Badgers;loss
+Blithering Badgers;Devastating Donkeys;loss
+Allegoric Alaskans;Courageous Californians;win
+```
+
+The result of the match refers to the first team listed. So this line
+
+```text
+Allegoric Alaskans;Blithering Badgers;win
+```
+
+Means that the Allegoric Alaskans beat the Blithering Badgers.
+
+This line:
+
+```text
+Courageous Californians;Blithering Badgers;loss
+```
+
+Means that the Blithering Badgers beat the Courageous Californians.
+
+And this line:
+
+```text
+Devastating Donkeys;Courageous Californians;draw
+```
+
+Means that the Devastating Donkeys and Courageous Californians tied.
+",11
+transpose,"Given an input text output it transposed.
+
+Roughly explained, the transpose of a matrix:
+
+```text
+ABC
+DEF
+```
+
+is given by:
+
+```text
+AD
+BE
+CF
+```
+
+Rows become columns and columns become rows. See <https://en.wikipedia.org/wiki/Transpose>.
+
+If the input has rows of different lengths, this is to be solved as follows:
+
+- Pad to the left with spaces.
+- Don't pad to the right.
+
+Therefore, transposing this matrix:
+
+```text
+ABC
+DE
+```
+
+results in:
+
+```text
+AD
+BE
+C
+```
+
+And transposing:
+
+```text
+AB
+DEF
+```
+
+results in:
+
+```text
+AD
+BE
+ F
+```
+
+In general, all characters from the input should also be present in the transposed output.
+That means that if a column in the input text contains only spaces on its bottom-most row(s),
+the corresponding output row should contain the spaces in its right-most column(s).
+",11
+triangle,"Determine if a triangle is equilateral, isosceles, or scalene.
+
+An _equilateral_ triangle has all three sides the same length.
+
+An _isosceles_ triangle has at least two sides the same length. (It is sometimes
+specified as having exactly two sides the same length, but for the purposes of
+this exercise we'll say at least two.)
+
+A _scalene_ triangle has all sides of different lengths.
+
+## Note
+
+For a shape to be a triangle at all, all sides have to be of length > 0, and
+the sum of the lengths of any two sides must be greater than or equal to the
+length of the third side. See [Triangle Inequality](https://en.wikipedia.org/wiki/Triangle_inequality).
+
+## Dig Deeper
+
+The case where the sum of the lengths of two sides _equals_ that of the
+third is known as a _degenerate_ triangle - it has zero area and looks like
+a single line. Feel free to add your own code/tests to check for degenerate triangles.
+",17
+trinary,"Convert a trinary number, represented as a string (e.g. '102012'), to its
+decimal equivalent using first principles.
+
+The program should consider strings specifying an invalid trinary as the
+value 0.
+
+Trinary numbers contain three symbols: 0, 1, and 2.
+
+The last place in a trinary number is the 1's place. The second to last
+is the 3's place, the third to last is the 9's place, etc.
+
+```shell
+# ""102012""
+    1       0       2       0       1       2    # the number
+1*3^5 + 0*3^4 + 2*3^3 + 0*3^2 + 1*3^1 + 2*3^0    # the value
+  243 +     0 +    54 +     0 +     3 +     2 =  302
+```
+
+If your language provides a method in the standard library to perform the
+conversion, pretend it doesn't exist and implement it yourself.
+",11
+twelve-days,"Output the lyrics to 'The Twelve Days of Christmas'.
+
+```text
+On the first day of Christmas my true love gave to me, a Partridge in a Pear Tree.
+
+On the second day of Christmas my true love gave to me, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the third day of Christmas my true love gave to me, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the fourth day of Christmas my true love gave to me, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the fifth day of Christmas my true love gave to me, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the sixth day of Christmas my true love gave to me, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the seventh day of Christmas my true love gave to me, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the eighth day of Christmas my true love gave to me, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the ninth day of Christmas my true love gave to me, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the tenth day of Christmas my true love gave to me, ten Lords-a-Leaping, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the eleventh day of Christmas my true love gave to me, eleven Pipers Piping, ten Lords-a-Leaping, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+
+On the twelfth day of Christmas my true love gave to me, twelve Drummers Drumming, eleven Pipers Piping, ten Lords-a-Leaping, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.
+```
+",15
+two-bucket,"Given two buckets of different size, demonstrate how to measure an exact number of liters by strategically transferring liters of fluid between the buckets.
+
+Since this mathematical problem is fairly subject to interpretation / individual approach, the tests have been written specifically to expect one overarching solution.
+
+To help, the tests provide you with which bucket to fill first. That means, when starting with the larger bucket full, you are NOT allowed at any point to have the smaller bucket full and the larger bucket empty (aka, the opposite starting point); that would defeat the purpose of comparing both approaches!
+
+Your program will take as input:
+- the size of bucket one
+- the size of bucket two
+- the desired number of liters to reach
+- which bucket to fill first, either bucket one or bucket two
+
+Your program should determine:
+- the total number of ""moves"" it should take to reach the desired number of liters, including the first fill
+- which bucket should end up with the desired number of liters (let's say this is bucket A) - either bucket one or bucket two
+- how many liters are left in the other bucket (bucket B)
+
+Note: any time a change is made to either or both buckets counts as one (1) move.
+
+Example:
+Bucket one can hold up to 7 liters, and bucket two can hold up to 11 liters. Let's say bucket one, at a given step, is holding 7 liters, and bucket two is holding 8 liters (7,8). If you empty bucket one and make no change to bucket two, leaving you with 0 liters and 8 liters respectively (0,8), that counts as one ""move"". Instead, if you had poured from bucket one into bucket two until bucket two was full, leaving you with 4 liters in bucket one and 11 liters in bucket two (4,11), that would count as only one ""move"" as well.
+
+To conclude, the only valid moves are:
+- pouring from one bucket to another
+- emptying one bucket and doing nothing to the other
+- filling one bucket and doing nothing to the other
+
+Written with <3 at [Fullstack Academy](http://www.fullstackacademy.com/) by Lindsay Levine.
+",6
+two-fer,"`Two-fer` or `2-fer` is short for two for one. One for you and one for me.
+
+```text
+""One for X, one for me.""
+```
+
+When X is a name or ""you"".
+
+If the given name is ""Alice"", the result should be ""One for Alice, one for me.""
+If no name is given, the result should be ""One for you, one for me.""
+
+",3
+variable-length-quantity,"Implement variable length quantity encoding and decoding.
+
+The goal of this exercise is to implement [VLQ](https://en.wikipedia.org/wiki/Variable-length_quantity) encoding/decoding.
+
+In short, the goal of this encoding is to encode integer values in a way that would save bytes.
+Only the first 7 bits of each byte is significant (right-justified; sort of like an ASCII byte).
+So, if you have a 32-bit value, you have to unpack it into a series of 7-bit bytes.
+Of course, you will have a variable number of bytes depending upon your integer.
+To indicate which is the last byte of the series, you leave bit #7 clear.
+In all of the preceding bytes, you set bit #7.
+
+So, if an integer is between `0-127`, it can be represented as one byte.
+Although VLQ can deal with numbers of arbitrary sizes, for this exercise we will restrict ourselves to only numbers that fit in a 32-bit unsigned integer.
+Here are examples of integers as 32-bit values, and the variable length quantities that they translate to:
+
+```text
+ NUMBER        VARIABLE QUANTITY
+00000000              00
+00000040              40
+0000007F              7F
+00000080             81 00
+00002000             C0 00
+00003FFF             FF 7F
+00004000           81 80 00
+00100000           C0 80 00
+001FFFFF           FF FF 7F
+00200000          81 80 80 00
+08000000          C0 80 80 00
+0FFFFFFF          FF FF FF 7F
+```
+",26
+word-count,"Given a phrase, count the occurrences of each word in that phrase.
+
+For example for the input `""olly olly in come free""`
+
+```text
+olly: 2
+in: 1
+come: 1
+free: 1
+```
+",11
+word-search,"In word search puzzles you get a square of letters and have to find specific
+words in them.
+
+For example:
+
+```text
+jefblpepre
+camdcimgtc
+oivokprjsm
+pbwasqroua
+rixilelhrs
+wolcqlirpc
+screeaumgr
+alxhpburyi
+jalaycalmp
+clojurermt
+```
+
+There are several programming languages hidden in the above square.
+
+Words can be hidden in all kinds of directions: left-to-right, right-to-left,
+vertical and diagonal.
+
+Given a puzzle and a list of words return the location of the first and last
+letter of each word.
+",20
+wordy,"Parse and evaluate simple math word problems returning the answer as an integer.
+
+## Iteration 1 — Addition
+
+Add two numbers together.
+
+> What is 5 plus 13?
+
+Evaluates to 18.
+
+Handle large numbers and negative numbers.
+
+## Iteration 2 — Subtraction, Multiplication and Division
+
+Now, perform the other three operations.
+
+> What is 7 minus 5?
+
+2
+
+> What is 6 multiplied by 4?
+
+24
+
+> What is 25 divided by 5?
+
+5
+
+## Iteration 3 — Multiple Operations
+
+Handle a set of operations, in sequence.
+
+Since these are verbal word problems, evaluate the expression from
+left-to-right, _ignoring the typical order of operations._
+
+> What is 5 plus 13 plus 6?
+
+24
+
+> What is 3 plus 2 multiplied by 3?
+
+15  (i.e. not 9)
+
+## Bonus — Exponentials
+
+If you'd like, handle exponentials.
+
+> What is 2 raised to the 5th power?
+
+32
+",16
+yacht,"# Score a single throw of dice in *Yacht*
+
+The dice game [Yacht](https://en.wikipedia.org/wiki/Yacht_(dice_game)) is from
+the same family as Poker Dice, Generala and particularly Yahtzee, of which it
+is a precursor. In the game, five dice are rolled and the result can be entered
+in any of twelve categories. The score of a throw of the dice depends on
+category chosen.
+
+## Scores in Yacht
+
+| Category | Score | Description | Example |
+| -------- | ----- | ----------- | ------- |
+| Ones | 1 × number of ones | Any combination	| 1 1 1 4 5 scores 3 |
+| Twos | 2 × number of twos | Any combination | 2 2 3 4 5 scores 4 |
+| Threes | 3 × number of threes | Any combination | 3 3 3 3 3 scores 15 |
+| Fours | 4 × number of fours | Any combination | 1 2 3 3 5 scores 0 |
+| Fives | 5 × number of fives| Any combination | 5 1 5 2 5 scores 15 |
+| Sixes | 6 × number of sixes | Any combination | 2 3 4 5 6 scores 6 |
+| Full House | Total of the dice | Three of one number and two of another | 3 3 3 5 5 scores 19 |
+| Four of a Kind | Total of the four dice | At least four dice showing the same face | 4 4 4 4 6 scores 16 |
+| Little Straight |  30 points | 1-2-3-4-5 | 1 2 3 4 5 scores 30 |
+| Big Straight | 30 points | 2-3-4-5-6 | 2 3 4 5 6 scores 30 |
+| Choice | Sum of the dice | Any combination | 2 3 3 4 6 scores 18 |
+| Yacht | 50 points | All five dice showing the same face | 4 4 4 4 4 scores 50 |
+
+If the dice do not satisfy the requirements of a category, the score is zero.
+If, for example, *Four Of A Kind* is entered in the *Yacht* category, zero
+points are scored. A *Yacht* scores zero if entered in the *Full House* category.
+
+## Task
+Given a list of values for five dice and a category, your solution should return
+the score of the dice for that category. If the dice do not satisfy the requirements
+of the category your solution should return 0. You can assume that five values
+will always be presented, and the value of each will be between one and six
+inclusively. You should not assume that the dice are ordered.
+",27
+zebra-puzzle,"Solve the zebra puzzle.
+
+1. There are five houses.
+2. The Englishman lives in the red house.
+3. The Spaniard owns the dog.
+4. Coffee is drunk in the green house.
+5. The Ukrainian drinks tea.
+6. The green house is immediately to the right of the ivory house.
+7. The Old Gold smoker owns snails.
+8. Kools are smoked in the yellow house.
+9. Milk is drunk in the middle house.
+10. The Norwegian lives in the first house.
+11. The man who smokes Chesterfields lives in the house next to the man with the fox.
+12. Kools are smoked in the house next to the house where the horse is kept.
+13. The Lucky Strike smoker drinks orange juice.
+14. The Japanese smokes Parliaments.
+15. The Norwegian lives next to the blue house.
+
+Each of the five houses is painted a different color, and their
+inhabitants are of different national extractions, own different pets,
+drink different beverages and smoke different brands of cigarettes.
+
+Which of the residents drinks water?
+Who owns the zebra?
+",2
+zipper,"Creating a zipper for a binary tree.
+
+[Zippers](https://en.wikipedia.org/wiki/Zipper_%28data_structure%29) are
+a purely functional way of navigating within a data structure and
+manipulating it.  They essentially contain a data structure and a
+pointer into that data structure (called the focus).
+
+For example given a rose tree (where each node contains a value and a
+list of child nodes) a zipper might support these operations:
+
+- `from_tree` (get a zipper out of a rose tree, the focus is on the root node)
+- `to_tree` (get the rose tree out of the zipper)
+- `value` (get the value of the focus node)
+- `prev` (move the focus to the previous child of the same parent,
+  returns a new zipper)
+- `next` (move the focus to the next child of the same parent, returns a
+  new zipper)
+- `up` (move the focus to the parent, returns a new zipper)
+- `set_value` (set the value of the focus node, returns a new zipper)
+- `insert_before` (insert a new subtree before the focus node, it
+  becomes the `prev` of the focus node, returns a new zipper)
+- `insert_after` (insert a new subtree after the focus node, it becomes
+  the `next` of the focus node, returns a new zipper)
+- `delete` (removes the focus node and all subtrees, focus moves to the
+  `next` node if possible otherwise to the `prev` node if possible,
+  otherwise to the parent node, returns a new zipper)
+",13

@@ -27,7 +27,6 @@ def get_problem_specification_data():
         return data
 
     problems["canonical_data"] = problems.exercise.apply(load_canonical_data)
-    problems["n_test_cases"] = problems.canonical_data.apply(lambda x: len(x["cases"]))
 
     def get_problem_description(problem):
         try:
@@ -40,6 +39,15 @@ def get_problem_specification_data():
 
     problems["description"] = problems.exercise.apply(get_problem_description)
 
+    def melt_test_group(test_group):
+        try:
+            cases = pandas.DataFrame(test_group.cases)
+        except Exception as e:
+            cases = pandas.DataFrame()
+        else:
+            cases["group_description"] = test_group.description
+        return cases
+
     def melt_test_cases(problem_spec):
         try:
             cases = pandas.DataFrame(problem_spec.canonical_data["cases"])
@@ -47,15 +55,20 @@ def get_problem_specification_data():
             cases = pandas.DataFrame()
         else:
             if "cases" in cases.columns:
-                cases = pandas.DataFrame()
-            else:
-                cases["exercise"] = problem_spec.exercise
+                # test cases are nested with test groups
+                cases = pandas.concat([melt_test_group(x) for x in cases.itertuples()], ignore_index=True, sort=True)
+            cases["exercise"] = problem_spec.exercise
         return cases
 
     test_cases = pandas.concat(
         [melt_test_cases(x) for x in problems.itertuples()], ignore_index=True, sort=True
-    )[["exercise", "description"]]
+    )[["exercise", "group_description", "description"]]
     del problems["canonical_data"]
+
+    n_test_cases = test_cases.groupby("exercise").size()
+    n_test_cases.name = "n_test_cases"
+    n_test_cases = n_test_cases.reset_index()
+    problems = problems.merge(n_test_cases)
 
     return dict(problems=problems, test_cases=test_cases)
 
