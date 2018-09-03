@@ -5,9 +5,23 @@ import json
 from pathlib import Path
 import github3
 import pandas
+import jinja2
 
+env_tmpl = jinja2.Template("""\
+export GITHUB_USERNAME={{ github_username }}
+export GITHUB_PASSWORD={{ github_password }}
+""")
 
-github = github3.login(os.environ["GITHUB_USERNAME"], os.environ["GITHUB_PASSWORD"])
+github_username = os.environ.get("GITHUB_USERNAME")
+github_password = os.environ.get("GITHUB_PASSWORD")
+
+if "GITHUB_USERNAME" not in os.environ or "GITHUB_PASSWORD" not in os.environ:
+    github_username = input("Enter your GitHub username: ")
+    github_password = input("Enter your GitHub password: ")
+    print("Writing .env")
+    open(".env", "w").write(env_tmpl.render(github_username=github_username, github_password=github_password))
+
+github = github3.login(github_username, github_password)
 
 
 def get_problem_specification_data():
