@@ -7,22 +7,6 @@ import github3
 import pandas
 import jinja2
 
-env_tmpl = jinja2.Template("""\
-export GITHUB_USERNAME={{ github_username }}
-export GITHUB_PASSWORD={{ github_password }}
-""")
-
-github_username = os.environ.get("GITHUB_USERNAME")
-github_password = os.environ.get("GITHUB_PASSWORD")
-
-if "GITHUB_USERNAME" not in os.environ or "GITHUB_PASSWORD" not in os.environ:
-    github_username = input("Enter your GitHub username: ")
-    github_password = input("Enter your GitHub password: ")
-    print("Writing .env")
-    open(".env", "w").write(env_tmpl.render(github_username=github_username, github_password=github_password))
-
-github = github3.login(github_username, github_password)
-
 
 def get_problem_specification_data():
     """Summarize information about problems from exercism/problem-specifications."""
@@ -48,7 +32,7 @@ def get_problem_specification_data():
         except github3.exceptions.NotFoundError:
             description = ""
         else:
-            description = contents.decoded.decode('utf-8')
+            description = contents.decoded.decode("utf-8")
         return description
 
     problems["description"] = problems.exercise.apply(get_problem_description)
@@ -70,12 +54,18 @@ def get_problem_specification_data():
         else:
             if "cases" in cases.columns:
                 # test cases are nested with test groups
-                cases = pandas.concat([melt_test_group(x) for x in cases.itertuples()], ignore_index=True, sort=True)
+                cases = pandas.concat(
+                    [melt_test_group(x) for x in cases.itertuples()],
+                    ignore_index=True,
+                    sort=True,
+                )
             cases["exercise"] = problem_spec.exercise
         return cases
 
     test_cases = pandas.concat(
-        [melt_test_cases(x) for x in problems.itertuples()], ignore_index=True, sort=True
+        [melt_test_cases(x) for x in problems.itertuples()],
+        ignore_index=True,
+        sort=True,
     )[["exercise", "group_description", "description"]]
     del problems["canonical_data"]
 
@@ -85,6 +75,10 @@ def get_problem_specification_data():
     problems = problems.merge(n_test_cases)
 
     return dict(problems=problems, test_cases=test_cases)
+
+
+def extract_test_cases_from_canonical_data(canonical_data):
+    return pandas.DataFrame(canonical_data["cases"])
 
 
 def get_exercise_data():
@@ -117,8 +111,13 @@ def get_exercise_data():
     def melt_topics(row):
         if not row.topics:
             return pandas.DataFrame()
-        return pandas.DataFrame({"exercise": row.exercise, "language": row.language, "topic": row.topics})
-    topics = pandas.concat([melt_topics(r) for r in data.itertuples()], ignore_index=True, sort=True)
+        return pandas.DataFrame(
+            {"exercise": row.exercise, "language": row.language, "topic": row.topics}
+        )
+
+    topics = pandas.concat(
+        [melt_topics(r) for r in data.itertuples()], ignore_index=True, sort=True
+    )
 
     return dict(exercises=exercises, topics=topics)
 
@@ -148,7 +147,7 @@ def list_problems():
 
 def print_problem_descriptions():
     repo = github.repository("exercism", "problem-specifications")
-    problems = [problem.strip() for problem in open('target-problems.txt')]
+    problems = [problem.strip() for problem in open("target-problems.txt")]
 
     descriptions_dir = Path("problem-descriptions")
     if not descriptions_dir.is_dir():
@@ -199,6 +198,28 @@ if __name__ == "__main__":
         "-a", "--all", action="store_true", help="run all download commands"
     )
 
+    env_tmpl = jinja2.Template(
+        """\
+    export GITHUB_USERNAME={{ github_username }}
+    export GITHUB_PASSWORD={{ github_password }}
+    """
+    )
+
+    github_username = os.environ.get("GITHUB_USERNAME")
+    github_password = os.environ.get("GITHUB_PASSWORD")
+
+    if "GITHUB_USERNAME" not in os.environ or "GITHUB_PASSWORD" not in os.environ:
+        github_username = input("Enter your GitHub username: ")
+        github_password = input("Enter your GitHub password: ")
+        print("Writing .env")
+        open(".env", "w").write(
+            env_tmpl.render(
+                github_username=github_username, github_password=github_password
+            )
+        )
+
+    github = github3.login(github_username, github_password)
+
     if not len(sys.argv) > 1:
         parser.print_help(sys.stderr)
         sys.exit(1)
@@ -222,5 +243,5 @@ if __name__ == "__main__":
         print_problem_descriptions()
 
     if args.all:
-      download_problem_specifications()
-      download_exercises()
+        download_problem_specifications()
+        download_exercises()
