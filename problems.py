@@ -14,84 +14,67 @@ def get_problem_specification_data():
     problems = pandas.DataFrame(
         {"exercise": [filename for filename, _ in repo.directory_contents("exercises")]}
     )
+    problems["canonical_data"] = problems.exercise.apply(load_canonical_data, repo=repo)
+    problems["description"] = problems.exercise.apply(get_problem_description, repo=repo)
 
-    def load_canonical_data(name):
-        try:
-            contents = repo.file_contents(f"exercises/{name}/canonical-data.json")
-        except github3.exceptions.NotFoundError:
-            data = {"cases": []}
-        else:
-            data = json.loads(contents.decoded.decode("utf-8"))
-        return data
+    test_cases = problems.canonical_data.apply(extract_test_cases_from_canonical_data)
 
-    problems["canonical_data"] = problems.exercise.apply(load_canonical_data)
+    # n_test_cases = test_cases.groupby("exercise").size()
+    # n_test_cases.name = "n_test_cases"
+    # n_test_cases = n_test_cases.reset_index()
+    # problems = problems.merge(n_test_cases)
 
-    def get_problem_description(problem):
-        try:
-            contents = repo.file_contents(f"exercises/{problem}/description.md")
-        except github3.exceptions.NotFoundError:
-            description = ""
-        else:
-            description = contents.decoded.decode("utf-8")
-        return description
-
-    problems["description"] = problems.exercise.apply(get_problem_description)
-
-    def melt_test_group(test_group):
-        try:
-            cases = pandas.DataFrame(test_group.cases)
-        except Exception as e:
-            cases = pandas.DataFrame()
-        else:
-            cases["group_description"] = test_group.description
-        return cases
-
-    def melt_test_cases(problem_spec):
-        try:
-            cases = pandas.DataFrame(problem_spec.canonical_data["cases"])
-        except Exception as e:
-            cases = pandas.DataFrame()
-        else:
-            if "cases" in cases.columns:
-                # test cases are nested with test groups
-                cases = pandas.concat(
-                    [melt_test_group(x) for x in cases.itertuples()],
-                    ignore_index=True,
-                    sort=True,
-                )
-            cases["exercise"] = problem_spec.exercise
-        return cases
-
-    test_cases = pandas.concat(
-        [melt_test_cases(x) for x in problems.itertuples()],
-        ignore_index=True,
-        sort=True,
-    )[["exercise", "group_description", "description"]]
-    del problems["canonical_data"]
-
-    n_test_cases = test_cases.groupby("exercise").size()
-    n_test_cases.name = "n_test_cases"
-    n_test_cases = n_test_cases.reset_index()
-    problems = problems.merge(n_test_cases)
-
+    problems["canonical_data"] = problems.canonical_data.apply(json.dumps)
     return dict(problems=problems, test_cases=test_cases)
 
 
-def extract_test_cases_from_canonical_data(canonical_data, group=""):
-    test_cases = []
-    for case in canonical_data["cases"]:
-        if "cases" in case:
-            # case is a test group
-            test_cases.append(extract_test_cases_from_canonical_data(case, group="group1"))
-        else:
-            test_cases.append(pandas.DataFrame({
-                "description": case["description"]
-            }, index=[0, ]))
-    test_cases = pandas.concat(test_cases, ignore_index=True)
-    if group:
-        test_cases[group] = canonical_data["description"]
+def load_canonical_data(name, repo):
+    try:
+        contents = repo.file_contents(f"exercises/{name}/canonical-data.json")
+    except github3.exceptions.NotFoundError:
+        data = {}
+    else:
+        data = json.loads(contents.decoded.decode("utf-8"))
+    return data
+
+
+def get_problem_description(problem, repo):
+    try:
+        contents = repo.file_contents(f"exercises/{problem}/description.md")
+    except github3.exceptions.NotFoundError:
+        description = ""
+    else:
+        description = contents.decoded.decode("utf-8")
+    return description
+
+
+def extract_test_cases_from_canonical_data(canonical_data):
+    if not canonical_data:
+        return pandas.DataFrame()
+
+    test_cases = extract_test_cases(canonical_data["cases"])
+    test_cases["exercise"] = canonical_data["exercise"]
     return test_cases
 
+def extract_test_cases(cases, group=""):
+    test_cases = []
+    for case in cases:
+        if "cases" in case:
+            # case is a test group
+            if group:
+                group += "; "
+            test_cases.append(extract_test_cases(case["cases"], group=group + case["description"]))
+        else:
+            test_cases.append(
+                pandas.DataFrame(
+                    {"description": case["description"], "group": group}, index=[0]
+                )
+            )
+    if len(test_cases) == 0:
+        test_cases = pandas.DataFrame()
+    else:
+        test_cases = pandas.concat(test_cases, ignore_index=True, sort=False)
+    return test_cases
 
 def get_exercise_data():
     languages = list_languages()

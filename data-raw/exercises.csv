@@ -20,7 +20,7 @@ ruby,accumulate,1,0,raindrops
 ruby,sum-of-multiples,5,0,difference-of-squares
 ruby,grade-school,5,0,hamming
 ruby,series,3,0,two-fer
-ruby,phone-number,3,0,clock
+ruby,phone-number,3,0,two-fer
 ruby,prime-factors,3,0,clock
 ruby,strain,2,0,raindrops
 ruby,etl,1,0,scrabble-score
@@ -1057,6 +1057,7 @@ scala,octal,0,0,
 scala,trinary,0,0,
 scala,diamond,4,0,accumulate
 scala,complex-numbers,6,0,sum-of-multiples
+scala,rotational-cipher,5,0,accumulate
 erlang,hello-world,1,1,
 erlang,leap,1,1,
 erlang,accumulate,1,1,
@@ -1101,6 +1102,7 @@ erlang,largest-series-product,5,0,bob
 erlang,complex-numbers,5,0,leap
 erlang,rotational-cipher,5,0,space-age
 erlang,change,5,0,accumulate
+erlang,variable-length-quantity,5,0,strain
 erlang,etl,6,0,hamming
 erlang,bank-account,6,0,raindrops
 erlang,luhn,6,0,strain
@@ -1116,6 +1118,7 @@ erlang,beer-song,7,0,leap
 erlang,dominoes,8,0,accumulate
 erlang,zipper,8,0,bob
 erlang,spiral-matrix,8,0,rna-transcription
+erlang,connect,8,0,raindrops
 common-lisp,hello-world,1,1,
 common-lisp,acronym,1,0,
 common-lisp,hamming,1,1,
@@ -1953,6 +1956,7 @@ bash,roman-numerals,4,0,luhn
 bash,affine-cipher,6,0,atbash-cipher
 bash,isogram,3,0,pangram
 bash,diamond,4,0,pangram
+bash,isbn-verifier,4,0,armstrong-numbers
 powershell,hello-world,1,1,
 powershell,reverse-string,1,0,
 powershell,leap,1,0,
@@ -1994,6 +1998,7 @@ r,collatz-conjecture,2,0,sum-of-multiples
 r,allergies,3,0,sum-of-multiples
 r,crypto-square,4,0,rotational-cipher
 r,diamond,3,0,pascals-triangle
+r,acronym,1,0,
 c,hello-world,1,1,
 c,isogram,1,1,
 c,acronym,1,0,isogram

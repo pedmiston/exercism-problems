@@ -2707,6 +2707,10 @@ diamond,scala,lists
 diamond,scala,strings
 diamond,scala,text_formatting
 complex-numbers,scala,math
+rotational-cipher,scala,math
+rotational-cipher,scala,security
+rotational-cipher,scala,strings
+rotational-cipher,scala,transforming
 hello-world,erlang,strings
 leap,erlang,control_flow_conditionals
 leap,erlang,logic
@@ -2791,6 +2795,9 @@ complex-numbers,erlang,strings
 rotational-cipher,erlang,algorithms
 rotational-cipher,erlang,strings
 change,erlang,algorithms
+variable-length-quantity,erlang,bitwise_operations
+variable-length-quantity,erlang,integers
+variable-length-quantity,erlang,transforming
 etl,erlang,algorithms
 etl,erlang,maps
 etl,erlang,strings
@@ -2824,6 +2831,9 @@ zipper,erlang,algorithms
 zipper,erlang,control_flow_recursion
 zipper,erlang,types
 spiral-matrix,erlang,algorithms
+connect,erlang,algorithms
+connect,erlang,games
+connect,erlang,parsing
 hello-world,common-lisp,strings
 acronym,common-lisp,strings
 acronym,common-lisp,transforming
@@ -3168,7 +3178,9 @@ simple-cipher,rust,ascii
 simple-cipher,rust,chars
 simple-cipher,rust,str_vs_string
 etl,rust,btree
-accumulate,rust,function_pointer
+accumulate,rust,generics
+accumulate,rust,higher_order_functions
+accumulate,rust,move_semantics
 acronym,rust,filter
 acronym,rust,flat_map
 acronym,rust,loops
@@ -5030,6 +5042,9 @@ isogram,bash,regexp
 diamond,bash,loops
 diamond,bash,strings
 diamond,bash,string_transformation
+isbn-verifier,bash,algorithms
+isbn-verifier,bash,integers
+isbn-verifier,bash,string_transformation
 hello-world,powershell,strings
 reverse-string,powershell,strings
 leap,powershell,control_flow_if_else_statements
@@ -5116,6 +5131,8 @@ crypto-square,r,text_formatting
 crypto-square,r,transforming
 diamond,r,control_flow_loops
 diamond,r,text_formatting
+acronym,r,strings
+acronym,r,filtering
 hello-world,c,strings
 isogram,c,arrays
 isogram,c,control_flow_if_else_statements
