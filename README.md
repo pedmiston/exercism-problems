@@ -30,20 +30,6 @@ python problems.py -h     # show help and options
 python problems.py --all  # scrape all data into csvs in data-raw/
 ```
 
-If you get the following KeyError when running the problems.py program,
-it likely means you forgot to export your GitHub username and password
-as the environment variables GITHUB_USERNAME and GITHUB_PASSWORD.
-
-```
-$ python problems.py -h
-Traceback (most recent call last):
-  File "problems.py", line 10, in <module>
-    github = github3.login(os.environ["GITHUB_USERNAME"], os.environ["GITHUB_PASSWORD"])
-  File "/usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7/lib/python3.7/os.py", line 678, in __getitem__
-    raise KeyError(key) from None
-KeyError: 'GITHUB_USERNAME'
-```
-
 ## Installing the R package
 
 The R package can be installed manually or from GitHub.
