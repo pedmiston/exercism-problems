@@ -1,0 +1,89 @@
+{
+  "exercise": "queen-attack",
+  "version": "2.1.0",
+  "comments": [
+    "Testing invalid positions will vary by language. The expected",
+    "value of -1 is there to indicate some sort of failure should",
+    "occur, while a 0 means no failure.",
+    "Some languages implement tests beyond this set, such as checking",
+    "for two pieces being placed on the same position, representing",
+    "the board graphically, or using standard chess notation. Those",
+    "tests can be offered as extra credit"
+  ],
+  "cases": [
+    {
+      "description": "Test creation of Queens with valid and invalid positions",
+      "cases": [
+        {
+          "description": "queen with a valid position",
+          "property": "create",
+          "input": {
+            "queen": {
+              "position": {
+                "row": 2,
+                "column": 2
+              }
+            }
+          },
+          "expected": 0
+        },
+        {
+          "description": "queen must have positive row",
+          "property": "create",
+          "input": {
+            "queen": {
+              "position": {
+                "row": -2,
+                "column": 2
+              }
+            }
+          },
+          "expected": -1
+        }
+      ]
+    },
+    {
+      "description": "Test the ability of one queen to attack another",
+      "cases": [
+        {
+          "description": "can not attack",
+          "property": "canAttack",
+          "input": {
+            "white_queen": {
+              "position": {
+                "row": 2,
+                "column": 4
+              }
+            },
+            "black_queen": {
+              "position": {
+                "row": 6,
+                "column": 6
+              }
+            }
+          },
+          "expected": false
+        },
+        {
+          "description": "can attack on same row",
+          "property": "canAttack",
+          "input": {
+            "white_queen": {
+              "position": {
+                "row": 2,
+                "column": 4
+              }
+            },
+            "black_queen": {
+              "position": {
+                "row": 2,
+                "column": 6
+              }
+            }
+          },
+          "expected": true
+        }
+      ]
+    }
+  ]
+}

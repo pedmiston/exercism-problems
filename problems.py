@@ -77,8 +77,20 @@ def get_problem_specification_data():
     return dict(problems=problems, test_cases=test_cases)
 
 
-def extract_test_cases_from_canonical_data(canonical_data):
-    return pandas.DataFrame(canonical_data["cases"])
+def extract_test_cases_from_canonical_data(canonical_data, group=""):
+    test_cases = []
+    for case in canonical_data["cases"]:
+        if "cases" in case:
+            # case is a test group
+            test_cases.append(extract_test_cases_from_canonical_data(case, group="group1"))
+        else:
+            test_cases.append(pandas.DataFrame({
+                "description": case["description"]
+            }, index=[0, ]))
+    test_cases = pandas.concat(test_cases, ignore_index=True)
+    if group:
+        test_cases[group] = canonical_data["description"]
+    return test_cases
 
 
 def get_exercise_data():

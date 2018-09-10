@@ -1,0 +1,55 @@
+{
+  "exercise": "queen-attack",
+  "version": "2.1.0",
+  "comments": [
+    "Testing invalid positions will vary by language. The expected",
+    "value of -1 is there to indicate some sort of failure should",
+    "occur, while a 0 means no failure.",
+    "Some languages implement tests beyond this set, such as checking",
+    "for two pieces being placed on the same position, representing",
+    "the board graphically, or using standard chess notation. Those",
+    "tests can be offered as extra credit"
+  ],
+  "cases": [
+    {
+      "description": "Level 1",
+      "cases": [
+        {
+          "description": "Level 2",
+          "cases": [
+            {"description": "Level 3",
+            "cases": [
+              {
+                "description": "queen with a valid position",
+                "property": "create",
+                "input": {
+                  "queen": {
+                    "position": {
+                      "row": 2,
+                      "column": 2
+                    }
+                  }
+                },
+                "expected": 0
+              },
+              {
+                "description": "queen must have positive row",
+                "property": "create",
+                "input": {
+                  "queen": {
+                    "position": {
+                      "row": -2,
+                      "column": 2
+                    }
+                  }
+                },
+                "expected": -1
+              }
+      ]
+    }
+  ]
+}
+]
+}
+]
+}
