@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from problems import extract_test_cases_from_canonical_data
+from exercism.problem_specifications import extract_test_cases_from_canonical_data
 
 test_data_dir = Path("tests/test_data")
 

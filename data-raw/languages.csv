@@ -1,0 +1,62 @@
+language,active,blurb
+ruby,1,"Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write."
+java,1,"Java is a very widely used Object Oriented programming language. It's safe, simple to use and portable so that you can ""write once, run anywhere""."
+coffeescript,1,"CoffeeScript is a language that compiles into JavaScript. It uses an alternative syntax to the Java-like syntax of JavaScript, and is one of many new transpiled languages used in web development."
+elixir,1,"Elixir is a dynamic, functional language designed for building scalable and maintainable applications. Elixir leverages the Erlang VM, known for running low-latency, distributed and fault-tolerant systems, while also being successfully used in web development and the embedded software domain."
+DEPRECATED.javascript,0,"JavaScript is a scripting language, primarily used for creating dynamic websites and programming web servers. It's a very popular language, and supports a variety of programming paradigms."
+clojure,1,
+go,1,"Go is a compiled, open source programming language with a small, consistent syntax, a powerful standard library, and fantastic tooling. It's a great fit for web backends and command-line tools."
+haskell,1,"Haskell is a functional programming language which is pure and statically-typed. It's known for lazy evaluation, where evaluation is deferred until necessary, and its purity, where monads are used for working with side-effects."
+objective-c,1,
+ocaml,1,"OCaml is a functional and object-oriented language, used both in industry and as a teaching language to elegantly solve problems. The strong type system, with type inference, is useful for catching mistakes."
+perl5,1,
+python,1,"Python is a clear and powerful object-oriented programming language with an elegant and easy-to-read syntax. It is ideal for prototyping and ad-hoc tasks, but also sees wide use in scientific computing, web development, and automation."
+scala,1,"Scala combines object-oriented and functional programming in one concise, high-level language. Scala's static types help avoid bugs in complex applications, and its JVM and JavaScript runtimes let you build high-performance systems with easy access to huge ecosystems of libraries."
+erlang,1,"Erlang is a functional language, designed for use in real-time distributed systems. It's used within telecom networks, and is notable for simple message passing with lightweight independent processes."
+common-lisp,1,A programmable programming language.
+php,1,
+rust,1,"Rust is a compiled programming language designed for speed, concurrency, and memory safety. Rust programs can run almost anywhere, from low-power embedded devices to web servers."
+csharp,1,"C# is a modern, object-oriented language with lots of great features, such as type-inference and async/await. The tooling is excellent, and there is extensive, well-written documentation."
+perl6,1,"Forget everything you know or think you know about Perl. Perl 6 is a production ready new emerging language that is highly expressive, feature-packed and optimized for fun."
+cpp,1,"C++ is a general-purpose programming language that supports procedural, object-oriented, generic and functional programming styles. C++ is deployed on billions of devices from the smallest embedded microprocessor to the largest supercomputer."
+d,1,
+javascript,1,"JavaScript is a scripting language, primarily used for creating dynamic websites and programming web servers. It's a very popular language, and supports a variety of programming paradigms."
+fsharp,1,"F# is a strongly-typed, functional language that is part of Microsoft's .NET language stack. Although F# is great for data science problems, it can elegantly handle almost every problem you throw at it."
+lua,1,"Lua is a lightweight scripting language, designed for use within programs. It's popular in gaming, and is a general-purpose language, which can provide a familiar syntax across different applications."
+swift,1,"Swift is a modern open-source language with the aim of making programming simple things easy, and difficult things possible while still being fast and safe by design. Swift can run in scripting mode in the included REPL or it can be compiled with full support for C and Objective-C interoperability."
+nim,1,"Nim is a system and applications programming language that is statically typed and compiled, designed to be efficient, expressive, and elegant. Being general-purpose it can fill a wide range of uses but has found a niche in game development and systems programming including embedded systems."
+bash,1,"Bash is a Unix command interpreter, for which plaintext files of commands can be made to create scripts. It's a powerful and concise way of getting stuff done!"
+powershell,0,Task-based command-line shell and scripting language designed especially for system administration.
+r,1,"R is an interpreted, open source programming language with powerful data manipulation and graphical capabilities. It has a thriving package ecosystem and is one of the most popular languages for data science."
+c,1,"C is a small, general-purpose, imperative programming language with a static type system, scopes, and structures. It's typically used as an alternative to assembly programming, such as in operating systems."
+sml,1,Standard ML is a functional programming language with type inference and some side-effects.
+vbnet,0,
+groovy,0,"Groovy is an unopinionated, multi-paradigm language that enhances Java with the intent to make your code less verbose, yet still allows you utilize the power of the JVM."
+plsql,1,
+scheme,1,
+cfml,1,"CFML (ColdFusion Markup Language) is an open source and commercial (JIT) compiled dynamic and loosely typed JVM scripting language that embodies classic OO, and functional programming, making it easy to learn, fun to use. CFML brings the power and scalability of the J2EE ecosystem but without the boilerplate of Java."
+elisp,1,"Emacs Lisp is a variant of lisp used as a scripting language by the Emacs text edior. Not only is it used to customize Emacs, but much of the core editing functionality itself is written in Emacs Lisp"
+haxe,0,
+pony,0,
+lfe,1,Lisp Flavoured Erlang is one of those eat your cake and have it too programming languages. As they say: It's the best of Erlang and of Lisp; at the same time!
+racket,1,
+elm,1,"Elm is a pure, functional language that compiles to javascript"
+kotlin,1,"Kotlin is a pragmatic programming language for JVM and Android that combines OO and functional features and is focused on interoperability, safety, clarity and tooling support."
+crystal,1,
+factor,0,
+idris,0,
+purescript,1,
+ceylon,0,
+mips,1,
+delphi,1,"Object Pascal based, Delphi is great for developing cross-platform desktop, mobile, web, and console applications."
+prolog,1,Prolog is a general-purpose logic programming language associated with artificial intelligence and computational linguistics.
+julia,1,"Julia is an open-source high-level, dynamic programming language whose sweet spot is technical and scientific computing. It is convenient for day-to-day work and fast enough for high performance computing."
+typescript,1,"TypeScript is a language for writing more maintainable JavaScript. TypeScript adds optional types, classes, and modules to JavaScript."
+vimscript,1,
+coq,0,
+fortran,0,
+dart,1,Dart is a general purpose programming language which has seen a rise in popularity for it's uses in mobile and web application development.
+gnu-apl,0,
+reasonml,1,ReasonML is a strongly typed functional language which compiles to both Javascript and native.
+pharo,0,"The immersive, modern, Smalltalk programming experience"
+ballerina,0,"Ballerina is a cloud-native programming language that incorporates fundamental concepts of distributed system integration into the language and offers a type safe, concurrent environment to implement microservices with distributed transactions, reliable messaging, stream processing, and workflows."
