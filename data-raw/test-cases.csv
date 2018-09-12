@@ -1,0 +1,1499 @@
+exercise,description,group
+acronym,basic,Abbreviate a phrase
+acronym,lowercase words,Abbreviate a phrase
+acronym,punctuation,Abbreviate a phrase
+acronym,all caps word,Abbreviate a phrase
+acronym,punctuation without whitespace,Abbreviate a phrase
+acronym,very long abbreviation,Abbreviate a phrase
+affine-cipher,encode yes,encode
+affine-cipher,encode no,encode
+affine-cipher,encode OMG,encode
+affine-cipher,encode O M G,encode
+affine-cipher,encode mindblowingly,encode
+affine-cipher,encode numbers,encode
+affine-cipher,encode deep thought,encode
+affine-cipher,encode all the letters,encode
+affine-cipher,encode with a not coprime to m,encode
+affine-cipher,decode exercism,decode
+affine-cipher,decode a sentence,decode
+affine-cipher,decode numbers,decode
+affine-cipher,decode all the letters,decode
+affine-cipher,decode with no spaces in input,decode
+affine-cipher,decode with too many spaces,decode
+affine-cipher,decode with a not coprime to m,decode
+all-your-base,single bit one to decimal,
+all-your-base,binary to single decimal,
+all-your-base,single decimal to binary,
+all-your-base,binary to multiple decimal,
+all-your-base,decimal to binary,
+all-your-base,trinary to hexadecimal,
+all-your-base,hexadecimal to trinary,
+all-your-base,15-bit integer,
+all-your-base,empty list,
+all-your-base,single zero,
+all-your-base,multiple zeros,
+all-your-base,leading zeros,
+all-your-base,input base is one,
+all-your-base,input base is zero,
+all-your-base,input base is negative,
+all-your-base,negative digit,
+all-your-base,invalid positive digit,
+all-your-base,output base is one,
+all-your-base,output base is zero,
+all-your-base,output base is negative,
+all-your-base,both bases are negative,
+allergies,no allergies means not allergic,allergicTo
+allergies,is allergic to eggs,allergicTo
+allergies,allergic to eggs in addition to other stuff,allergicTo
+allergies,allergic to strawberries but not peanuts,allergicTo
+allergies,no allergies at all,list
+allergies,allergic to just eggs,list
+allergies,allergic to just peanuts,list
+allergies,allergic to just strawberries,list
+allergies,allergic to eggs and peanuts,list
+allergies,allergic to more than eggs but not peanuts,list
+allergies,allergic to lots of stuff,list
+allergies,allergic to everything,list
+allergies,ignore non allergen score parts,list
+alphametics,puzzle with three letters,Solve the alphametics puzzle
+alphametics,solution must have unique value for each letter,Solve the alphametics puzzle
+alphametics,leading zero solution is invalid,Solve the alphametics puzzle
+alphametics,puzzle with four letters,Solve the alphametics puzzle
+alphametics,puzzle with six letters,Solve the alphametics puzzle
+alphametics,puzzle with seven letters,Solve the alphametics puzzle
+alphametics,puzzle with eight letters,Solve the alphametics puzzle
+alphametics,puzzle with ten letters,Solve the alphametics puzzle
+alphametics,puzzle with ten letters and 199 addends,Solve the alphametics puzzle
+anagram,no matches,
+anagram,detects two anagrams,
+anagram,does not detect anagram subsets,
+anagram,detects anagram,
+anagram,detects three anagrams,
+anagram,does not detect non-anagrams with identical checksum,
+anagram,detects anagrams case-insensitively,
+anagram,detects anagrams using case-insensitive subject,
+anagram,detects anagrams using case-insensitive possible matches,
+anagram,does not detect a anagram if the original word is repeated,
+anagram,anagrams must use all letters exactly once,
+anagram,capital word is not own anagram,
+armstrong-numbers,Single digit numbers are Armstrong numbers,
+armstrong-numbers,There are no 2 digit Armstrong numbers,
+armstrong-numbers,Three digit number that is an Armstrong number,
+armstrong-numbers,Three digit number that is not an Armstrong number,
+armstrong-numbers,Four digit number that is an Armstrong number,
+armstrong-numbers,Four digit number that is not an Armstrong number,
+armstrong-numbers,Seven digit number that is an Armstrong number,
+armstrong-numbers,Seven digit number that is not an Armstrong number,
+atbash-cipher,encode yes,encode
+atbash-cipher,encode no,encode
+atbash-cipher,encode OMG,encode
+atbash-cipher,encode spaces,encode
+atbash-cipher,encode mindblowingly,encode
+atbash-cipher,encode numbers,encode
+atbash-cipher,encode deep thought,encode
+atbash-cipher,encode all the letters,encode
+atbash-cipher,decode exercism,decode
+atbash-cipher,decode a sentence,decode
+atbash-cipher,decode numbers,decode
+atbash-cipher,decode all the letters,decode
+atbash-cipher,decode with too many spaces,decode
+atbash-cipher,decode with no spaces,decode
+beer-song,first generic verse,verse; single verse
+beer-song,last generic verse,verse; single verse
+beer-song,verse with 2 bottles,verse; single verse
+beer-song,verse with 1 bottle,verse; single verse
+beer-song,verse with 0 bottles,verse; single verse
+beer-song,first two verses,lyrics; multiple verses
+beer-song,last three verses,lyrics; multiple verses
+beer-song,all verses,lyrics; multiple verses
+binary-search-tree,data is retained,
+binary-search-tree,smaller number at left node,insert data at proper node
+binary-search-tree,same number at left node,insert data at proper node
+binary-search-tree,greater number at right node,insert data at proper node
+binary-search-tree,can create complex tree,
+binary-search-tree,can sort single number,can sort data
+binary-search-tree,can sort if second number is smaller than first,can sort data
+binary-search-tree,can sort if second number is same as first,can sort data
+binary-search-tree,can sort if second number is greater than first,can sort data
+binary-search-tree,can sort complex tree,can sort data
+binary-search,finds a value in an array with one element,
+binary-search,finds a value in the middle of an array,
+binary-search,finds a value at the beginning of an array,
+binary-search,finds a value at the end of an array,
+binary-search,finds a value in an array of odd length,
+binary-search,finds a value in an array of even length,
+binary-search,identifies that a value is not included in the array,
+binary-search,a value smaller than the array's smallest value is not included,
+binary-search,a value larger than the array's largest value is not included,
+binary-search,nothing is included in an empty array,
+binary,binary 0 is decimal 0,
+binary,binary 1 is decimal 1,
+binary,binary 10 is decimal 2,
+binary,binary 11 is decimal 3,
+binary,binary 100 is decimal 4,
+binary,binary 1001 is decimal 9,
+binary,binary 11010 is decimal 26,
+binary,binary 10001101000 is decimal 1128,
+binary,binary ignores leading zeros,
+binary,2 is not a valid binary digit,
+binary,a number containing a non-binary digit is invalid,
+binary,a number with trailing non-binary characters is invalid,
+binary,a number with leading non-binary characters is invalid,
+binary,a number with internal non-binary characters is invalid,
+binary,a number and a word whitespace separated is invalid,
+bob,stating something,
+bob,shouting,
+bob,shouting gibberish,
+bob,asking a question,
+bob,asking a numeric question,
+bob,asking gibberish,
+bob,talking forcefully,
+bob,using acronyms in regular speech,
+bob,forceful question,
+bob,shouting numbers,
+bob,no letters,
+bob,question with no letters,
+bob,shouting with special characters,
+bob,shouting with no exclamation mark,
+bob,statement containing question mark,
+bob,non-letters with question,
+bob,prattling on,
+bob,silence,
+bob,prolonged silence,
+bob,alternate silence,
+bob,multiple line question,
+bob,starting with whitespace,
+bob,ending with whitespace,
+bob,other whitespace,
+bob,non-question ending with whitespace,
+book-store,Only a single book,Return the total basket price after applying the best discount.
+book-store,Two of the same book,Return the total basket price after applying the best discount.
+book-store,Empty basket,Return the total basket price after applying the best discount.
+book-store,Two different books,Return the total basket price after applying the best discount.
+book-store,Three different books,Return the total basket price after applying the best discount.
+book-store,Four different books,Return the total basket price after applying the best discount.
+book-store,Five different books,Return the total basket price after applying the best discount.
+book-store,Two groups of four is cheaper than group of five plus group of three,Return the total basket price after applying the best discount.
+book-store,Two groups of four is cheaper than groups of five and three,Return the total basket price after applying the best discount.
+book-store,Group of four plus group of two is cheaper than two groups of three,Return the total basket price after applying the best discount.
+book-store,Two each of first 4 books and 1 copy each of rest,Return the total basket price after applying the best discount.
+book-store,Two copies of each book,Return the total basket price after applying the best discount.
+book-store,Three copies of first book and 2 each of remaining,Return the total basket price after applying the best discount.
+book-store,Three each of first 2 books and 2 each of remaining books,Return the total basket price after applying the best discount.
+book-store,Four groups of four are cheaper than two groups each of five and three,Return the total basket price after applying the best discount.
+bowling,should be able to score a game with all zeros,
+bowling,should be able to score a game with no strikes or spares,
+bowling,a spare followed by zeros is worth ten points,
+bowling,points scored in the roll after a spare are counted twice,
+bowling,consecutive spares each get a one roll bonus,
+bowling,a spare in the last frame gets a one roll bonus that is counted once,
+bowling,a strike earns ten points in a frame with a single roll,
+bowling,points scored in the two rolls after a strike are counted twice as a bonus,
+bowling,consecutive strikes each get the two roll bonus,
+bowling,a strike in the last frame gets a two roll bonus that is counted once,
+bowling,rolling a spare with the two roll bonus does not get a bonus roll,
+bowling,strikes with the two roll bonus do not get bonus rolls,
+bowling,a strike with the one roll bonus after a spare in the last frame does not get a bonus,
+bowling,all strikes is a perfect game,
+bowling,rolls cannot score negative points,
+bowling,a roll cannot score more than 10 points,
+bowling,two rolls in a frame cannot score more than 10 points,
+bowling,bonus roll after a strike in the last frame cannot score more than 10 points,
+bowling,two bonus rolls after a strike in the last frame cannot score more than 10 points,
+bowling,two bonus rolls after a strike in the last frame can score more than 10 points if one is a strike,
+bowling,the second bonus rolls after a strike in the last frame cannot be a strike if the first one is not a strike,
+bowling,second bonus roll after a strike in the last frame cannot score more than 10 points,
+bowling,an unstarted game cannot be scored,
+bowling,an incomplete game cannot be scored,
+bowling,cannot roll if game already has ten frames,
+bowling,bonus rolls for a strike in the last frame must be rolled before score can be calculated,
+bowling,both bonus rolls for a strike in the last frame must be rolled before score can be calculated,
+bowling,bonus roll for a spare in the last frame must be rolled before score can be calculated,
+bowling,cannot roll after bonus roll for spare,
+bowling,cannot roll after bonus rolls for strike,
+bracket-push,paired square brackets,
+bracket-push,empty string,
+bracket-push,unpaired brackets,
+bracket-push,wrong ordered brackets,
+bracket-push,wrong closing bracket,
+bracket-push,paired with whitespace,
+bracket-push,partially paired brackets,
+bracket-push,simple nested brackets,
+bracket-push,several paired brackets,
+bracket-push,paired and nested brackets,
+bracket-push,unopened closing brackets,
+bracket-push,unpaired and nested brackets,
+bracket-push,paired and wrong nested brackets,
+bracket-push,paired and incomplete brackets,
+bracket-push,math expression,
+bracket-push,complex latex expression,
+change,single coin change,
+change,multiple coin change,
+change,change with Lilliputian Coins,
+change,change with Lower Elbonia Coins,
+change,large target values,
+change,possible change without unit coins available,
+change,another possible change without unit coins available,
+change,no coins make 0 change,
+change,error testing for change smaller than the smallest of coins,
+change,error if no combination can add up to target,
+change,cannot find negative change values,
+circular-buffer,reading empty buffer should fail,
+circular-buffer,can read an item just written,
+circular-buffer,each item may only be read once,
+circular-buffer,items are read in the order they are written,
+circular-buffer,full buffer can't be written to,
+circular-buffer,a read frees up capacity for another write,
+circular-buffer,read position is maintained even across multiple writes,
+circular-buffer,items cleared out of buffer can't be read,
+circular-buffer,clear frees up capacity for another write,
+circular-buffer,clear does nothing on empty buffer,
+circular-buffer,overwrite acts like write on non-full buffer,
+circular-buffer,overwrite replaces the oldest item on full buffer,
+circular-buffer,overwrite replaces the oldest item remaining in buffer following a read,
+clock,on the hour,Create a new clock with an initial time
+clock,past the hour,Create a new clock with an initial time
+clock,midnight is zero hours,Create a new clock with an initial time
+clock,hour rolls over,Create a new clock with an initial time
+clock,hour rolls over continuously,Create a new clock with an initial time
+clock,sixty minutes is next hour,Create a new clock with an initial time
+clock,minutes roll over,Create a new clock with an initial time
+clock,minutes roll over continuously,Create a new clock with an initial time
+clock,hour and minutes roll over,Create a new clock with an initial time
+clock,hour and minutes roll over continuously,Create a new clock with an initial time
+clock,hour and minutes roll over to exactly midnight,Create a new clock with an initial time
+clock,negative hour,Create a new clock with an initial time
+clock,negative hour rolls over,Create a new clock with an initial time
+clock,negative hour rolls over continuously,Create a new clock with an initial time
+clock,negative minutes,Create a new clock with an initial time
+clock,negative minutes roll over,Create a new clock with an initial time
+clock,negative minutes roll over continuously,Create a new clock with an initial time
+clock,negative hour and minutes both roll over,Create a new clock with an initial time
+clock,negative hour and minutes both roll over continuously,Create a new clock with an initial time
+clock,add minutes,Add minutes
+clock,add no minutes,Add minutes
+clock,add to next hour,Add minutes
+clock,add more than one hour,Add minutes
+clock,add more than two hours with carry,Add minutes
+clock,add across midnight,Add minutes
+clock,add more than one day (1500 min = 25 hrs),Add minutes
+clock,add more than two days,Add minutes
+clock,subtract minutes,Subtract minutes
+clock,subtract to previous hour,Subtract minutes
+clock,subtract more than an hour,Subtract minutes
+clock,subtract across midnight,Subtract minutes
+clock,subtract more than two hours,Subtract minutes
+clock,subtract more than two hours with borrow,Subtract minutes
+clock,subtract more than one day (1500 min = 25 hrs),Subtract minutes
+clock,subtract more than two days,Subtract minutes
+clock,clocks with same time,Compare two clocks for equality
+clock,clocks a minute apart,Compare two clocks for equality
+clock,clocks an hour apart,Compare two clocks for equality
+clock,clocks with hour overflow,Compare two clocks for equality
+clock,clocks with hour overflow by several days,Compare two clocks for equality
+clock,clocks with negative hour,Compare two clocks for equality
+clock,clocks with negative hour that wraps,Compare two clocks for equality
+clock,clocks with negative hour that wraps multiple times,Compare two clocks for equality
+clock,clocks with minute overflow,Compare two clocks for equality
+clock,clocks with minute overflow by several days,Compare two clocks for equality
+clock,clocks with negative minute,Compare two clocks for equality
+clock,clocks with negative minute that wraps,Compare two clocks for equality
+clock,clocks with negative minute that wraps multiple times,Compare two clocks for equality
+clock,clocks with negative hours and minutes,Compare two clocks for equality
+clock,clocks with negative hours and minutes that wrap,Compare two clocks for equality
+clock,full clock and zeroed clock,Compare two clocks for equality
+collatz-conjecture,zero steps for one,
+collatz-conjecture,divide if even,
+collatz-conjecture,even and odd steps,
+collatz-conjecture,large number of even and odd steps,
+collatz-conjecture,zero is an error,
+collatz-conjecture,negative value is an error,
+complex-numbers,Real part of a purely real number,Real part
+complex-numbers,Real part of a purely imaginary number,Real part
+complex-numbers,Real part of a number with real and imaginary part,Real part
+complex-numbers,Imaginary part of a purely real number,Imaginary part
+complex-numbers,Imaginary part of a purely imaginary number,Imaginary part
+complex-numbers,Imaginary part of a number with real and imaginary part,Imaginary part
+complex-numbers,Imaginary unit,
+complex-numbers,Add purely real numbers,Arithmetic; Addition
+complex-numbers,Add purely imaginary numbers,Arithmetic; Addition
+complex-numbers,Add numbers with real and imaginary part,Arithmetic; Addition
+complex-numbers,Subtract purely real numbers,Arithmetic; Subtraction
+complex-numbers,Subtract purely imaginary numbers,Arithmetic; Subtraction
+complex-numbers,Subtract numbers with real and imaginary part,Arithmetic; Subtraction
+complex-numbers,Multiply purely real numbers,Arithmetic; Multiplication
+complex-numbers,Multiply purely imaginary numbers,Arithmetic; Multiplication
+complex-numbers,Multiply numbers with real and imaginary part,Arithmetic; Multiplication
+complex-numbers,Divide purely real numbers,Arithmetic; Division
+complex-numbers,Divide purely imaginary numbers,Arithmetic; Division
+complex-numbers,Divide numbers with real and imaginary part,Arithmetic; Division
+complex-numbers,Absolute value of a positive purely real number,Absolute value
+complex-numbers,Absolute value of a negative purely real number,Absolute value
+complex-numbers,Absolute value of a purely imaginary number with positive imaginary part,Absolute value
+complex-numbers,Absolute value of a purely imaginary number with negative imaginary part,Absolute value
+complex-numbers,Absolute value of a number with real and imaginary part,Absolute value
+complex-numbers,Conjugate a purely real number,Complex conjugate
+complex-numbers,Conjugate a purely imaginary number,Complex conjugate
+complex-numbers,Conjugate a number with real and imaginary part,Complex conjugate
+complex-numbers,Euler's identity/formula,Complex exponential function
+complex-numbers,Exponential of 0,Complex exponential function
+complex-numbers,Exponential of a purely real number,Complex exponential function
+complex-numbers,Exponential of a number with real and imaginary part,Complex exponential function
+connect,an empty board has no winner,
+connect,X can win on a 1x1 board,
+connect,O can win on a 1x1 board,
+connect,only edges does not make a winner,
+connect,illegal diagonal does not make a winner,
+connect,nobody wins crossing adjacent angles,
+connect,X wins crossing from left to right,
+connect,O wins crossing from top to bottom,
+connect,X wins using a convoluted path,
+connect,X wins using a spiral path,
+crypto-square,empty plaintext results in an empty ciphertext,
+crypto-square,Lowercase,
+crypto-square,Remove spaces,
+crypto-square,Remove punctuation,
+crypto-square,9 character plaintext results in 3 chunks of 3 characters,
+crypto-square,"8 character plaintext results in 3 chunks, the last one with a trailing space",
+crypto-square,"54 character plaintext results in 7 chunks, the last two with trailing spaces",
+custom-set,sets with no elements are empty,Returns true if the set contains no elements
+custom-set,sets with elements are not empty,Returns true if the set contains no elements
+custom-set,nothing is contained in an empty set,Sets can report if they contain an element
+custom-set,when the element is in the set,Sets can report if they contain an element
+custom-set,when the element is not in the set,Sets can report if they contain an element
+custom-set,empty set is a subset of another empty set,A set is a subset if all of its elements are contained in the other set
+custom-set,empty set is a subset of non-empty set,A set is a subset if all of its elements are contained in the other set
+custom-set,non-empty set is not a subset of empty set,A set is a subset if all of its elements are contained in the other set
+custom-set,set is a subset of set with exact same elements,A set is a subset if all of its elements are contained in the other set
+custom-set,set is a subset of larger set with same elements,A set is a subset if all of its elements are contained in the other set
+custom-set,set is not a subset of set that does not contain its elements,A set is a subset if all of its elements are contained in the other set
+custom-set,the empty set is disjoint with itself,Sets are disjoint if they share no elements
+custom-set,empty set is disjoint with non-empty set,Sets are disjoint if they share no elements
+custom-set,non-empty set is disjoint with empty set,Sets are disjoint if they share no elements
+custom-set,sets are not disjoint if they share an element,Sets are disjoint if they share no elements
+custom-set,sets are disjoint if they share no elements,Sets are disjoint if they share no elements
+custom-set,empty sets are equal,Sets with the same elements are equal
+custom-set,empty set is not equal to non-empty set,Sets with the same elements are equal
+custom-set,non-empty set is not equal to empty set,Sets with the same elements are equal
+custom-set,sets with the same elements are equal,Sets with the same elements are equal
+custom-set,sets with different elements are not equal,Sets with the same elements are equal
+custom-set,set is not equal to larger set with same elements,Sets with the same elements are equal
+custom-set,add to empty set,Unique elements can be added to a set
+custom-set,add to non-empty set,Unique elements can be added to a set
+custom-set,adding an existing element does not change the set,Unique elements can be added to a set
+custom-set,intersection of two empty sets is an empty set,Intersection returns a set of all shared elements
+custom-set,intersection of an empty set and non-empty set is an empty set,Intersection returns a set of all shared elements
+custom-set,intersection of a non-empty set and an empty set is an empty set,Intersection returns a set of all shared elements
+custom-set,intersection of two sets with no shared elements is an empty set,Intersection returns a set of all shared elements
+custom-set,intersection of two sets with shared elements is a set of the shared elements,Intersection returns a set of all shared elements
+custom-set,difference of two empty sets is an empty set,Difference (or Complement) of a set is a set of all elements that are only in the first set
+custom-set,difference of empty set and non-empty set is an empty set,Difference (or Complement) of a set is a set of all elements that are only in the first set
+custom-set,difference of a non-empty set and an empty set is the non-empty set,Difference (or Complement) of a set is a set of all elements that are only in the first set
+custom-set,difference of two non-empty sets is a set of elements that are only in the first set,Difference (or Complement) of a set is a set of all elements that are only in the first set
+custom-set,union of empty sets is an empty set,Union returns a set of all elements in either set
+custom-set,union of an empty set and non-empty set is the non-empty set,Union returns a set of all elements in either set
+custom-set,union of a non-empty set and empty set is the non-empty set,Union returns a set of all elements in either set
+custom-set,union of non-empty sets contains all unique elements,Union returns a set of all elements in either set
+diamond,Degenerate case with a single 'A' row,
+diamond,Degenerate case with no row containing 3 distinct groups of spaces,
+diamond,Smallest non-degenerate case with odd diamond side length,
+diamond,Smallest non-degenerate case with even diamond side length,
+diamond,Largest possible diamond,
+difference-of-squares,square of sum 1,Square the sum of the numbers up to the given number
+difference-of-squares,square of sum 5,Square the sum of the numbers up to the given number
+difference-of-squares,square of sum 100,Square the sum of the numbers up to the given number
+difference-of-squares,sum of squares 1,Sum the squares of the numbers up to the given number
+difference-of-squares,sum of squares 5,Sum the squares of the numbers up to the given number
+difference-of-squares,sum of squares 100,Sum the squares of the numbers up to the given number
+difference-of-squares,difference of squares 1,Subtract sum of squares from square of sums
+difference-of-squares,difference of squares 5,Subtract sum of squares from square of sums
+difference-of-squares,difference of squares 100,Subtract sum of squares from square of sums
+diffie-hellman,private key is in range 1 .. p,
+diffie-hellman,private key is random,
+diffie-hellman,can calculate public key using private key,
+diffie-hellman,can calculate secret using other party's public key,
+diffie-hellman,key exchange,
+dominoes,empty input = empty output,
+dominoes,singleton input = singleton output,
+dominoes,singleton that can't be chained,
+dominoes,three elements,
+dominoes,can reverse dominoes,
+dominoes,can't be chained,
+dominoes,disconnected - simple,
+dominoes,disconnected - double loop,
+dominoes,disconnected - single isolated,
+dominoes,need backtrack,
+dominoes,separate loops,
+dominoes,nine elements,
+etl,a single letter,transforms the a set of scrabble data previously indexed by the tile score to a set of data indexed by the tile letter
+etl,single score with multiple letters,transforms the a set of scrabble data previously indexed by the tile score to a set of data indexed by the tile letter
+etl,multiple scores with multiple letters,transforms the a set of scrabble data previously indexed by the tile score to a set of data indexed by the tile letter
+etl,multiple scores with differing numbers of letters,transforms the a set of scrabble data previously indexed by the tile score to a set of data indexed by the tile letter
+flatten-array,no nesting,
+flatten-array,flattens array with just integers present,
+flatten-array,5 level nesting,
+flatten-array,6 level nesting,
+flatten-array,6 level nest list with null values,
+flatten-array,all values in nested list are null,
+food-chain,fly,Return specified verse or series of verses
+food-chain,spider,Return specified verse or series of verses
+food-chain,bird,Return specified verse or series of verses
+food-chain,cat,Return specified verse or series of verses
+food-chain,dog,Return specified verse or series of verses
+food-chain,goat,Return specified verse or series of verses
+food-chain,cow,Return specified verse or series of verses
+food-chain,horse,Return specified verse or series of verses
+food-chain,multiple verses,Return specified verse or series of verses
+food-chain,full song,Return specified verse or series of verses
+forth,numbers just get pushed onto the stack,parsing and numbers
+forth,can add two numbers,addition
+forth,errors if there is nothing on the stack,addition
+forth,errors if there is only one value on the stack,addition
+forth,can subtract two numbers,subtraction
+forth,errors if there is nothing on the stack,subtraction
+forth,errors if there is only one value on the stack,subtraction
+forth,can multiply two numbers,multiplication
+forth,errors if there is nothing on the stack,multiplication
+forth,errors if there is only one value on the stack,multiplication
+forth,can divide two numbers,division
+forth,performs integer division,division
+forth,errors if dividing by zero,division
+forth,errors if there is nothing on the stack,division
+forth,errors if there is only one value on the stack,division
+forth,addition and subtraction,combined arithmetic
+forth,multiplication and division,combined arithmetic
+forth,copies a value on the stack,dup
+forth,copies the top value on the stack,dup
+forth,errors if there is nothing on the stack,dup
+forth,removes the top value on the stack if it is the only one,drop
+forth,removes the top value on the stack if it is not the only one,drop
+forth,errors if there is nothing on the stack,drop
+forth,swaps the top two values on the stack if they are the only ones,swap
+forth,swaps the top two values on the stack if they are not the only ones,swap
+forth,errors if there is nothing on the stack,swap
+forth,errors if there is only one value on the stack,swap
+forth,copies the second element if there are only two,over
+forth,copies the second element if there are more than two,over
+forth,errors if there is nothing on the stack,over
+forth,errors if there is only one value on the stack,over
+forth,can consist of built-in words,user-defined words
+forth,execute in the right order,user-defined words
+forth,can override other user-defined words,user-defined words
+forth,can override built-in words,user-defined words
+forth,can override built-in operators,user-defined words
+forth,can use different words with the same name,user-defined words
+forth,can define word that uses word with the same name,user-defined words
+forth,cannot redefine numbers,user-defined words
+forth,errors if executing a non-existent word,user-defined words
+forth,DUP is case-insensitive,case-insensitivity
+forth,DROP is case-insensitive,case-insensitivity
+forth,SWAP is case-insensitive,case-insensitivity
+forth,OVER is case-insensitive,case-insensitivity
+forth,user-defined words are case-insensitive,case-insensitivity
+forth,definitions are case-insensitive,case-insensitivity
+gigasecond,date only specification of time,Add one gigasecond to the input.
+gigasecond,second test for date only specification of time,Add one gigasecond to the input.
+gigasecond,third test for date only specification of time,Add one gigasecond to the input.
+gigasecond,full time specified,Add one gigasecond to the input.
+gigasecond,full time with day roll-over,Add one gigasecond to the input.
+go-counting,Black corner territory on 5x5 board,
+go-counting,White center territory on 5x5 board,
+go-counting,Open corner territory on 5x5 board,
+go-counting,A stone and not a territory on 5x5 board,
+go-counting,Invalid because X is too low for 5x5 board,
+go-counting,Invalid because X is too high for 5x5 board,
+go-counting,Invalid because Y is too low for 5x5 board,
+go-counting,Invalid because Y is too high for 5x5 board,
+go-counting,One territory is the whole board,
+go-counting,Two territory rectangular board,
+go-counting,Two region rectangular board,
+grade-school,Adding a student adds them to the sorted roster,
+grade-school,Adding more student adds them to the sorted roster,
+grade-school,Adding students to different grades adds them to the same sorted roster,
+grade-school,Roster returns an empty list if there are no students enrolled,
+grade-school,Student names with grades are displayed in the same sorted roster,
+grade-school,Grade returns the students in that grade in alphabetical order,
+grade-school,Grade returns an empty list if there are no students in that grade,
+grains,1,returns the number of grains on the square
+grains,2,returns the number of grains on the square
+grains,3,returns the number of grains on the square
+grains,4,returns the number of grains on the square
+grains,16,returns the number of grains on the square
+grains,32,returns the number of grains on the square
+grains,64,returns the number of grains on the square
+grains,square 0 raises an exception,returns the number of grains on the square
+grains,negative square raises an exception,returns the number of grains on the square
+grains,square greater than 64 raises an exception,returns the number of grains on the square
+grains,returns the total number of grains on the board,
+grep,"One file, one match, no flags",Test grepping a single file
+grep,"One file, one match, print line numbers flag",Test grepping a single file
+grep,"One file, one match, case-insensitive flag",Test grepping a single file
+grep,"One file, one match, print file names flag",Test grepping a single file
+grep,"One file, one match, match entire lines flag",Test grepping a single file
+grep,"One file, one match, multiple flags",Test grepping a single file
+grep,"One file, several matches, no flags",Test grepping a single file
+grep,"One file, several matches, print line numbers flag",Test grepping a single file
+grep,"One file, several matches, match entire lines flag",Test grepping a single file
+grep,"One file, several matches, case-insensitive flag",Test grepping a single file
+grep,"One file, several matches, inverted flag",Test grepping a single file
+grep,"One file, no matches, various flags",Test grepping a single file
+grep,"Multiple files, one match, no flags",Test grepping multiples files at once
+grep,"Multiple files, several matches, no flags",Test grepping multiples files at once
+grep,"Multiple files, several matches, print line numbers flag",Test grepping multiples files at once
+grep,"Multiple files, one match, print file names flag",Test grepping multiples files at once
+grep,"Multiple files, several matches, case-insensitive flag",Test grepping multiples files at once
+grep,"Multiple files, several matches, inverted flag",Test grepping multiples files at once
+grep,"Multiple files, one match, match entire lines flag",Test grepping multiples files at once
+grep,"Multiple files, one match, multiple flags",Test grepping multiples files at once
+grep,"Multiple files, no matches, various flags",Test grepping multiples files at once
+hamming,empty strands,
+hamming,identical strands,
+hamming,long identical strands,
+hamming,complete distance in single nucleotide strands,
+hamming,complete distance in small strands,
+hamming,small distance in small strands,
+hamming,small distance,
+hamming,small distance in long strands,
+hamming,non-unique character in first strand,
+hamming,non-unique character in second strand,
+hamming,same nucleotides in different positions,
+hamming,large distance,
+hamming,large distance in off-by-one strand,
+hamming,disallow first strand longer,
+hamming,disallow second strand longer,
+hello-world,Say Hi!,
+house,verse one - the house that jack built,Return specified verse or series of verses
+house,verse two - the malt that lay,Return specified verse or series of verses
+house,verse three - the rat that ate,Return specified verse or series of verses
+house,verse four - the cat that killed,Return specified verse or series of verses
+house,verse five - the dog that worried,Return specified verse or series of verses
+house,verse six - the cow with the crumpled horn,Return specified verse or series of verses
+house,verse seven - the maiden all forlorn,Return specified verse or series of verses
+house,verse eight - the man all tattered and torn,Return specified verse or series of verses
+house,verse nine - the priest all shaven and shorn,Return specified verse or series of verses
+house,verse 10 - the rooster that crowed in the morn,Return specified verse or series of verses
+house,verse 11 - the farmer sowing his corn,Return specified verse or series of verses
+house,verse 12 - the horse and the hound and the horn,Return specified verse or series of verses
+house,multiple verses,Return specified verse or series of verses
+house,full rhyme,Return specified verse or series of verses
+isbn-verifier,valid isbn number,
+isbn-verifier,invalid isbn check digit,
+isbn-verifier,valid isbn number with a check digit of 10,
+isbn-verifier,check digit is a character other than X,
+isbn-verifier,invalid character in isbn,
+isbn-verifier,X is only valid as a check digit,
+isbn-verifier,valid isbn without separating dashes,
+isbn-verifier,isbn without separating dashes and X as check digit,
+isbn-verifier,isbn without check digit and dashes,
+isbn-verifier,too long isbn and no dashes,
+isbn-verifier,too short isbn,
+isbn-verifier,isbn without check digit,
+isbn-verifier,check digit of X should not be used for 0,
+isbn-verifier,empty isbn,
+isbn-verifier,input is 9 characters,
+isbn-verifier,invalid characters are not ignored,
+isbn-verifier,input is too long but contains a valid isbn,
+isogram,empty string,Check if the given string is an isogram
+isogram,isogram with only lower case characters,Check if the given string is an isogram
+isogram,word with one duplicated character,Check if the given string is an isogram
+isogram,word with one duplicated character from the end of the alphabet,Check if the given string is an isogram
+isogram,longest reported english isogram,Check if the given string is an isogram
+isogram,word with duplicated character in mixed case,Check if the given string is an isogram
+isogram,"word with duplicated character in mixed case, lowercase first",Check if the given string is an isogram
+isogram,hypothetical isogrammic word with hyphen,Check if the given string is an isogram
+isogram,isogram with duplicated hyphen,Check if the given string is an isogram
+isogram,made-up name that is an isogram,Check if the given string is an isogram
+isogram,duplicated character in the middle,Check if the given string is an isogram
+isogram,same first and last characters,Check if the given string is an isogram
+kindergarten-garden,garden with single student,partial garden
+kindergarten-garden,different garden with single student,partial garden
+kindergarten-garden,garden with two students,partial garden
+kindergarten-garden,second student's garden,partial garden; multiple students for the same garden with three students
+kindergarten-garden,third student's garden,partial garden; multiple students for the same garden with three students
+kindergarten-garden,first student's garden,full garden
+kindergarten-garden,second student's garden,full garden
+kindergarten-garden,second to last student's garden,full garden
+kindergarten-garden,last student's garden,full garden
+largest-series-product,finds the largest product if span equals length,
+largest-series-product,can find the largest product of 2 with numbers in order,
+largest-series-product,can find the largest product of 2,
+largest-series-product,can find the largest product of 3 with numbers in order,
+largest-series-product,can find the largest product of 3,
+largest-series-product,can find the largest product of 5 with numbers in order,
+largest-series-product,can get the largest product of a big number,
+largest-series-product,reports zero if the only digits are zero,
+largest-series-product,reports zero if all spans include zero,
+largest-series-product,rejects span longer than string length,
+largest-series-product,reports 1 for empty string and empty product (0 span),
+largest-series-product,reports 1 for nonempty string and empty product (0 span),
+largest-series-product,rejects empty string and nonzero span,
+largest-series-product,rejects invalid character in digits,
+largest-series-product,rejects negative span,
+leap,year not divisible by 4: common year,
+leap,"year divisible by 4, not divisible by 100: leap year",
+leap,"year divisible by 100, not divisible by 400: common year",
+leap,year divisible by 400: leap year,
+list-ops,empty lists,append entries to a list and return the new list
+list-ops,empty list to list,append entries to a list and return the new list
+list-ops,non-empty lists,append entries to a list and return the new list
+list-ops,empty list,concatenate a list of lists
+list-ops,list of lists,concatenate a list of lists
+list-ops,list of nested lists,concatenate a list of lists
+list-ops,empty list,filter list returning only values that satisfy the filter function
+list-ops,non-empty list,filter list returning only values that satisfy the filter function
+list-ops,empty list,returns the length of a list
+list-ops,non-empty list,returns the length of a list
+list-ops,empty list,return a list of elements whose values equal the list value transformed by the mapping function
+list-ops,non-empty list,return a list of elements whose values equal the list value transformed by the mapping function
+list-ops,empty list,folds (reduces) the given list from the left with a function
+list-ops,direction independent function applied to non-empty list,folds (reduces) the given list from the left with a function
+list-ops,direction dependent function applied to non-empty list,folds (reduces) the given list from the left with a function
+list-ops,empty list,folds (reduces) the given list from the right with a function
+list-ops,direction independent function applied to non-empty list,folds (reduces) the given list from the right with a function
+list-ops,direction dependent function applied to non-empty list,folds (reduces) the given list from the right with a function
+list-ops,empty list,reverse the elements of the list
+list-ops,non-empty list,reverse the elements of the list
+luhn,single digit strings can not be valid,
+luhn,a single zero is invalid,
+luhn,a simple valid SIN that remains valid if reversed,
+luhn,a simple valid SIN that becomes invalid if reversed,
+luhn,a valid Canadian SIN,
+luhn,invalid Canadian SIN,
+luhn,invalid credit card,
+luhn,valid strings with a non-digit included become invalid,
+luhn,valid strings with punctuation included become invalid,
+luhn,valid strings with symbols included become invalid,
+luhn,single zero with space is invalid,
+luhn,more than a single zero is valid,
+luhn,input digit 9 is correctly converted to output digit 9,
+luhn,strings with non-digits is invalid,
+markdown,parses normal text as a paragraph,
+markdown,parsing italics,
+markdown,parsing bold text,
+markdown,"mixed normal, italics and bold text",
+markdown,with h1 header level,
+markdown,with h2 header level,
+markdown,with h6 header level,
+markdown,unordered lists,
+markdown,With a little bit of everything,
+markdown,with markdown symbols in the header text that should not be interpreted,
+markdown,with markdown symbols in the list item text that should not be interpreted,
+markdown,with markdown symbols in the paragraph text that should not be interpreted,
+matrix,extract row from one number matrix,
+matrix,can extract row,
+matrix,extract row where numbers have different widths,
+matrix,can extract row from non-square matrix,
+matrix,extract column from one number matrix,
+matrix,can extract column,
+matrix,can extract column from non-square matrix,
+matrix,extract column where numbers have different widths,
+meetup,monteenth of May 2013,
+meetup,monteenth of August 2013,
+meetup,monteenth of September 2013,
+meetup,tuesteenth of March 2013,
+meetup,tuesteenth of April 2013,
+meetup,tuesteenth of August 2013,
+meetup,wednesteenth of January 2013,
+meetup,wednesteenth of February 2013,
+meetup,wednesteenth of June 2013,
+meetup,thursteenth of May 2013,
+meetup,thursteenth of June 2013,
+meetup,thursteenth of September 2013,
+meetup,friteenth of April 2013,
+meetup,friteenth of August 2013,
+meetup,friteenth of September 2013,
+meetup,saturteenth of February 2013,
+meetup,saturteenth of April 2013,
+meetup,saturteenth of October 2013,
+meetup,sunteenth of May 2013,
+meetup,sunteenth of June 2013,
+meetup,sunteenth of October 2013,
+meetup,first Monday of March 2013,
+meetup,first Monday of April 2013,
+meetup,first Tuesday of May 2013,
+meetup,first Tuesday of June 2013,
+meetup,first Wednesday of July 2013,
+meetup,first Wednesday of August 2013,
+meetup,first Thursday of September 2013,
+meetup,first Thursday of October 2013,
+meetup,first Friday of November 2013,
+meetup,first Friday of December 2013,
+meetup,first Saturday of January 2013,
+meetup,first Saturday of February 2013,
+meetup,first Sunday of March 2013,
+meetup,first Sunday of April 2013,
+meetup,second Monday of March 2013,
+meetup,second Monday of April 2013,
+meetup,second Tuesday of May 2013,
+meetup,second Tuesday of June 2013,
+meetup,second Wednesday of July 2013,
+meetup,second Wednesday of August 2013,
+meetup,second Thursday of September 2013,
+meetup,second Thursday of October 2013,
+meetup,second Friday of November 2013,
+meetup,second Friday of December 2013,
+meetup,second Saturday of January 2013,
+meetup,second Saturday of February 2013,
+meetup,second Sunday of March 2013,
+meetup,second Sunday of April 2013,
+meetup,third Monday of March 2013,
+meetup,third Monday of April 2013,
+meetup,third Tuesday of May 2013,
+meetup,third Tuesday of June 2013,
+meetup,third Wednesday of July 2013,
+meetup,third Wednesday of August 2013,
+meetup,third Thursday of September 2013,
+meetup,third Thursday of October 2013,
+meetup,third Friday of November 2013,
+meetup,third Friday of December 2013,
+meetup,third Saturday of January 2013,
+meetup,third Saturday of February 2013,
+meetup,third Sunday of March 2013,
+meetup,third Sunday of April 2013,
+meetup,fourth Monday of March 2013,
+meetup,fourth Monday of April 2013,
+meetup,fourth Tuesday of May 2013,
+meetup,fourth Tuesday of June 2013,
+meetup,fourth Wednesday of July 2013,
+meetup,fourth Wednesday of August 2013,
+meetup,fourth Thursday of September 2013,
+meetup,fourth Thursday of October 2013,
+meetup,fourth Friday of November 2013,
+meetup,fourth Friday of December 2013,
+meetup,fourth Saturday of January 2013,
+meetup,fourth Saturday of February 2013,
+meetup,fourth Sunday of March 2013,
+meetup,fourth Sunday of April 2013,
+meetup,last Monday of March 2013,
+meetup,last Monday of April 2013,
+meetup,last Tuesday of May 2013,
+meetup,last Tuesday of June 2013,
+meetup,last Wednesday of July 2013,
+meetup,last Wednesday of August 2013,
+meetup,last Thursday of September 2013,
+meetup,last Thursday of October 2013,
+meetup,last Friday of November 2013,
+meetup,last Friday of December 2013,
+meetup,last Saturday of January 2013,
+meetup,last Saturday of February 2013,
+meetup,last Sunday of March 2013,
+meetup,last Sunday of April 2013,
+meetup,last Wednesday of February 2012,
+meetup,last Wednesday of December 2014,
+meetup,last Sunday of February 2015,
+meetup,first Friday of December 2012,
+minesweeper,no rows,
+minesweeper,no columns,
+minesweeper,no mines,
+minesweeper,minefield with only mines,
+minesweeper,mine surrounded by spaces,
+minesweeper,space surrounded by mines,
+minesweeper,horizontal line,
+minesweeper,"horizontal line, mines at edges",
+minesweeper,vertical line,
+minesweeper,"vertical line, mines at edges",
+minesweeper,cross,
+minesweeper,large minefield,
+nth-prime,first prime,
+nth-prime,second prime,
+nth-prime,sixth prime,
+nth-prime,big prime,
+nth-prime,there is no zeroth prime,
+nucleotide-count,empty strand,count all nucleotides in a strand
+nucleotide-count,can count one nucleotide in single-character input,count all nucleotides in a strand
+nucleotide-count,strand with repeated nucleotide,count all nucleotides in a strand
+nucleotide-count,strand with multiple nucleotides,count all nucleotides in a strand
+nucleotide-count,strand with invalid nucleotides,count all nucleotides in a strand
+ocr-numbers,Recognizes 0,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 1,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Unreadable but correctly sized inputs return ?,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Input with a number of lines that is not a multiple of four raises an error,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Input with a number of columns that is not a multiple of three raises an error,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 110101100,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Garbled numbers in a string are replaced with ?,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 2,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 3,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 4,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 5,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 6,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 7,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 8,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes 9,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Recognizes string of decimal numbers,Converts lines of OCR Numbers to a string of integers
+ocr-numbers,Numbers separated by empty lines are recognized. Lines are joined by commas.,Converts lines of OCR Numbers to a string of integers
+palindrome-products,finds the smallest palindrome from single digit factors,
+palindrome-products,finds the largest palindrome from single digit factors,
+palindrome-products,find the smallest palindrome from double digit factors,
+palindrome-products,find the largest palindrome from double digit factors,
+palindrome-products,find smallest palindrome from triple digit factors,
+palindrome-products,find the largest palindrome from triple digit factors,
+palindrome-products,find smallest palindrome from four digit factors,
+palindrome-products,find the largest palindrome from four digit factors,
+palindrome-products,empty result for smallest if no palindrome in the range,
+palindrome-products,empty result for largest if no palindrome in the range,
+palindrome-products,error result for smallest if min is more than max,
+palindrome-products,error result for largest if min is more than max,
+pangram,sentence empty,Check if the given string is a pangram
+pangram,recognizes a perfect lower case pangram,Check if the given string is a pangram
+pangram,pangram with only lower case,Check if the given string is a pangram
+pangram,missing character 'x',Check if the given string is a pangram
+pangram,"another missing character, e.g. 'h'",Check if the given string is a pangram
+pangram,pangram with underscores,Check if the given string is a pangram
+pangram,pangram with numbers,Check if the given string is a pangram
+pangram,missing letters replaced by numbers,Check if the given string is a pangram
+pangram,pangram with mixed case and punctuation,Check if the given string is a pangram
+pangram,upper and lower case versions of the same character should not be counted separately,Check if the given string is a pangram
+pascals-triangle,zero rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,single row,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,two rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,three rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,four rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,five rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,six rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,ten rows,"Given a count, return a collection of that many rows of pascal's triangle"
+pascals-triangle,negative rows,"Given a count, return a collection of that many rows of pascal's triangle"
+perfect-numbers,Smallest perfect number is classified correctly,Perfect numbers
+perfect-numbers,Medium perfect number is classified correctly,Perfect numbers
+perfect-numbers,Large perfect number is classified correctly,Perfect numbers
+perfect-numbers,Smallest abundant number is classified correctly,Abundant numbers
+perfect-numbers,Medium abundant number is classified correctly,Abundant numbers
+perfect-numbers,Large abundant number is classified correctly,Abundant numbers
+perfect-numbers,Smallest prime deficient number is classified correctly,Deficient numbers
+perfect-numbers,Smallest non-prime deficient number is classified correctly,Deficient numbers
+perfect-numbers,Medium deficient number is classified correctly,Deficient numbers
+perfect-numbers,Large deficient number is classified correctly,Deficient numbers
+perfect-numbers,Edge case (no factors other than itself) is classified correctly,Deficient numbers
+perfect-numbers,Zero is rejected (not a natural number),Invalid inputs
+perfect-numbers,Negative integer is rejected (not a natural number),Invalid inputs
+phone-number,cleans the number,Cleanup user-entered phone numbers
+phone-number,cleans numbers with dots,Cleanup user-entered phone numbers
+phone-number,cleans numbers with multiple spaces,Cleanup user-entered phone numbers
+phone-number,invalid when 9 digits,Cleanup user-entered phone numbers
+phone-number,invalid when 11 digits does not start with a 1,Cleanup user-entered phone numbers
+phone-number,valid when 11 digits and starting with 1,Cleanup user-entered phone numbers
+phone-number,valid when 11 digits and starting with 1 even with punctuation,Cleanup user-entered phone numbers
+phone-number,invalid when more than 11 digits,Cleanup user-entered phone numbers
+phone-number,invalid with letters,Cleanup user-entered phone numbers
+phone-number,invalid with punctuations,Cleanup user-entered phone numbers
+phone-number,invalid if area code starts with 0,Cleanup user-entered phone numbers
+phone-number,invalid if area code starts with 1,Cleanup user-entered phone numbers
+phone-number,invalid if exchange code starts with 0,Cleanup user-entered phone numbers
+phone-number,invalid if exchange code starts with 1,Cleanup user-entered phone numbers
+pig-latin,word beginning with a,ay is added to words that start with vowels
+pig-latin,word beginning with e,ay is added to words that start with vowels
+pig-latin,word beginning with i,ay is added to words that start with vowels
+pig-latin,word beginning with o,ay is added to words that start with vowels
+pig-latin,word beginning with u,ay is added to words that start with vowels
+pig-latin,word beginning with a vowel and followed by a qu,ay is added to words that start with vowels
+pig-latin,word beginning with p,first letter and ay are moved to the end of words that start with consonants
+pig-latin,word beginning with k,first letter and ay are moved to the end of words that start with consonants
+pig-latin,word beginning with x,first letter and ay are moved to the end of words that start with consonants
+pig-latin,word beginning with q without a following u,first letter and ay are moved to the end of words that start with consonants
+pig-latin,word beginning with ch,some letter clusters are treated like a single consonant
+pig-latin,word beginning with qu,some letter clusters are treated like a single consonant
+pig-latin,word beginning with qu and a preceding consonant,some letter clusters are treated like a single consonant
+pig-latin,word beginning with th,some letter clusters are treated like a single consonant
+pig-latin,word beginning with thr,some letter clusters are treated like a single consonant
+pig-latin,word beginning with sch,some letter clusters are treated like a single consonant
+pig-latin,word beginning with yt,some letter clusters are treated like a single vowel
+pig-latin,word beginning with xr,some letter clusters are treated like a single vowel
+pig-latin,y is treated like a consonant at the beginning of a word,position of y in a word determines if it is a consonant or a vowel
+pig-latin,y is treated like a vowel at the end of a consonant cluster,position of y in a word determines if it is a consonant or a vowel
+pig-latin,y as second letter in two letter word,position of y in a word determines if it is a consonant or a vowel
+pig-latin,a whole phrase,phrases are translated
+poker,single hand always wins,
+poker,highest card out of all hands wins,
+poker,a tie has multiple winners,
+poker,"multiple hands with the same high cards, tie compares next highest ranked, down to last card",
+poker,one pair beats high card,
+poker,highest pair wins,
+poker,two pairs beats one pair,
+poker,"both hands have two pairs, highest ranked pair wins",
+poker,"both hands have two pairs, with the same highest ranked pair, tie goes to low pair",
+poker,"both hands have two identically ranked pairs, tie goes to remaining card (kicker)",
+poker,three of a kind beats two pair,
+poker,"both hands have three of a kind, tie goes to highest ranked triplet",
+poker,"with multiple decks, two players can have same three of a kind, ties go to highest remaining cards",
+poker,a straight beats three of a kind,
+poker,aces can end a straight (10 J Q K A),
+poker,aces can start a straight (A 2 3 4 5),
+poker,"both hands with a straight, tie goes to highest ranked card",
+poker,"even though an ace is usually high, a 5-high straight is the lowest-scoring straight",
+poker,flush beats a straight,
+poker,"both hands have a flush, tie goes to high card, down to the last one if necessary",
+poker,full house beats a flush,
+poker,"both hands have a full house, tie goes to highest-ranked triplet",
+poker,"with multiple decks, both hands have a full house with the same triplet, tie goes to the pair",
+poker,four of a kind beats a full house,
+poker,"both hands have four of a kind, tie goes to high quad",
+poker,"with multiple decks, both hands with identical four of a kind, tie determined by kicker",
+poker,straight flush beats four of a kind,
+poker,"both hands have straight flush, tie goes to highest-ranked card",
+pov,Results in the same tree if the input tree is a singleton,Reroot a tree so that its root is the specified node.
+pov,Can reroot a tree with a parent and one sibling,Reroot a tree so that its root is the specified node.
+pov,Can reroot a tree with a parent and many siblings,Reroot a tree so that its root is the specified node.
+pov,Can reroot a tree with new root deeply nested in tree,Reroot a tree so that its root is the specified node.
+pov,Moves children of the new root to same level as former parent,Reroot a tree so that its root is the specified node.
+pov,Can reroot a complex tree with cousins,Reroot a tree so that its root is the specified node.
+pov,Errors if target does not exist in a singleton tree,Reroot a tree so that its root is the specified node.
+pov,Errors if target does not exist in a large tree,Reroot a tree so that its root is the specified node.
+pov,Can find path to parent,"Given two nodes, find the path between them"
+pov,Can find path to sibling,"Given two nodes, find the path between them"
+pov,Can find path to cousin,"Given two nodes, find the path between them"
+pov,Can find path not involving root,"Given two nodes, find the path between them"
+pov,Can find path from nodes other than x,"Given two nodes, find the path between them"
+pov,Errors if destination does not exist,"Given two nodes, find the path between them"
+pov,Errors if source does not exist,"Given two nodes, find the path between them"
+prime-factors,no factors,returns prime factors for the given input number
+prime-factors,prime number,returns prime factors for the given input number
+prime-factors,square of a prime,returns prime factors for the given input number
+prime-factors,cube of a prime,returns prime factors for the given input number
+prime-factors,product of primes and non-primes,returns prime factors for the given input number
+prime-factors,product of primes,returns prime factors for the given input number
+prime-factors,factors include a large prime,returns prime factors for the given input number
+protein-translation,Methionine RNA sequence,Translate input RNA sequences into proteins
+protein-translation,Phenylalanine RNA sequence 1,Translate input RNA sequences into proteins
+protein-translation,Phenylalanine RNA sequence 2,Translate input RNA sequences into proteins
+protein-translation,Leucine RNA sequence 1,Translate input RNA sequences into proteins
+protein-translation,Leucine RNA sequence 2,Translate input RNA sequences into proteins
+protein-translation,Serine RNA sequence 1,Translate input RNA sequences into proteins
+protein-translation,Serine RNA sequence 2,Translate input RNA sequences into proteins
+protein-translation,Serine RNA sequence 3,Translate input RNA sequences into proteins
+protein-translation,Serine RNA sequence 4,Translate input RNA sequences into proteins
+protein-translation,Tyrosine RNA sequence 1,Translate input RNA sequences into proteins
+protein-translation,Tyrosine RNA sequence 2,Translate input RNA sequences into proteins
+protein-translation,Cysteine RNA sequence 1,Translate input RNA sequences into proteins
+protein-translation,Cysteine RNA sequence 2,Translate input RNA sequences into proteins
+protein-translation,Tryptophan RNA sequence,Translate input RNA sequences into proteins
+protein-translation,STOP codon RNA sequence 1,Translate input RNA sequences into proteins
+protein-translation,STOP codon RNA sequence 2,Translate input RNA sequences into proteins
+protein-translation,STOP codon RNA sequence 3,Translate input RNA sequences into proteins
+protein-translation,Translate RNA strand into correct protein list,Translate input RNA sequences into proteins
+protein-translation,Translation stops if STOP codon at beginning of sequence,Translate input RNA sequences into proteins
+protein-translation,Translation stops if STOP codon at end of two-codon sequence,Translate input RNA sequences into proteins
+protein-translation,Translation stops if STOP codon at end of three-codon sequence,Translate input RNA sequences into proteins
+protein-translation,Translation stops if STOP codon in middle of three-codon sequence,Translate input RNA sequences into proteins
+protein-translation,Translation stops if STOP codon in middle of six-codon sequence,Translate input RNA sequences into proteins
+proverb,zero pieces,
+proverb,one piece,
+proverb,two pieces,
+proverb,three pieces,
+proverb,full proverb,
+proverb,four pieces modernized,
+queen-attack,queen with a valid position,Test creation of Queens with valid and invalid positions
+queen-attack,queen must have positive row,Test creation of Queens with valid and invalid positions
+queen-attack,queen must have row on board,Test creation of Queens with valid and invalid positions
+queen-attack,queen must have positive column,Test creation of Queens with valid and invalid positions
+queen-attack,queen must have column on board,Test creation of Queens with valid and invalid positions
+queen-attack,can not attack,Test the ability of one queen to attack another
+queen-attack,can attack on same row,Test the ability of one queen to attack another
+queen-attack,can attack on same column,Test the ability of one queen to attack another
+queen-attack,can attack on first diagonal,Test the ability of one queen to attack another
+queen-attack,can attack on second diagonal,Test the ability of one queen to attack another
+queen-attack,can attack on third diagonal,Test the ability of one queen to attack another
+queen-attack,can attack on fourth diagonal,Test the ability of one queen to attack another
+rail-fence-cipher,encode with two rails,encode
+rail-fence-cipher,encode with three rails,encode
+rail-fence-cipher,encode with ending in the middle,encode
+rail-fence-cipher,decode with three rails,decode
+rail-fence-cipher,decode with five rails,decode
+rail-fence-cipher,decode with six rails,decode
+raindrops,the sound for 1 is 1,
+raindrops,the sound for 3 is Pling,
+raindrops,the sound for 5 is Plang,
+raindrops,the sound for 7 is Plong,
+raindrops,the sound for 6 is Pling as it has a factor 3,
+raindrops,2 to the power 3 does not make a raindrop sound as 3 is the exponent not the base,
+raindrops,the sound for 9 is Pling as it has a factor 3,
+raindrops,the sound for 10 is Plang as it has a factor 5,
+raindrops,the sound for 14 is Plong as it has a factor of 7,
+raindrops,the sound for 15 is PlingPlang as it has factors 3 and 5,
+raindrops,the sound for 21 is PlingPlong as it has factors 3 and 7,
+raindrops,the sound for 25 is Plang as it has a factor 5,
+raindrops,the sound for 27 is Pling as it has a factor 3,
+raindrops,the sound for 35 is PlangPlong as it has factors 5 and 7,
+raindrops,the sound for 49 is Plong as it has a factor 7,
+raindrops,the sound for 52 is 52,
+raindrops,"the sound for 105 is PlingPlangPlong as it has factors 3, 5 and 7",
+raindrops,the sound for 3125 is Plang as it has a factor 5,
+rational-numbers,Add two positive rational numbers,Arithmetic; Addition
+rational-numbers,Add a positive rational number and a negative rational number,Arithmetic; Addition
+rational-numbers,Add two negative rational numbers,Arithmetic; Addition
+rational-numbers,Add a rational number to its additive inverse,Arithmetic; Addition
+rational-numbers,Subtract two positive rational numbers,Arithmetic; Subtraction
+rational-numbers,Subtract a positive rational number and a negative rational number,Arithmetic; Subtraction
+rational-numbers,Subtract two negative rational numbers,Arithmetic; Subtraction
+rational-numbers,Subtract a rational number from itself,Arithmetic; Subtraction
+rational-numbers,Multiply two positive rational numbers,Arithmetic; Multiplication
+rational-numbers,Multiply a negative rational number by a positive rational number,Arithmetic; Multiplication
+rational-numbers,Multiply two negative rational numbers,Arithmetic; Multiplication
+rational-numbers,Multiply a rational number by its reciprocal,Arithmetic; Multiplication
+rational-numbers,Multiply a rational number by 1,Arithmetic; Multiplication
+rational-numbers,Multiply a rational number by 0,Arithmetic; Multiplication
+rational-numbers,Divide two positive rational numbers,Arithmetic; Division
+rational-numbers,Divide a positive rational number by a negative rational number,Arithmetic; Division
+rational-numbers,Divide two negative rational numbers,Arithmetic; Division
+rational-numbers,Divide a rational number by 1,Arithmetic; Division
+rational-numbers,Absolute value of a positive rational number,Absolute value
+rational-numbers,Absolute value of a negative rational number,Absolute value
+rational-numbers,Absolute value of zero,Absolute value
+rational-numbers,Raise a positive rational number to a positive integer power,Exponentiation of a rational number
+rational-numbers,Raise a negative rational number to a positive integer power,Exponentiation of a rational number
+rational-numbers,Raise zero to an integer power,Exponentiation of a rational number
+rational-numbers,Raise one to an integer power,Exponentiation of a rational number
+rational-numbers,Raise a positive rational number to the power of zero,Exponentiation of a rational number
+rational-numbers,Raise a negative rational number to the power of zero,Exponentiation of a rational number
+rational-numbers,Raise a real number to a positive rational number,Exponentiation of a real number to a rational number
+rational-numbers,Raise a real number to a negative rational number,Exponentiation of a real number to a rational number
+rational-numbers,Raise a real number to a zero rational number,Exponentiation of a real number to a rational number
+rational-numbers,Reduce a positive rational number to lowest terms,Reduction to lowest terms
+rational-numbers,Reduce a negative rational number to lowest terms,Reduction to lowest terms
+rational-numbers,Reduce a rational number with a negative denominator to lowest terms,Reduction to lowest terms
+rational-numbers,Reduce zero to lowest terms,Reduction to lowest terms
+rational-numbers,Reduce an integer to lowest terms,Reduction to lowest terms
+rational-numbers,Reduce one to lowest terms,Reduction to lowest terms
+react,input cells have a value,
+react,an input cell's value can be set,
+react,compute cells calculate initial value,
+react,compute cells take inputs in the right order,
+react,compute cells update value when dependencies are changed,
+react,compute cells can depend on other compute cells,
+react,compute cells fire callbacks,
+react,callback cells only fire on change,
+react,callbacks do not report already reported values,
+react,callbacks can fire from multiple cells,
+react,callbacks can be added and removed,
+react,removing a callback multiple times doesn't interfere with other callbacks,
+react,callbacks should only be called once even if multiple dependencies change,
+react,callbacks should not be called if dependencies change but output value doesn't change,
+rectangles,no rows,
+rectangles,no columns,
+rectangles,no rectangles,
+rectangles,one rectangle,
+rectangles,two rectangles without shared parts,
+rectangles,five rectangles with shared parts,
+rectangles,rectangle of height 1 is counted,
+rectangles,rectangle of width 1 is counted,
+rectangles,1x1 square is counted,
+rectangles,only complete rectangles are counted,
+rectangles,rectangles can be of different sizes,
+rectangles,corner is required for a rectangle to be complete,
+rectangles,large input with many rectangles,
+rest-api,no users,user management
+rest-api,add user,user management
+rest-api,get single user,user management
+rest-api,both users have 0 balance,iou
+rest-api,borrower has negative balance,iou
+rest-api,lender has negative balance,iou
+rest-api,lender owes borrower,iou
+rest-api,lender owes borrower less than new loan,iou
+reverse-string,an empty string,
+reverse-string,a word,
+reverse-string,a capitalized word,
+reverse-string,a sentence with punctuation,
+reverse-string,a palindrome,
+rna-transcription,Empty RNA sequence,
+rna-transcription,RNA complement of cytosine is guanine,
+rna-transcription,RNA complement of guanine is cytosine,
+rna-transcription,RNA complement of thymine is adenine,
+rna-transcription,RNA complement of adenine is uracil,
+rna-transcription,RNA complement,
+robot-simulator,Robots are created with a position and direction,A robot is created with a position and a direction
+robot-simulator,Negative positions are allowed,A robot is created with a position and a direction
+robot-simulator,does not change the position,rotates the robot's direction 90 degrees clockwise
+robot-simulator,changes the direction from north to east,rotates the robot's direction 90 degrees clockwise
+robot-simulator,changes the direction from east to south,rotates the robot's direction 90 degrees clockwise
+robot-simulator,changes the direction from south to west,rotates the robot's direction 90 degrees clockwise
+robot-simulator,changes the direction from west to north,rotates the robot's direction 90 degrees clockwise
+robot-simulator,does not change the position,rotates the robot's direction 90 degrees counter-clockwise
+robot-simulator,changes the direction from north to west,rotates the robot's direction 90 degrees counter-clockwise
+robot-simulator,changes the direction from west to south,rotates the robot's direction 90 degrees counter-clockwise
+robot-simulator,changes the direction from south to east,rotates the robot's direction 90 degrees counter-clockwise
+robot-simulator,changes the direction from east to north,rotates the robot's direction 90 degrees counter-clockwise
+robot-simulator,does not change the direction,moves the robot forward 1 space in the direction it is pointing
+robot-simulator,increases the y coordinate one when facing north,moves the robot forward 1 space in the direction it is pointing
+robot-simulator,decreases the y coordinate by one when facing south,moves the robot forward 1 space in the direction it is pointing
+robot-simulator,increases the x coordinate by one when facing east,moves the robot forward 1 space in the direction it is pointing
+robot-simulator,decreases the x coordinate by one when facing west,moves the robot forward 1 space in the direction it is pointing
+robot-simulator,instructions to move west and north,"Where R = Turn Right, L = Turn Left and A = Advance, the robot can follow a series of instructions and end up with the correct position and direction"
+robot-simulator,instructions to move west and south,"Where R = Turn Right, L = Turn Left and A = Advance, the robot can follow a series of instructions and end up with the correct position and direction"
+robot-simulator,instructions to move east and north,"Where R = Turn Right, L = Turn Left and A = Advance, the robot can follow a series of instructions and end up with the correct position and direction"
+roman-numerals,1 is a single I,
+roman-numerals,2 is two I's,
+roman-numerals,3 is three I's,
+roman-numerals,"4, being 5 - 1, is IV",
+roman-numerals,5 is a single V,
+roman-numerals,"6, being 5 + 1, is VI",
+roman-numerals,"9, being 10 - 1, is IX",
+roman-numerals,20 is two X's,
+roman-numerals,48 is not 50 - 2 but rather 40 + 8,
+roman-numerals,49 is not 40 + 5 + 4 but rather 50 - 10 + 10 - 1,
+roman-numerals,50 is a single L,
+roman-numerals,"90, being 100 - 10, is XC",
+roman-numerals,100 is a single C,
+roman-numerals,"60, being 50 + 10, is LX",
+roman-numerals,"400, being 500 - 100, is CD",
+roman-numerals,500 is a single D,
+roman-numerals,"900, being 1000 - 100, is CM",
+roman-numerals,1000 is a single M,
+roman-numerals,3000 is three M's,
+rotational-cipher,"rotate a by 0, same output as input",Test rotation from English to ROTn
+rotational-cipher,rotate a by 1,Test rotation from English to ROTn
+rotational-cipher,"rotate a by 26, same output as input",Test rotation from English to ROTn
+rotational-cipher,rotate m by 13,Test rotation from English to ROTn
+rotational-cipher,rotate n by 13 with wrap around alphabet,Test rotation from English to ROTn
+rotational-cipher,rotate capital letters,Test rotation from English to ROTn
+rotational-cipher,rotate spaces,Test rotation from English to ROTn
+rotational-cipher,rotate numbers,Test rotation from English to ROTn
+rotational-cipher,rotate punctuation,Test rotation from English to ROTn
+rotational-cipher,rotate all letters,Test rotation from English to ROTn
+run-length-encoding,empty string,run-length encode a string
+run-length-encoding,single characters only are encoded without count,run-length encode a string
+run-length-encoding,string with no single characters,run-length encode a string
+run-length-encoding,single characters mixed with repeated characters,run-length encode a string
+run-length-encoding,multiple whitespace mixed in string,run-length encode a string
+run-length-encoding,lowercase characters,run-length encode a string
+run-length-encoding,empty string,run-length decode a string
+run-length-encoding,single characters only,run-length decode a string
+run-length-encoding,string with no single characters,run-length decode a string
+run-length-encoding,single characters with repeated characters,run-length decode a string
+run-length-encoding,multiple whitespace mixed in string,run-length decode a string
+run-length-encoding,lower case string,run-length decode a string
+run-length-encoding,encode followed by decode gives original string,encode and then decode
+saddle-points,Can identify single saddle point,
+saddle-points,Can identify that empty matrix has no saddle points,
+saddle-points,Can identify lack of saddle points when there are none,
+saddle-points,Can identify multiple saddle points in a column,
+saddle-points,Can identify multiple saddle points in a row,
+saddle-points,Can identify saddle point in bottom right corner,
+saddle-points,Can identify saddle points in a non square matrix,
+saddle-points,Can identify that saddle points in a single column matrix are those with the minimum value,
+saddle-points,Can identify that saddle points in a single row matrix are those with the maximum value,
+say,zero,
+say,one,
+say,fourteen,
+say,twenty,
+say,twenty-two,
+say,one hundred,
+say,one hundred twenty-three,
+say,one thousand,
+say,one thousand two hundred thirty-four,
+say,one million,
+say,one million two thousand three hundred forty-five,
+say,one billion,
+say,a big number,
+say,numbers below zero are out of range,
+say,"numbers above 999,999,999,999 are out of range",
+scale-generator,Chromatic scale with sharps,Chromatic scales
+scale-generator,Chromatic scale with flats,Chromatic scales
+scale-generator,Simple major scale,Scales with specified intervals
+scale-generator,Major scale with sharps,Scales with specified intervals
+scale-generator,Major scale with flats,Scales with specified intervals
+scale-generator,Minor scale with sharps,Scales with specified intervals
+scale-generator,Minor scale with flats,Scales with specified intervals
+scale-generator,Dorian mode,Scales with specified intervals
+scale-generator,Mixolydian mode,Scales with specified intervals
+scale-generator,Lydian mode,Scales with specified intervals
+scale-generator,Phrygian mode,Scales with specified intervals
+scale-generator,Locrian mode,Scales with specified intervals
+scale-generator,Harmonic minor,Scales with specified intervals
+scale-generator,Octatonic,Scales with specified intervals
+scale-generator,Hexatonic,Scales with specified intervals
+scale-generator,Pentatonic,Scales with specified intervals
+scale-generator,Enigmatic,Scales with specified intervals
+scrabble-score,lowercase letter,
+scrabble-score,uppercase letter,
+scrabble-score,valuable letter,
+scrabble-score,short word,
+scrabble-score,"short, valuable word",
+scrabble-score,medium word,
+scrabble-score,"medium, valuable word",
+scrabble-score,"long, mixed-case word",
+scrabble-score,english-like word,
+scrabble-score,empty input,
+scrabble-score,entire alphabet available,
+secret-handshake,wink for 1,Create a handshake for a number
+secret-handshake,double blink for 10,Create a handshake for a number
+secret-handshake,close your eyes for 100,Create a handshake for a number
+secret-handshake,jump for 1000,Create a handshake for a number
+secret-handshake,combine two actions,Create a handshake for a number
+secret-handshake,reverse two actions,Create a handshake for a number
+secret-handshake,reversing one action gives the same action,Create a handshake for a number
+secret-handshake,reversing no actions still gives no actions,Create a handshake for a number
+secret-handshake,all possible actions,Create a handshake for a number
+secret-handshake,reverse all possible actions,Create a handshake for a number
+secret-handshake,do nothing for zero,Create a handshake for a number
+series,slices of one from one,
+series,slices of one from two,
+series,slices of two,
+series,slices of two overlap,
+series,slices can include duplicates,
+series,slices of a long series,
+series,slice length is too large,
+series,slice length cannot be zero,
+series,slice length cannot be negative,
+series,empty series is invalid,
+sgf-parsing,empty input,
+sgf-parsing,tree with no nodes,
+sgf-parsing,node without tree,
+sgf-parsing,node without properties,
+sgf-parsing,single node tree,
+sgf-parsing,properties without delimiter,
+sgf-parsing,all lowercase property,
+sgf-parsing,upper and lowercase property,
+sgf-parsing,two nodes,
+sgf-parsing,two child trees,
+sgf-parsing,multiple property values,
+sgf-parsing,escaped property,
+sieve,no primes under two,
+sieve,find first prime,
+sieve,find primes up to 10,
+sieve,limit is prime,
+sieve,find primes up to 1000,
+simple-cipher,Can encode,Random key cipher
+simple-cipher,Can decode,Random key cipher
+simple-cipher,"Is reversible. I.e., if you apply decode in a encoded result, you must see the same plaintext encode parameter as a result of the decode method",Random key cipher
+simple-cipher,Key is made only of lowercase letters,Random key cipher
+simple-cipher,Can encode,Substitution cipher
+simple-cipher,Can decode,Substitution cipher
+simple-cipher,"Is reversible. I.e., if you apply decode in a encoded result, you must see the same plaintext encode parameter as a result of the decode method",Substitution cipher
+simple-cipher,Can double shift encode,Substitution cipher
+simple-cipher,Can wrap on encode,Substitution cipher
+simple-cipher,Can wrap on decode,Substitution cipher
+simple-cipher,Can handle messages longer than the key,Substitution cipher
+simple-cipher,Throws an error with an all uppercase key,Incorrect key cipher
+simple-cipher,Throws an error with a numeric key,Incorrect key cipher
+simple-cipher,Throws an error with empty key,Incorrect key cipher
+space-age,age on Earth,
+space-age,age on Mercury,
+space-age,age on Venus,
+space-age,age on Mars,
+space-age,age on Jupiter,
+space-age,age on Saturn,
+space-age,age on Uranus,
+space-age,age on Neptune,
+spiral-matrix,empty spiral,
+spiral-matrix,trivial spiral,
+spiral-matrix,spiral of size 2,
+spiral-matrix,spiral of size 3,
+spiral-matrix,spiral of size 4,
+spiral-matrix,spiral of size 5,
+sublist,empty lists,
+sublist,empty list within non empty list,
+sublist,non empty list contains empty list,
+sublist,list equals itself,
+sublist,different lists,
+sublist,false start,
+sublist,consecutive,
+sublist,sublist at start,
+sublist,sublist in middle,
+sublist,sublist at end,
+sublist,at start of superlist,
+sublist,in middle of superlist,
+sublist,at end of superlist,
+sublist,first list missing element from second list,
+sublist,second list missing element from first list,
+sublist,order matters to a list,
+sublist,same digits but different numbers,
+sum-of-multiples,multiples of 3 or 5 up to 1,
+sum-of-multiples,multiples of 3 or 5 up to 4,
+sum-of-multiples,multiples of 3 up to 7,
+sum-of-multiples,multiples of 3 or 5 up to 10,
+sum-of-multiples,multiples of 3 or 5 up to 100,
+sum-of-multiples,multiples of 3 or 5 up to 1000,
+sum-of-multiples,"multiples of 7, 13 or 17 up to 20",
+sum-of-multiples,multiples of 4 or 6 up to 15,
+sum-of-multiples,"multiples of 5, 6 or 8 up to 150",
+sum-of-multiples,multiples of 5 or 25 up to 51,
+sum-of-multiples,multiples of 43 or 47 up to 10000,
+sum-of-multiples,multiples of 1 up to 100,
+sum-of-multiples,multiples of an empty list up to 10000,
+tournament,just the header if no input,
+tournament,"a win is three points, a loss is zero points",
+tournament,a win can also be expressed as a loss,
+tournament,a different team can win,
+tournament,a draw is one point each,
+tournament,There can be more than one match,
+tournament,There can be more than one winner,
+tournament,There can be more than two teams,
+tournament,typical input,
+tournament,incomplete competition (not all pairs have played),
+tournament,ties broken alphabetically,
+transpose,empty string,
+transpose,two characters in a row,
+transpose,two characters in a column,
+transpose,simple,
+transpose,single line,
+transpose,first line longer than second line,
+transpose,second line longer than first line,
+transpose,mixed line length,
+transpose,square,
+transpose,rectangle,
+transpose,triangle,
+triangle,true if all sides are equal,returns true if the triangle is equilateral
+triangle,false if any side is unequal,returns true if the triangle is equilateral
+triangle,false if no sides are equal,returns true if the triangle is equilateral
+triangle,"All zero sides are illegal, so the triangle is not equilateral",returns true if the triangle is equilateral
+triangle,sides may be floats,returns true if the triangle is equilateral
+triangle,true if last two sides are equal,returns true if the triangle is isosceles
+triangle,true if first two sides are equal,returns true if the triangle is isosceles
+triangle,true if first and last sides are equal,returns true if the triangle is isosceles
+triangle,equilateral triangles are also isosceles,returns true if the triangle is isosceles
+triangle,false if no sides are equal,returns true if the triangle is isosceles
+triangle,"Sides that violate triangle inequality are not isosceles, even if two are equal",returns true if the triangle is isosceles
+triangle,sides may be floats,returns true if the triangle is isosceles
+triangle,true if no sides are equal,returns true if the triangle is scalene
+triangle,false if all sides are equal,returns true if the triangle is scalene
+triangle,false if two sides are equal,returns true if the triangle is scalene
+triangle,"Sides that violate triangle inequality are not scalene, even if they are all different",returns true if the triangle is scalene
+triangle,sides may be floats,returns true if the triangle is scalene
+trinary,trinary 1 is decimal 1,returns the decimal representation of the input trinary value
+trinary,trinary 2 is decimal 2,returns the decimal representation of the input trinary value
+trinary,trinary 10 is decimal 3,returns the decimal representation of the input trinary value
+trinary,trinary 11 is decimal 4,returns the decimal representation of the input trinary value
+trinary,trinary 100 is decimal 9,returns the decimal representation of the input trinary value
+trinary,trinary 112 is decimal 14,returns the decimal representation of the input trinary value
+trinary,trinary 222 is decimal 26,returns the decimal representation of the input trinary value
+trinary,trinary 1122000120 is decimal 32091,returns the decimal representation of the input trinary value
+trinary,invalid trinary digits returns 0,returns the decimal representation of the input trinary value
+trinary,invalid word as input returns 0,returns the decimal representation of the input trinary value
+trinary,invalid numbers with letters as input returns 0,returns the decimal representation of the input trinary value
+twelve-days,first day a partridge in a pear tree,verse
+twelve-days,second day two turtle doves,verse
+twelve-days,third day three french hens,verse
+twelve-days,fourth day four calling birds,verse
+twelve-days,fifth day five gold rings,verse
+twelve-days,sixth day six geese-a-laying,verse
+twelve-days,seventh day seven swans-a-swimming,verse
+twelve-days,eighth day eight maids-a-milking,verse
+twelve-days,ninth day nine ladies dancing,verse
+twelve-days,tenth day ten lords-a-leaping,verse
+twelve-days,eleventh day eleven pipers piping,verse
+twelve-days,twelfth day twelve drummers drumming,verse
+twelve-days,recites first three verses of the song,lyrics
+twelve-days,recites three verses from the middle of the song,lyrics
+twelve-days,recites the whole song,lyrics
+two-bucket,Measure using bucket one of size 3 and bucket two of size 5 - start with bucket one,
+two-bucket,Measure using bucket one of size 3 and bucket two of size 5 - start with bucket two,
+two-bucket,Measure using bucket one of size 7 and bucket two of size 11 - start with bucket one,
+two-bucket,Measure using bucket one of size 7 and bucket two of size 11 - start with bucket two,
+two-bucket,Measure one step using bucket one of size 1 and bucket two of size 3 - start with bucket two,
+two-bucket,Measure using bucket one of size 2 and bucket two of size 3 - start with bucket one and end with bucket two,
+two-fer,no name given,
+two-fer,a name given,
+two-fer,another name given,
+variable-length-quantity,zero,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,arbitrary single byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,largest single byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,smallest double byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,arbitrary double byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,largest double byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,smallest triple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,arbitrary triple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,largest triple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,smallest quadruple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,arbitrary quadruple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,largest quadruple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,smallest quintuple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,arbitrary quintuple byte,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,maximum 32-bit integer input,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,two single-byte values,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,two multi-byte values,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,many multi-byte values,"Encode a series of integers, producing a series of bytes."
+variable-length-quantity,one byte,"Decode a series of bytes, producing a series of integers."
+variable-length-quantity,two bytes,"Decode a series of bytes, producing a series of integers."
+variable-length-quantity,three bytes,"Decode a series of bytes, producing a series of integers."
+variable-length-quantity,four bytes,"Decode a series of bytes, producing a series of integers."
+variable-length-quantity,maximum 32-bit integer,"Decode a series of bytes, producing a series of integers."
+variable-length-quantity,incomplete sequence causes error,"Decode a series of bytes, producing a series of integers."
+variable-length-quantity,"incomplete sequence causes error, even if value is zero","Decode a series of bytes, producing a series of integers."
+variable-length-quantity,multiple values,"Decode a series of bytes, producing a series of integers."
+word-count,count one word,
+word-count,count one of each word,
+word-count,multiple occurrences of a word,
+word-count,handles cramped lists,
+word-count,handles expanded lists,
+word-count,ignore punctuation,
+word-count,include numbers,
+word-count,normalize case,
+word-count,with apostrophes,
+word-count,with quotations,
+word-count,multiple spaces not detected as a word,
+word-search,Should accept an initial game grid and a target search word,
+word-search,Should locate one word written left to right,
+word-search,Should locate the same word written left to right in a different position,
+word-search,Should locate a different left to right word,
+word-search,Should locate that different left to right word in a different position,
+word-search,Should locate a left to right word in two line grid,
+word-search,Should locate a left to right word in three line grid,
+word-search,Should locate a left to right word in ten line grid,
+word-search,Should locate that left to right word in a different position in a ten line grid,
+word-search,Should locate a different left to right word in a ten line grid,
+word-search,Should locate multiple words,
+word-search,Should locate a single word written right to left,
+word-search,Should locate multiple words written in different horizontal directions,
+word-search,Should locate words written top to bottom,
+word-search,Should locate words written bottom to top,
+word-search,Should locate words written top left to bottom right,
+word-search,Should locate words written bottom right to top left,
+word-search,Should locate words written bottom left to top right,
+word-search,Should locate words written top right to bottom left,
+word-search,Should fail to locate a word that is not in the puzzle,
+wordy,addition,
+wordy,more addition,
+wordy,addition with negative numbers,
+wordy,large addition,
+wordy,subtraction,
+wordy,multiplication,
+wordy,division,
+wordy,multiple additions,
+wordy,addition and subtraction,
+wordy,multiple subtraction,
+wordy,subtraction then addition,
+wordy,multiple multiplication,
+wordy,addition and multiplication,
+wordy,multiple division,
+wordy,unknown operation,
+wordy,Non math question,
+yacht,Yacht,
+yacht,Not Yacht,
+yacht,Ones,
+yacht,"Ones, out of order",
+yacht,No ones,
+yacht,Twos,
+yacht,Fours,
+yacht,Yacht counted as threes,
+yacht,Yacht of 3s counted as fives,
+yacht,Sixes,
+yacht,"Full house two small, three big",
+yacht,"Full house three small, two big",
+yacht,Two pair is not a full house,
+yacht,Four of a kind is not a full house,
+yacht,Yacht is not a full house,
+yacht,Four of a Kind,
+yacht,Yacht can be scored as Four of a Kind,
+yacht,Full house is not Four of a Kind,
+yacht,Little Straight,
+yacht,Little Straight as Big Straight,
+yacht,Four in order but not a little straight,
+yacht,No pairs but not a little straight,
+yacht,"Minimum is 1, maximum is 5, but not a little straight",
+yacht,Big Straight,
+yacht,Big Straight as little straight,
+yacht,Choice,
+yacht,Yacht as choice,
+zebra-puzzle,resident who drinks water,
+zebra-puzzle,resident who owns zebra,
+zipper,data is retained,
+zipper,"left, right and value",
+zipper,dead end,
+zipper,tree from deep focus,
+zipper,traversing up from top,
+zipper,"left, right, and up",
+zipper,set_value,
+zipper,set_value after traversing up,
+zipper,set_left with leaf,
+zipper,set_right with null,
+zipper,set_right with subtree,
+zipper,set_value on deep focus,
+zipper,different paths to same zipper,

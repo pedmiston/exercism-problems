@@ -44,33 +44,29 @@ def find_languages(github):
     return languages
 
 
-def melt_language_exercises(languages):
-    language_exercises = []
-    for row in languages.itertuples():
-        exercises = pandas.DataFrame(row.config["exercises"]).rename(
+def extract_exercises(languages):
+    exercises = []
+    for language in languages.itertuples():
+        e = pandas.DataFrame(language.config["exercises"]).rename(
             columns={"slug": "exercise"}
         )
-        exercises["core"] = exercises.core.astype(int)
-        exercises.insert(0, "language", row.language)
-        language_exercises.append(exercises)
-    language_exercises = pandas.concat(
-        language_exercises, ignore_index=True, sort=False
-    )
-    return language_exercises
+        e["core"] = e.core.astype(int)
+        e.insert(0, "language", language.language)
+        exercises.append(e)
+    exercises = pandas.concat(exercises, ignore_index=True, sort=False)
+    return exercises
 
 
-def melt_language_exercise_topics(language_exercises):
-    language_exercise_topics = []
-    for row in language_exercises.itertuples():
-        if row.topics is None:
+def extract_topics(exercises):
+    topics = []
+    for exercise in exercises.itertuples():
+        if exercise.topics is None:
             continue
-        topics = pandas.DataFrame(
-            {"topic": row.topics}, index=list(range(len(row.topics)))
+        t = pandas.DataFrame(
+            {"topic": exercise.topics}, index=list(range(len(exercise.topics)))
         )
-        topics.insert(0, "language", row.language)
-        topics.insert(1, "exercise", row.exercise)
-        language_exercise_topics.append(topics)
-    language_exercise_topics = pandas.concat(
-        language_exercise_topics, ignore_index=True, sort=False
-    )
-    return language_exercise_topics
+        t.insert(0, "language", exercise.language)
+        t.insert(1, "exercise", exercise.exercise)
+        topics.append(t)
+    topics = pandas.concat(topics, ignore_index=True, sort=False)
+    return topics

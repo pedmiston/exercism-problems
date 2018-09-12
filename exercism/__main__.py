@@ -8,12 +8,8 @@ from pathlib import Path
 import github3
 import jinja2
 
-from .problem_specifications import get_problem_specifications
-from .languages import (
-    get_languages,
-    melt_language_exercises,
-    melt_language_exercise_topics,
-)
+from .problem_specifications import get_problem_specifications, extract_test_cases
+from .languages import get_languages, extract_exercises, extract_topics
 
 
 env_tmpl = """\
@@ -71,26 +67,23 @@ if __name__ == "__main__":
 
     if args.problem_specifications:
         problem_specifications = get_problem_specifications(github)
+        test_cases = extract_test_cases(problem_specifications)
+        del problem_specifications["canonical_data"]
+        del problem_specifications["metadata"]
+        del problem_specifications["problem_description"]
         problem_specifications.to_csv(
             data_dir / "problem-specifications.csv", index=False
         )
+        test_cases.to_csv(data_dir / "test-cases.csv", index=False)
 
     if args.languages:
         languages = get_languages(github)
-        exercises = melt_language_exercises(languages)
-        topics = melt_language_exercise_topics(exercises)
+        exercises = extract_exercises(languages)
+        topics = extract_topics(exercises)
         del languages["repo"]
         del languages["config"]
         languages.to_csv(data_dir / "languages.csv", index=False)
-        exercises[
-            [
-                "language",
-                "exercise",
-                "core",
-                "deprecated",
-                "difficulty",
-                "unlocked_by",
-                "uuid",
-            ]
-        ].to_csv(data_dir / "exercises.csv", index=False)
+        exercises[["language", "exercise", "core", "difficulty"]].to_csv(
+            data_dir / "exercises.csv", index=False
+        )
         topics.to_csv(data_dir / "topics.csv", index=False)

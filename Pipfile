@@ -8,6 +8,7 @@ requests = "*"
 pandas = "*"
 "github3.py" = "*"
 "jinja2" = "*"
+pyyaml = "*"
 
 [dev-packages]
 pytest = "*"
@@ -19,3 +20,6 @@ python_version = "3.7"
 
 [pipenv]
 allow_prereleases = true
+
+[scripts]
+all = "python -m exercism --all"

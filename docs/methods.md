@@ -8,14 +8,16 @@ To assemble the data, you need a python environment. Here's how I set up to work
 pipenv install --dev
 ```
 
-The data are fetched from GitHub using the python package "github3.py". To
+The data are fetched from GitHub using the python package "github3". To
 authenticate a connection to the GitHub API, you need a username and password
-available as environment variables. The first time you run the problems.py
-script, you will be prompted for your GitHub username and password. On subsequent runs, these will be loaded automatically.
+available as environment variables. The first time you run the `exercism`
+module script, you will be prompted for your GitHub username and password.
+On subsequent runs, these will be loaded automatically via the environment
+file ".env".
 
 ```bash
-pipenv run python problems.py -h     # show help and options
-pipenv run python problems.py --all  # scrape all data into csvs in data-raw/
+pipenv run python -m exercism -h     # show help and options
+pipenv run python -m exercism --all  # scrape all data into csvs in data-raw/
 ```
 
 ## Installing the R package
@@ -33,7 +35,7 @@ data("problem_specifications")                          # load problem specifica
 
 ### Installing the R package manually
 
-After running `python problems.py --all`, run the following
+After running `python -m exercism --all`, run the following
 R scripts to compile the csvs to rda files, and to install
 the package locally.
 

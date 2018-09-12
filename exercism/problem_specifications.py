@@ -1,5 +1,7 @@
+import json
 import github3
 import pandas
+import yaml
 
 
 def get_problem_specifications(github):
@@ -12,11 +14,19 @@ def get_problem_specifications(github):
         load_description, repo=repo
     )
     problems["metadata"] = problems.exercise.apply(load_metadata, repo=repo)
+    problems["blurb"] = problems.metadata.apply(
+        lambda metadata: metadata.get("blurb", "")
+    )
     return problems
 
 
 def load_canonical_data(exercise, repo):
-    return load_exercise_file("canonical-data.json", exercise, repo)
+    contents = load_exercise_file("canonical-data.json", exercise, repo)
+    try:
+        data = json.loads(contents)
+    except json.JSONDecodeError:
+        data = {}
+    return data
 
 
 def load_description(exercise, repo):
@@ -24,7 +34,12 @@ def load_description(exercise, repo):
 
 
 def load_metadata(exercise, repo):
-    return load_exercise_file("metadata.yml", exercise, repo)
+    contents = load_exercise_file("metadata.yml", exercise, repo)
+    if not contents:
+        data = {}
+    else:
+        data = yaml.load(contents)
+    return data
 
 
 def load_exercise_file(name, exercise, repo):
@@ -37,24 +52,27 @@ def load_exercise_file(name, exercise, repo):
     return contents
 
 
-def extract_test_cases_from_canonical_data(canonical_data):
-    if not canonical_data:
-        return pandas.DataFrame()
-
-    test_cases = extract_test_cases(canonical_data["cases"])
-    test_cases["exercise"] = canonical_data["exercise"]
+def extract_test_cases(problems):
+    test_cases = []
+    for problem in problems.itertuples():
+        if not problem.canonical_data:
+            continue
+        t = flatten_test_cases(problem.canonical_data["cases"])
+        t.insert(0, "exercise", problem.exercise)
+        test_cases.append(t)
+    test_cases = pandas.concat(test_cases, ignore_index=True, sort=False)
     return test_cases
 
 
-def extract_test_cases(cases, group=""):
+def flatten_test_cases(cases, group=""):
     test_cases = []
     for case in cases:
         if "cases" in case:
             # case is a test group
-            if group:
+            if group and not group.endswith("; "):
                 group += "; "
             test_cases.append(
-                extract_test_cases(case["cases"], group=group + case["description"])
+                flatten_test_cases(case["cases"], group=group + case["description"])
             )
         else:
             test_cases.append(

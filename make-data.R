@@ -2,9 +2,10 @@
 library(devtools)
 library(readr)
 
+exercises <- read_csv("data-raw/exercises.csv")
+languages <- read_csv("data-raw/languages.csv")
 problem_specifications <- read_csv("data-raw/problem-specifications.csv")
 test_cases <- read_csv("data-raw/test-cases.csv")
-exercises <- read_csv("data-raw/exercises.csv")
-exercise_topics <- read_csv("data-raw/exercise-topics.csv")
+topics <- read_csv("data-raw/topics.csv")
 
-use_data(problem_specifications, test_cases, exercises, exercise_topics, overwrite = TRUE)
+use_data(exercises, languages, problem_specifications, test_cases, topics, overwrite = TRUE)
