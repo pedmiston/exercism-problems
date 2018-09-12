@@ -7,79 +7,10 @@ output:
 ---
 ```{r config, include=FALSE}
 library(knitr)
-opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE)
+read_chunk("R/exercism-problems.R")
 ```
 ```{r setup, include=FALSE}
-make_recoder <- function(key) {
-  recoder <- function(frame) {
-    if(missing(frame)) return(key)
-    left_join(frame, key)
-  }
-  recoder
-}
-
-make_color_palette <- function(hex_colors, names) {
-  names(hex_colors) <- names
-  get_colors <- function(...) {
-    hex_colors[...] %>%
-      unname()
-  }
-  get_colors
-}
-
-library(tidyverse)
-library(lme4)
-theme_set(theme_minimal())
-set2 <- make_color_palette(RColorBrewer::brewer.pal(3, "Set2"), c("green", "orange", "blue"))
-
-library(exercism)
-data("problem_specifications")
-data("exercises")
-
-exercises <- filter(exercises, difficulty != 0)
-
-# Select core exercises: Problems with implementations in the 10 most popular languages according to StackOverflow.
-exercism_languages <- unique(exercises$language)
-top_10_languages <- c("python", "php", "r", "go", "ruby", "c", "objective-c", "scala", "swift", "javascript", "typescript", "java")
-core_exercises <- exercises %>%
-  filter(difficulty > 0) %>%
-  group_by(exercise) %>%
-  summarize(in_core_languages = all(top_10_languages %in% language)) %>%
-  filter(in_core_languages) %>%
-  .$exercise
-
-problem_specifications <- problem_specifications %>%
-  mutate(
-    in_core_languages = exercise %in% core_exercises,
-    has_test_cases = n_test_cases > 0
-  )
-
-recode_one_v_two <- make_recoder(data_frame(
-  n_test_cases = c(1, 2),
-  one_v_two = c(-0.5, 0.5)
-))
-recode_three_plus <- make_recoder(data_frame(
-  n_test_cases = 3:30,
-  three_plus = TRUE,
-  n_test_cases_1 = n_test_cases - min(n_test_cases) + 1,
-  n_test_cases_log = log10(n_test_cases_1)
-))
-
-problems_by_language <- left_join(exercises, problem_specifications)
-
-problem_difficulty <- problems_by_language %>%
-  group_by(exercise, n_test_cases, has_test_cases) %>%
-  summarize(difficulty = mean(difficulty)) %>%
-  ungroup() %>%
-  recode_one_v_two() %>%
-  recode_three_plus()
-
-language_per_n_test_case <- problems_by_language %>%
-  group_by(language, n_test_cases, has_test_cases) %>%
-  summarize(difficulty = mean(difficulty)) %>%
-  ungroup() %>%
-  recode_one_v_two() %>%
-  recode_three_plus()
 ```
 
 Are the same problems easier to solve in some programming languages than others?
@@ -88,7 +19,7 @@ solved in different languages available on the website Exercism.io.
 
 ## What is Exercism.io?
 
-[Exercism.io](https://exercism.io) is for users to learn new
+[Exercism.io](https://exercism.io) is a website for users to learn new
 programming languages and improve their programming ability by completing
 practice problems referred to as "exercises". To complete each exercise, users
 have to write a program that meets certain requirements as described in the
@@ -98,6 +29,9 @@ Exercism.io problems valuable for understanding the potential differences betwee
 languages.
 
 ## Self-assigned problem difficulty
+
+```{r difficulty, include=FALSE}
+```
 
 Most Exercism.io problems have been assigned a difficulty score ranging from
 1-10. For example, [python's "hello-world"
@@ -113,59 +47,17 @@ What's interesting about these difficulty scores is that the same problems are
 assigned different difficulty scores in different languages. Note the
 variability within each problem (row) in the plot below.
 
-```{r difficulty, fig.height=14}
-set.seed(254)
-ggplot(exercises) +
-  aes(fct_reorder(exercise, difficulty, .fun = mean), difficulty) +
-  stat_summary(fun.y = mean,
-               fun.ymin = function(x) mean(x) - sd(x),
-               fun.ymax = function(x) mean(x) + sd(x),
-               geom = "linerange", alpha = 0.8) +
-  geom_point(aes(color = language), position = position_jitter(width=0, height=0.2), shape = 1, alpha = 0.6) +
-  coord_flip() +
-  scale_y_continuous("self-assigned difficulty", breaks = 1:10, position = "right") +
-  labs(x = "", caption = "Problems sorted by average difficulty across languages. Lineranges show mean difficulties ±1 standard deviation.") +
-  theme(legend.position = "none")
+```{r difficulty-per-problem, fig.height=14}
+difficulty_plot
 ```
 
-## Exploratory analyses
+## Difficulty per language
 
-Why are some problems more difficult in some languages than in others? The
-self-assigned difficulty scores shown above are likely correlated with objective
-measures of difficulty, but there are many other factors that may influence the
-rated values. For example, novices and experts may rate the difficulty of the
-same problem differently, in which case the differences between languages could
-simply mean differences between raters. Without knowing more about how these
-difficulty scores are assigned, it is impossible to draw strong conclusions from
-these data. Nonetheless, we can explore the data **as if** self-assigned
-difficulty is representative of objective difficulty, and use the insights to
-articulate a pre-registered analysis plan for analyzing objective difficulty
-scores when they have been obtained.
-
-### Difficulty per language
-
-**Are problems easier in some languages than others?** We can estimate the
+**Are all problems easier in some languages than others?** We can estimate the
 average difficulty for each language while controlling for overall problem
 difficulty using a hierarchical linear model.
 
-```{r ranking, echo=1:2, fig.height=8}
-# Fit lmer mod with one param per language
-lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
-                                  data = exercises)
-
-get_lang_difficulty_preds <- function(mod) {
-  broom::tidy(mod, effects = "fixed") %>%
-    rename(language = term) %>%
-    mutate(language = str_replace(language, "^language", ""))
-}
-
-lang_difficulty_preds <- get_lang_difficulty_preds(lang_difficulty_mod)
-lang_difficulty_plot <- ggplot(lang_difficulty_preds) +
-    aes(fct_reorder(language, estimate, .desc = TRUE), estimate) +
-    geom_linerange(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
-    coord_flip(ylim = c(0.7, 5.9), expand = FALSE, clip = "off") +
-    labs(x = "", y = "average difficulty") +
-    scale_y_continuous(breaks = 1:6)
+```{r difficulty-per-language, fig.height=8}
 lang_difficulty_plot
 ```
 
@@ -174,14 +66,16 @@ implemented in all 10 most popular languages according to StackOverflow. How do
 these top languages compare in self-assigned difficulty on the
 core exercises?
 
-```{r ranking-core}
-core_lang_difficulty_mod <- lme4::lmer(difficulty ~ -1 + language + (1|exercise),
-                                  data = filter(exercises, language %in% top_10_languages, exercise %in% core_exercises))
-core_lang_difficulty_preds <- get_lang_difficulty_preds(core_lang_difficulty_mod)
-lang_difficulty_plot %+% core_lang_difficulty_preds
+```{r core-difficulty}
+core_difficulty_plot +
+  labs(title = "Difficulty of core exercises",
+       caption = "Difficulty of core exercises implemented in all top 10 most popular languages.")
 ```
 
-### Number of test cases and self-assigned difficulty
+## Number of test cases
+
+```{r n-test-cases, include=FALSE}
+```
 
 Another factor to incorporate into our model is the number of **test cases**.
 Test cases involve providing the solution program with input and comparing the
@@ -189,214 +83,39 @@ output to what was expected. The same test cases can be evaluated in all
 languages. Each problem has a different number of test cases, and the
 distribution of problem sizes is shown below.
 
-> Problems with zero test cases likely means the problem is still being developed.
-
-In addition, most problems have more tests than test cases, because many
-problems specify certain behavioral requirements (e.g., returning an object of a
-particular type) that must be manually translated into tests in each language,
-and do not correspond to input and output pairs.
+> Problems may have more tests than test cases because they
+  specify behavioral requirements (e.g., returning an object of a
+  particular type) that do not correspond to input and output pairs.
 
 ```{r n-test-cases-dotplot, fig.height=3}
-scale_color_is_core <- scale_color_brewer("", labels = c("other", "core"), palette = "Set2")
-scale_fill_is_core <- scale_fill_brewer("", labels = c("other", "core"), palette = "Set2")
-ggplot(problem_specifications) +
-  aes(n_test_cases, fill = in_core_languages) +
-  geom_dotplot(binwidth = 1, stackdir = "center") +
-  scale_x_continuous(breaks = seq(0, 100, by = 10)) +
-  scale_y_continuous(NULL, breaks = NULL) +
-  scale_fill_is_core +
-  labs(x = "number of test cases", caption = "Distribution of problems sorted by number of test cases.\nSource: github.com/exercism/problem-specifications")
+n_test_cases_plot
 ```
 
-```{r n-test-cases-dotplot-labeled, fig.height=20, fig.width=40, eval=FALSE}
-problem_specifications_dotplot <- problem_specifications %>%
-  group_by(n_test_cases) %>%
-  mutate(height = 1:n(),
-         height_c = height - mean(height)) %>%
-  ungroup()
-
-ggplot(problem_specifications_dotplot) +
-  aes(factor(n_test_cases), height_c) +
-  geom_text(aes(label = exercise, color = in_core_languages), angle = 45, hjust = 0.5, check_overlap = TRUE, size = 10) +
-  coord_cartesian(xlim = c(-0.1, 28), ylim = c(-11, 11), expand = FALSE) +
-  labs(x = "number of test cases", caption = "Distribution of labeled problems for reference. Note the ordinal x-axis.\nSource: github.com/exercism/problem-specifications") +
-  scale_y_continuous(NULL, breaks = NULL) +
-  scale_color_is_core +
-  theme(text = element_text(size = 50))
-```
+## Difficulty per test case
 
 **What's the relationship between number of test cases and difficulty?**
 Presumably problems with more test cases would be harder, and yet not every test
 is the same level of difficulty.
 
 ```{r problem-difficulty-by-num-tests}
-exercise_means <- problems_by_language %>%
-  group_by(exercise, n_test_cases, has_test_cases) %>%
-  summarize(
-    difficulty = mean(difficulty),
-    n_languages = length(unique(language))
-  ) %>%
-  ungroup()
-
-n_test_case_means <- problems_by_language %>%
-  group_by(n_test_cases) %>%
-  summarize(
-    difficulty = mean(difficulty),
-    n_exercises = length(unique(exercise))
-  ) %>%
-  ungroup()
-
-language_means <- problems_by_language %>%
-  filter(n_test_cases > 0) %>%
-  group_by(language, n_test_cases) %>%
-  summarize(
-    difficulty = mean(difficulty),
-    n_exerises = length(unique(exercise))
-  ) %>%
-  ungroup()
-
-ggplot(problems_by_language) +
-  aes(n_test_cases, difficulty) +
-  geom_point(aes(shape = has_test_cases), data = exercise_means, show.legend = FALSE) +
-  geom_point(aes(size = n_exercises), data = n_test_case_means, stat = "summary", fun.y = mean, color = "black") +
-  geom_smooth(aes(group = language), data = filter(problems_by_language, n_test_cases != 0, n_test_cases < 30),
-              method = "lm", se = FALSE, size = 0.2, alpha = 0.2, color = set2("blue")) +
-  geom_smooth(data = filter(problems_by_language, n_test_cases != 0, n_test_cases < 30), method = "lm", se = FALSE, size = 1.5, color = "black") +
-  scale_x_log10("Number of test cases (log scale)", breaks = c(1, 4, 12, 24, 48, 100)) +
-  scale_y_continuous("Difficulty", breaks = 1:10) +
-  scale_size_continuous("Number of exercises") +
-  scale_shape_manual(values = c(4, 1)) +
-  coord_cartesian(clip = "off") +
-  theme(legend.position = "bottom") +
-  labs(caption = "Black circles show mean difficulty of all exercises with the same number of test cases.\nWhite circles show mean difficulty for each exercise averaged across all languages.\nThin blue lines show linear regressions fit for each language.")
+difficulty_per_test_case_plot
 ```
 
-Looking at the plot above, there seems to be a difference in difficulty between problems with 1 and 2 tests, with some form of linear relationship beginning with 3 tests and continuing through arounmd 30 tests. We can investigate these relationships with post-hoc tests, as visible in the plot below.
+## Exercise topics
 
-```{r problem-difficulty-by-num-tests-post-hoc}
-one_v_two_mod <- lm(difficulty ~ one_v_two, data = problem_difficulty)
-one_v_two_preds <- recode_one_v_two() %>%
-  cbind(., predict(one_v_two_mod, newdata = ., se = TRUE)) %>%
-  rename(difficulty = fit, se = se.fit)
-
-one_v_two_lang <- filter(language_per_n_test_case, !is.na(one_v_two)) %>%
-  mutate(n_test_cases_adj = ifelse(n_test_cases == 1, 1.1, 1.75))
-
-one_v_two_lang_mod <- lmer(difficulty ~ one_v_two + (1|language), data = one_v_two_lang)
-one_v_two_lang_preds <- recode_one_v_two() %>%
-  cbind(., AICcmodavg::predictSE(one_v_two_lang_mod, newdata = ., se = TRUE)) %>%
-  rename(difficulty = fit, se = se.fit) %>%
-  mutate(n_test_cases_adj = ifelse(n_test_cases == 1, 1.1, 1.75))
-
-three_plus_mod <- lm(difficulty ~ n_test_cases_log, data = filter(problem_difficulty, three_plus))
-three_plus_preds <- recode_three_plus() %>%
-  cbind(., predict(three_plus_mod, newdata = ., se = TRUE)) %>%
-  rename(difficulty = fit, se = se.fit)
-
-three_plus_lang_mod <- lmer(difficulty ~ n_test_cases_log + (n_test_cases_log|language), data = filter(language_per_n_test_case, three_plus))
-three_plus_lang_preds <- recode_three_plus() %>%
-  cbind(., AICcmodavg::predictSE(three_plus_lang_mod, newdata = ., se = TRUE)) %>%
-  rename(difficulty = fit, se = se.fit)
-
-ggplot(problem_difficulty) +
-  aes(n_test_cases, difficulty) +
-  geom_errorbar(aes(ymin = difficulty - se, ymax = difficulty + se), data = one_v_two_preds,
-                width = 0.1) +
-  geom_smooth(aes(ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = three_plus_preds, color = NA) +
-  geom_smooth(aes(group = language), data = filter(language_per_n_test_case, !is.na(three_plus)), show.legend = FALSE, method = "lm", size = 0.5, se = FALSE,
-              color = set2("blue")) +
-  geom_errorbar(aes(x = n_test_cases_adj, ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = one_v_two_lang_preds,
-                color = set2("blue"), size = 1.5, width = 0.1) +
-  geom_point(aes(x = n_test_cases, shape = has_test_cases), show.legend = FALSE) +
-  geom_line(aes(x = n_test_cases_adj, group = language), stat = "summary", fun.y = mean, data = one_v_two_lang, show.legend = FALSE,
-            color = set2("blue")) +
-  geom_smooth(aes(ymin = difficulty - se, ymax = difficulty + se), stat = "identity", data = three_plus_lang_preds, size = 1.5, color = NA,
-              fill = set2("blue")) +
-  scale_x_log10("Number of test cases (log scale)", breaks = c(1, 4, 12, 24, 48, 100)) +
-  scale_y_continuous("Difficulty", breaks = 1:10) +
-  scale_shape_manual(values = c(4, 19)) +
-  coord_cartesian(clip = "off")
+```{r topics, include=FALSE}
 ```
-
-**Which languages are easiest regardless of the number of tests?**
-
-```{r per-lang-mods, fig.height=8}
-lang_mods <- lmList(difficulty ~ n_test_cases | language, data = as.data.frame(filter(problems_by_language, has_test_cases, n_test_cases < 30)))
-lang_pred_lines <- coef(lang_mods) %>%
-  # as.data.frame() %>%
-  rownames_to_column("language") %>%
-  as_data_frame() %>%
-  rename(intercept = `(Intercept)`, slope = n_test_cases)
-
-labeled <- lang_pred_lines %>%
-  filter(intercept < 1.7, slope < 0.04) %>%
-  .$language
-
-lang_pred_lines$labeled <- lang_pred_lines$language %in% labeled
-
-ggplot(lang_pred_lines) +
-  aes(n_test_cases, difficulty) +
-  geom_point(data = language_means, show.legend = FALSE, position = position_jitter(width = 0.1, height = 0.05)) +
-  geom_abline(aes(slope = slope, intercept = intercept, color = labeled)) +
-  coord_cartesian(xlim = c(1, 30), ylim = c(0, 10)) +
-  scale_y_continuous(breaks = 1:10) +
-  scale_shape_manual(values = c(4, 19)) +
-  scale_color_manual(values = c("gray", set2("blue"))) +
-  theme(legend.position = "none")
-
-lang_pred_lines_ranks <- lang_pred_lines %>%
-  mutate(intercept_rank = rank(intercept, ties.method = "first"),
-         slope_rank = rank(slope, ties.method = "first")) %>%
-  select(-c(intercept, slope)) %>%
-  gather(param, value, -c(language, labeled))
-
-ggplot(lang_pred_lines_ranks) +
-  aes(param, value, color = labeled) +
-  geom_text(aes(label = language),
-            data = filter(lang_pred_lines_ranks, param == "intercept_rank"),
-            hjust = 1, nudge_x = -0.01) +
-  geom_line(aes(group = language)) +
-  scale_x_discrete("per language model param", labels = c("intercept", "slope")) +
-  scale_y_continuous("param rank") +
-  scale_color_manual(values = c("gray", set2("blue"))) +
-  theme(legend.position = "none") +
-  labs(caption = "Rank correlation plot showing relationship between intercepts and slopes.\nHighlighted languages have a small intercept and small slope.")
-```
-
-### Topics
 
 Each problem touches on one or more topic.
 
 ```{r top20-topics}
-data("topics")
-
-top20_topics <- topics %>%
-  distinct(exercise, topic) %>%
-  count(topic) %>%
-  top_n(20, wt = n)
-
-top20_topic_names <- top20_topics$topic
-
-ggplot(top20_topics) +
-  aes(fct_reorder(topic, n), n) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  labs(x = "", y = "number of exercises", caption = "Top 20 topics")
+top20_topics_plot
 ```
+
+## Difficulty by topic
 
 Some topics are more difficult than others.
 
 ```{r topic-difficulty}
-topic_difficulty <- left_join(topics, exercises) %>%
-  filter(topic %in% top20_topic_names) %>%
-  group_by(topic) %>%
-  summarize(
-    difficulty = mean(difficulty)
-  )
-
-ggplot(topic_difficulty) +
-  aes(fct_reorder(topic, difficulty), difficulty) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  labs(x = "", y = "average difficulty", caption = "Average difficulty of top 20 topics")
+difficulty_by_topic_plot
 ```

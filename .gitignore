@@ -2,4 +2,5 @@ __pycache__/
 .pytest_cache/
 .Rproj.user
 docs/*.html
+docs/*cache/
 .env
