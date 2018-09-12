@@ -5,7 +5,8 @@
 To assemble the data, you need a python environment. Here's how I set up to work on this project.
 
 ```bash
-pipenv install --dev
+pipenv install --dev  # creates a new python virtualenv and installs the required packages
+pipenv run all        # runs the "exercism" module script that downloads all data
 ```
 
 The data are fetched from GitHub using the python package "github3". To
@@ -14,11 +15,6 @@ available as environment variables. The first time you run the `exercism`
 module script, you will be prompted for your GitHub username and password.
 On subsequent runs, these will be loaded automatically via the environment
 file ".env".
-
-```bash
-pipenv run python -m exercism -h     # show help and options
-pipenv run python -m exercism --all  # scrape all data into csvs in data-raw/
-```
 
 ## Installing the R package
 

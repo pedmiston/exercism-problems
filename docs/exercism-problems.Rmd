@@ -40,11 +40,7 @@ exercises <- filter(exercises, difficulty != 0)
 
 # Select core exercises: Problems with implementations in the 10 most popular languages according to StackOverflow.
 exercism_languages <- unique(exercises$language)
-data("stack_overflow_ranks", package = "programmingquestionnaire")
-top_10_languages <- stack_overflow_ranks %>%
-  filter(language_name %in% exercism_languages) %>%
-  top_n(10) %>%
-  .$language_name
+top_10_languages <- c("python", "php", "r", "go", "ruby", "c", "objective-c", "scala", "swift", "javascript", "typescript", "java")
 core_exercises <- exercises %>%
   filter(difficulty > 0) %>%
   group_by(exercise) %>%
@@ -122,8 +118,8 @@ set.seed(254)
 ggplot(exercises) +
   aes(fct_reorder(exercise, difficulty, .fun = mean), difficulty) +
   stat_summary(fun.y = mean,
-               fun.ymin = function(x) mean(x) - sd(x), 
-               fun.ymax = function(x) mean(x) + sd(x), 
+               fun.ymin = function(x) mean(x) - sd(x),
+               fun.ymax = function(x) mean(x) + sd(x),
                geom = "linerange", alpha = 0.8) +
   geom_point(aes(color = language), position = position_jitter(width=0, height=0.2), shape = 1, alpha = 0.6) +
   coord_flip() +
@@ -372,9 +368,9 @@ ggplot(lang_pred_lines_ranks) +
 Each problem touches on one or more topic.
 
 ```{r top20-topics}
-data("exercise_topics")
+data("topics")
 
-top20_topics <- exercise_topics %>%
+top20_topics <- topics %>%
   distinct(exercise, topic) %>%
   count(topic) %>%
   top_n(20, wt = n)
@@ -391,7 +387,7 @@ ggplot(top20_topics) +
 Some topics are more difficult than others.
 
 ```{r topic-difficulty}
-topic_difficulty <- left_join(exercise_topics, exercises) %>%
+topic_difficulty <- left_join(topics, exercises) %>%
   filter(topic %in% top20_topic_names) %>%
   group_by(topic) %>%
   summarize(

@@ -5,8 +5,8 @@ docs/exercism-problems.md: docs/exercism-problems.Rmd
 clean:
 	rm -rf docs/*_files/ docs/*_cache/ docs/*.md
 
-get-data: problems.py
-	python problems.py --all
+get-data:
+	pipenv run all
 make-data: make-data.R get-data
 	Rscript make-data.R
 install: install.R make-data
