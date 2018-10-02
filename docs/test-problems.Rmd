@@ -1,0 +1,31 @@
+---
+title: Test problems
+author: Pierce Edmiston
+output:
+  github_document: {}
+---
+```{r config, include=FALSE}
+library(knitr)
+opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+```
+```{r setup}
+library(tidyverse)
+library(exercism)
+data("exercises")
+```
+
+# Core problems in python and java
+
+```{r core-problems}
+target_languages <- c("java", "python")
+exercises %>%
+  filter(language %in% target_languages,
+         core == 1) %>%
+  group_by(exercise) %>%
+  mutate(is_core_in_target_languages = (n() == length(target_languages))) %>%
+  ungroup() %>%
+  filter(is_core_in_target_languages == 1) %>%
+  select(-is_core_in_target_languages) %>%
+  arrange(exercise) %>%
+  kable(caption = paste0("Core exercises in ", paste(target_languages, collapse = " and "), "."))
+```
